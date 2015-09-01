@@ -55,9 +55,8 @@
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
 			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput"/></li>
-			    <li><label>旧密码:</label><input type="text" name="oldPwd" value ="${user.oldPwd}"  class="dfinput"/></li>
-			    <li><label>新密码:</label><input type="text" name="newPwd" value ="${user.newPwd}"  class="dfinput"/></li>
-			    <li><label>更新人编号:</label><input type="text" name="updater" value ="${user.updater}"  class="dfinput"/></li>
+			    <li><label>旧密码:</label><input type="password" name="oldPwd" value ="${user.oldPwd}"  class="dfinput"/></li>
+			    <li><label>新密码:</label><input type="password" name="newPwd" value ="${user.newPwd}"  class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

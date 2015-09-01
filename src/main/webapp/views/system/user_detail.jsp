@@ -55,10 +55,9 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput"/></li>
-			    <li><label>用户姓名:</label><input type="text" id="userName" name="userName" value ="${user.userName}"  class="dfinput"/></li>
-			    <li><label>新密码:</label><input type="text" name="password" value ="${user.password}"  class="dfinput"/></li>
-			    <li><label>更新人编号:</label><input type="text" name="creator" value ="${user.creator}"  class="dfinput"/></li>
+			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" class="dfinput"/></li>
+			    <li><label>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput"/></li>
+			    <li><label>新密码:</label><input type="password" name="password" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>
