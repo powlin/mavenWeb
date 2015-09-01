@@ -48,11 +48,6 @@
 		value="<%=request.getContextPath()%>" />
 	<input type="hidden" id="operate" value = "${operate}"/>
 	<input type="hidden" id="roleLevel" value = "${role.roleLevel}"/>
-	<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">菜单设置</h4>
-					</div>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -80,9 +75,5 @@
 			</ul>
 	    </div>
     </form>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-primary" onclick="save()">保存</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-    </div>
 </body>
 </html>

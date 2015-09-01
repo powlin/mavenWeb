@@ -22,11 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IMenuAO;
 import com.xnjr.cpzc.ao.IRoleAO;
+import com.xnjr.cpzc.dto.res.LTreeRes;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703632Res;
 import com.xnjr.cpzc.dto.res.ZC703633Res;
 import com.xnjr.cpzc.dto.res.ZC703643Res;
-import com.xnjr.cpzc.dto.res.ZtreeRes;
 
 /** 
  * @author: 茜茜 
@@ -176,14 +176,23 @@ public class AuthorityController extends BaseController {
             @RequestParam(value = "menu_code", required = false) String menuCode,
             @RequestParam(value = "parent_code", required = false) String parentCode) {
         List<ZC703632Res> list = menuAO.queryMenuList(menuCode, parentCode);
-        List<ZtreeRes> resultList = new ArrayList<ZtreeRes>();
+        List<LTreeRes> resultList = new ArrayList<LTreeRes>();
         for (ZC703632Res result : list) {
-            ZtreeRes ztreeRes = new ZtreeRes();
-            ztreeRes.setId(result.getMenuCode());
-            ztreeRes.setpId(result.getParentCode());
-            ztreeRes.setName(result.getMenuName());
-            resultList.add(ztreeRes);
+            LTreeRes lTreeRes = new LTreeRes();
+            lTreeRes.setId(result.getMenuCode());
+            lTreeRes.setPid(result.getParentCode());
+            lTreeRes.setText(result.getMenuName());
+            resultList.add(lTreeRes);
         }
         return resultList;
+    }
+
+    @RequestMapping(value = "/roleMenu/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean editRoleMenus(@RequestParam("role_code") String roleCode,
+            @RequestParam(value = "menus[]") String[] menus) {
+        System.out.println(roleCode);
+        System.out.println(menus.length);
+        return true;
     }
 }

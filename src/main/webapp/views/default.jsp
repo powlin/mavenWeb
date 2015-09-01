@@ -6,11 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>无标题文档</title>
 <link href="../components/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../components/js/jquery.js"></script>
-<script type="text/javascript" src="../components/js/jsapi.js"></script>
-<script type="text/javascript" src="../components/js/format+zh_CN,default,corechart.I.js"></script>		
-<script type="text/javascript" src="../components/js/jquery.gvChart-1.0.1.min.js"></script>
-<script type="text/javascript" src="../components/js/jquery.ba-resize.min.js"></script>
 
 <script type="text/javascript">
 		gvChartInit();
