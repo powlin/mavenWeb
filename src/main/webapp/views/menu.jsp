@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>无标题文档</title>
 <link href="../components/css/style.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="../components/js/jquery.js"></script>
+<script language="JavaScript" src="../components/js/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 $(function(){	
 	//导航切换

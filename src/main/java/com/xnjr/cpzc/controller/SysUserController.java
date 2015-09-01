@@ -55,8 +55,8 @@ public class SysUserController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return sysUserAO.queryMenuPage(userCode, userName, status, start, limit,
-            orderColumn, orderDir);
+        return sysUserAO.queryMenuPage(userCode, userName, status, start,
+            limit, orderColumn, orderDir);
     }
 
     @SuppressWarnings("rawtypes")

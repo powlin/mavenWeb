@@ -162,7 +162,7 @@
 	<div class="panel-body">
 		<div>
 			<div id="custom-toolbar" style="margin-bottom: 8px">
-				<div class="form-inline" role="form" onsubmit="return searchSys();">
+				<div class="form-inline" role="form">
 					<div class="form-group mr40">
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
 							class="form-control" id="role_code_search" placeholder="请输入角色编号">
@@ -182,21 +182,5 @@
 			<table id="tableList"></table>
 		</div>
 	</div>
-	<div id="myModal" class="modal hide fade">
-	    <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">x</button>
-	        <h3>对话框标题</h3>
-	    </div>
-	    <div class="modal-body">
-	        <p>对话框主体</p>
-	    </div>
-	    <div class="modal-footer">
-	        <a href="#" class="btn" data-dismiss="modal">取消</a>
-	        <a href="#" class="btn btn-primary" data-dismiss="modal">确定</a>
-	    </div>
-	</div>
-	<button type="button" data-toggle="modal" data-target="#myModal">打开对话框</button>
-<a href="#myModal" role="button" class="btn" data-toggle="modal">打开对话框</button>
-	 <a href="role_detail.jsp" data-toggle="modal" data-target="#myModal">打开对话框</a>
 </body>
 </html>
