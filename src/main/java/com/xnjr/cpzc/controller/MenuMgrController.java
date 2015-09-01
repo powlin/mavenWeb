@@ -59,7 +59,7 @@ public class MenuMgrController extends BaseController {
     }
 
     // ******** 删除菜单 *****
-    @RequestMapping(value = "/menu/deletemenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/menu/delete", method = RequestMethod.POST)
     @ResponseBody
     public boolean deletemenu(@RequestParam("menuCode") String menuCode) {
         // 删除菜单验证
