@@ -111,7 +111,7 @@ $(function() {
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-primary btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-primary btn-xs editSta">修改状态</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>'].join('');
+    return ['<button class="btn btn-primary btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs editSta">修改状态</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
@@ -120,15 +120,7 @@ window.operateEvents = {
     	window.location.href = $("#base_path").val() + "/sysUser/user/detailPas?userCode="+row.userCode+"&operate=edit";
     },'click .editSta': function (e, value, row, index) {
     	window.location.href = $("#base_path").val() + "/sysUser/user/detailSta?userCode="+row.userCode+"&operate=edit";
-    },
-    'click .del': function (e, value, row, index) {
-    	if(!confirm("是否确认删除用户"+row.usrCode+"?")){
-    		return false;
-    	}
-    	var url = $("#base_path").val() + "/sysUser/user/drop";
-    	var data = {userCode:row.userCode};
-		doPostAjax(url, data, doSuccessDel);
-    },
+    }
 };
 
 function doSuccessDel(res) {

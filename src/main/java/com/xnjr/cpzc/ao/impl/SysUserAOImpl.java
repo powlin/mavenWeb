@@ -14,10 +14,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.xnjr.cpzc.ao.ISysUserAO;
+import com.xnjr.cpzc.dto.req.ZC703171Req;
+import com.xnjr.cpzc.dto.req.ZC703173Req;
+import com.xnjr.cpzc.dto.req.ZC703174Req;
+import com.xnjr.cpzc.dto.req.ZC703175Req;
 import com.xnjr.cpzc.dto.req.ZC703176Req;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.SuccessRes;
-import com.xnjr.cpzc.dto.res.ZC703633Res;
 import com.xnjr.cpzc.exception.BizException;
 import com.xnjr.cpzc.http.BizConnecter;
 import com.xnjr.cpzc.util.JsonUtils;
@@ -51,41 +54,41 @@ public class SysUserAOImpl implements ISysUserAO {
     @Override
     public Page queryMenuPage(String userCode, String userName, String status,
             String start, String limit, String orderColumn, String orderDir) {
-        ZC703176Req zc703176Req = new ZC703176Req();
-        zc703176Req.setUserCode(userCode);
-        zc703176Req.setUserName(userName);
-        zc703176Req.setStatus(status);
-        zc703176Req.setStart(start);
-        zc703176Req.setLimit(limit);
-        zc703176Req.setOrderColumn(orderColumn);
-        zc703176Req.setOrderDir(orderDir);
+        ZC703175Req zc703175Req = new ZC703175Req();
+        zc703175Req.setUserCode(userCode);
+        zc703175Req.setUserName(userName);
+        zc703175Req.setStatus(status);
+        zc703175Req.setStart(start);
+        zc703175Req.setLimit(limit);
+        zc703175Req.setOrderColumn(orderColumn);
+        zc703175Req.setOrderDir(orderDir);
         String jsonStr = BizConnecter.getBizData("703175",
-            JsonUtils.object2Json(zc703176Req));
+            JsonUtils.object2Json(zc703175Req));
         return JsonUtils.json2Bean(jsonStr, Page.class);
     }
 
     @SuppressWarnings("rawtypes")
     @Override
     public List queryUserList(String userCode, String userName, String status) {
-        ZC703176Req zc703176Req = new ZC703176Req();
-        zc703176Req.setUserCode(userCode);
-        zc703176Req.setUserName(userName);
-        zc703176Req.setStatus(status);
+        ZC703174Req zc703174Req = new ZC703174Req();
+        zc703174Req.setUserCode(userCode);
+        zc703174Req.setUserName(userName);
+        zc703174Req.setStatus(status);
         String jsonStr = BizConnecter.getBizData("703174",
-            JsonUtils.object2Json(zc703176Req));
+            JsonUtils.object2Json(zc703174Req));
         return JsonUtils.json2Bean(jsonStr, List.class);
     }
 
     @Override
-    public ZC703633Res addUser(String userCode, String userName,
-            String password, String creator) {
-        ZC703176Req zc703176Req = new ZC703176Req();
-        zc703176Req.setUserCode(userCode);
-        zc703176Req.setUserName(userName);
-        zc703176Req.setPassword(password);
-        zc703176Req.setCreator(creator);
+    public boolean addUser(String userCode, String userName, String password,
+            String creator) {
+        ZC703171Req zc703171Req = new ZC703171Req();
+        zc703171Req.setUserCode(userCode);
+        zc703171Req.setUserName(userName);
+        zc703171Req.setPassword(password);
+        zc703171Req.setCreator(creator);
         return BizConnecter.getBizData("703171",
-            JsonUtils.object2Json(zc703176Req), ZC703633Res.class);
+            JsonUtils.object2Json(zc703171Req), SuccessRes.class).isSuccess();
     }
 
     @Override
@@ -112,5 +115,15 @@ public class SysUserAOImpl implements ISysUserAO {
 
         return BizConnecter.getBizData("703172",
             JsonUtils.object2Json(zc703176Req), SuccessRes.class).isSuccess();
+    }
+
+    @Override
+    public boolean editUserSta(String userCode, String status, String updater) {
+        ZC703173Req zc703173Req = new ZC703173Req();
+        zc703173Req.setUserCode(userCode);
+        zc703173Req.setStatus(status);
+        zc703173Req.setUpdater(updater);
+        return BizConnecter.getBizData("703173",
+            JsonUtils.object2Json(zc703173Req), SuccessRes.class).isSuccess();
     }
 }
