@@ -11,19 +11,21 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
-		
-		/* var data = {};
+		//查询所有角色列表
+		var data = {};
 		data['role_code'] = "";
 		data['role_level'] = "";
 		data['create_datetime_start'] = "";
 		data['create_datetime_end'] = "";
 		var url = $("#base_path").val() + "/sysAuth/role/list";
-		doGetAjax(url, data, doQueryRoleListSuccessBack); */
+		/* doGetAjax(url, data, doQueryRoleListSuccessBack); */
+		doAjax(url, data, false, "GET", 'json', doQueryRoleListSuccessBack, doError);
 		
-		var operate = $("#operate").val();
-		if(operate == "edit"){
-			$("#operContent").text("新增用户");
-		}
+		//查询当前用户的角色
+		var data1 = {};
+		data1['userCode'] = $("#userCode").val();
+		var url = $("#base_path").val() + "/sysAuth/user/role";
+		doGetAjax(url, data1, doQueryUserRoleSuccessBack);
 		
 		//提交
 		$('#subBtn').click(function() {
@@ -32,8 +34,21 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
-			/* var operator = $("#operate").val() != "edit"?"add":"edit"; */
-			var url = $("#base_path").val() + "/sysUser/user/add";
+			/* var roleVal = "input.roleVal";
+			var roleStr = "";
+			for(var i = 0;i < $(roleVal).length;i++){
+				if($(roleVal).eq(i).is(":checked")){
+					roleStr += $(roleVal).eq(i).val() + ",";
+				}
+			}
+			if(roleStr.length > 0){
+				roleStr = roleStr.substring(0, roleStr.length-1);
+			}else{
+				roleStr = "0";
+			}
+			data['roleStr'] = roleStr; */
+			data['userCode'] = $("#userCode").val();
+			var url = $("#base_path").val() + "/sysUser/user/editRole";
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
@@ -47,37 +62,51 @@
 		}
 	}
 	
-	/* function doQueryRoleListSuccessBack(res){
+	function doQueryRoleListSuccessBack(res){
 		var data = res.data;
 		var html = "";
 		if(typeof(data) != "undefined"){
 			for(var i = 0;i < data.length;i++){
-				html += "<input type='checkbox' class='roleVal' name='roleVal' value='"+data[i].roleCode+"'/>" + data[i].roleName + "&nbsp;&nbsp;&nbsp;";
+				html += "<input type='radio' class='roleCode' name='roleCode' value='"+data[i].roleCode+"'/>&nbsp;" + data[i].roleName + "&nbsp;&nbsp;&nbsp;";
 			}
 		}
 		$("label.roleList").html(html);
-	} */
+	}
+	
+	function doQueryUserRoleSuccessBack(res){
+		var data = res.data;
+		var roleCode = "input.roleCode";
+		if(typeof(data) != "undefined"){
+			for(var i = 0;i < $(roleCode).length;i++){
+				if($(roleCode).eq(i).val() == data[0].roleCode){
+					$(roleCode).eq(i).attr("checked", "checked");
+				}
+			}
+		}
+	}
+	
+	function doError(res){
+		
+	}
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
-	<input type="hidden" id="operate" value = "${operate}"/>
+	<input type="hidden" id="userCode" name="userCode" value = "${user.userCode}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
 	    	<li><a href="#">用户管理</a></li>
 	    	<li><a href="#">用户设置</a></li>
-	    	<li id="operContent">新增菜单</li>
+	    	<li id="operContent">设置角色</li>
    		</ul>
     </div>
     <form>
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" class="dfinput"/></li>
-			    <li><label>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput"/></li>
-			    <li><label>新密码:</label><input type="password" name="password" class="dfinput"/></li>
-			    <!-- <li><label>用户角色:</label><label class="roleList">正在加载...</label></li> -->
+			    <li><label>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label>用户角色:</label><label class="roleList">正在加载...</label></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

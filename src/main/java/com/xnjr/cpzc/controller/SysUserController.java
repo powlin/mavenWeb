@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xnjr.cpzc.ao.IRoleAO;
 import com.xnjr.cpzc.ao.ISysUserAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
@@ -24,6 +25,8 @@ import com.xnjr.cpzc.dto.res.Page;
 @Controller
 @RequestMapping(value = "/sysUser")
 public class SysUserController extends BaseController {
+    @Autowired
+    protected IRoleAO roleAO;
 
     @Autowired
     protected ISysUserAO sysUserAO;
@@ -54,8 +57,8 @@ public class SysUserController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return sysUserAO.queryMenuPage(userCode, userName, status, start,
-            limit, orderColumn, orderDir);
+        return sysUserAO.queryMenuPage(userCode, userName, status, start, limit,
+            orderColumn, orderDir);
     }
 
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
@@ -66,10 +69,10 @@ public class SysUserController extends BaseController {
         return view;
     }
 
-    // ******** 添加菜单 *****
+    // ******** 添加用户 *****
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addmenu(@RequestParam("userCode") String userCode,
+    public boolean addUser(@RequestParam("userCode") String userCode,
             @RequestParam("userName") String userName,
             @RequestParam("password") String password) {
         // 添加用户验证
@@ -85,6 +88,23 @@ public class SysUserController extends BaseController {
             @RequestParam(value = "userCode", required = false) String userCode,
             @RequestParam("operate") String operate) {
         ModelAndView view = new ModelAndView("/system/user_detail_pas");
+        if (StringUtils.isNotBlank(userCode) && "edit".equals(operate)) {// 是修改则查询数据库
+            List list = sysUserAO.queryUserList(userCode, "", "");
+            if (list != null && list.size() > 0) {
+                view.addObject("user", list.get(0));
+                view.addObject("operate", operate);
+            }
+        }
+        return view;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/user/detailRole", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView queryDetailRoleUser(
+            @RequestParam(value = "userCode", required = false) String userCode,
+            @RequestParam("operate") String operate) {
+        ModelAndView view = new ModelAndView("/system/user_detail_role");
         if (StringUtils.isNotBlank(userCode) && "edit".equals(operate)) {// 是修改则查询数据库
             List list = sysUserAO.queryUserList(userCode, "", "");
             if (list != null && list.size() > 0) {
@@ -121,6 +141,20 @@ public class SysUserController extends BaseController {
         // 修改密码验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return sysUserAO.editUserPas(userCode, oldPwd, newPwd,
+            sessionUser.getUser_id());
+    }
+
+    // ******** 修改用户角色 *****
+    @RequestMapping(value = "/user/editRole", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean editUserRole(@RequestParam("userCode") String userCode,
+            @RequestParam("roleCode") String roleCode) {
+        SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        boolean del = sysUserAO.deleteUserRole(userCode);// 删除当前用户纪录
+        if (!del) {// 删除失败
+            return false;
+        }
+        return sysUserAO.addUserRole(userCode, roleCode,
             sessionUser.getUser_id());
     }
 

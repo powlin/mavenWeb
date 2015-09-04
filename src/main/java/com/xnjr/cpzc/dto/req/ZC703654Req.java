@@ -18,6 +18,9 @@ public class ZC703654Req {
     // 用户编号
     private String userId;
 
+    // 用户编号
+    private String userCode;
+
     // 角色编号
     private String roleCode;
 
@@ -46,6 +49,14 @@ public class ZC703654Req {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
 }
