@@ -157,7 +157,7 @@
 		    <li><a href="#">系统管理</a></li>
 		    <li><a href="#">菜单设置</a></li>
 	    </ul>
-	    <button id="addBtn" class="btn btn-primary btn-sm">新增</button></span>
+	    
     </div>
 	<div class="panel-body">
 		<div>
@@ -165,7 +165,7 @@
 				<div class="form-inline" role="form">
 					<div class="form-group mr40">
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
-							class="form-control" id="role_code_search" placeholder="请输入角色编号">
+							class="form-control" id="role_code_search">
 					</div>
 					<div class="form-group">
 						<label for="parent_code" class="control-label">角色等级:</label>
@@ -177,6 +177,7 @@
 						</select>
 					</div>&nbsp;
 					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+					<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
 				</div>
 			</div>
 			<table id="tableList"></table>

@@ -14,9 +14,9 @@
 		var operate = $("#operate").val();
 		if(operate == "edit"){
 			$("#operContent").text("修改角色");
-			var roleLevel = $("#roleLevel").val();
-			if(roleLevel != null && roleLevel != "0"){
-				 $("select[name='role_level'] option[value='"+ roleLevel +"']").attr("selected", true);
+			var role_level = $("#role_level_hid").val();
+			if(role_level != null && role_level != "0"){
+				 $("select[name='role_level'] option[value='"+ role_level +"']").attr("selected", true);
 			}
 		}
 		
@@ -47,7 +47,7 @@
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
 	<input type="hidden" id="operate" value = "${operate}"/>
-	<input type="hidden" id="roleLevel" value = "${role.roleLevel}"/>
+	<input type="hidden" id="role_level_hid" value = "${role.roleLevel}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
