@@ -14,14 +14,14 @@ package com.xnjr.cpzc.dto.req;
  * @history:
  */
 public class ZC703665Req {
-    private String id;
+    private String userCode;
 
-    public String getId() {
-        return id;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
 }

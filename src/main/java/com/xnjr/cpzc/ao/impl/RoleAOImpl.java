@@ -18,6 +18,7 @@ import com.xnjr.cpzc.dto.req.ZC703641Req;
 import com.xnjr.cpzc.dto.req.ZC703642Req;
 import com.xnjr.cpzc.dto.req.ZC703643Req;
 import com.xnjr.cpzc.dto.req.ZC703645Req;
+import com.xnjr.cpzc.dto.req.ZC703652Req;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.SuccessRes;
 import com.xnjr.cpzc.dto.res.ZC703643Res;
@@ -152,6 +153,16 @@ public class RoleAOImpl implements IRoleAO {
 
         return BizConnecter.getBizData("703645",
             JsonUtils.object2Json(zc779045Req), SuccessRes.class).isSuccess();
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public List queryUserRoleList(String userCode) {
+        ZC703652Req zc703652Req = new ZC703652Req();
+        zc703652Req.setUserCode(userCode);
+        String jsonStr = BizConnecter.getBizData("703652",
+            JsonUtils.object2Json(zc703652Req));
+        return JsonUtils.json2Bean(jsonStr, List.class);
     }
 
 }

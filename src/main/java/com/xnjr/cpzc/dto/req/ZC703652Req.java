@@ -17,6 +17,17 @@ public class ZC703652Req {
     // 用户编号
     private String userId;
 
+    // 用户编号
+    private String userCode;
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
+
     public String getUserId() {
         return userId;
     }

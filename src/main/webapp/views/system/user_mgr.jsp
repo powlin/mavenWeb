@@ -94,7 +94,7 @@ $(function() {
 		}, {
 			field : 'operate',
 			title : '操作',
-			width : 200,
+			width : 240,
 			align : 'center',
 			valign : 'middle',
 			formatter : operateFormatter,
@@ -111,13 +111,15 @@ $(function() {
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-primary btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs editSta">修改状态</button>'].join('');
+    return ['<button class="btn btn-primary btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-primary btn-xs editRole">设置角色</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs editSta">设置状态</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
 window.operateEvents = {
     'click .editPas': function (e, value, row, index) {
     	window.location.href = $("#base_path").val() + "/sysUser/user/detailPas?userCode="+row.userCode+"&operate=edit";
+    },'click .editRole': function (e, value, row, index) {
+    	window.location.href = $("#base_path").val() + "/sysUser/user/detailRole?userCode="+row.userCode+"&operate=edit";
     },'click .editSta': function (e, value, row, index) {
     	window.location.href = $("#base_path").val() + "/sysUser/user/detailSta?userCode="+row.userCode+"&operate=edit";
     }

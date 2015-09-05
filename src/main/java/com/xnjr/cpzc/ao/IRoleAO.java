@@ -86,4 +86,14 @@ public interface IRoleAO {
      */
     public boolean editRole(String roleCode, String roleName, String roleLevel,
             String updater, String remark);
+
+    /**
+     * 
+     * @param userCode
+     * @return 
+     * @create: 2015年9月4日 下午2:03:28 yuexia
+     * @history:
+     */
+    @SuppressWarnings("rawtypes")
+    public List queryUserRoleList(String userCode);
 }
