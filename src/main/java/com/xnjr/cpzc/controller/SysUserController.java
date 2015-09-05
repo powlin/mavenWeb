@@ -40,9 +40,6 @@ public class SysUserController extends BaseController {
     @Autowired
     protected IRoleMenuAO roleMenuAO;
 
-    @Autowired
-    protected ISysUserRoleAO sysUserRoleAO;
-
     // ******** 用户登录 *****
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView doLogin(@RequestParam("login_name") String loginName,
@@ -94,13 +91,14 @@ public class SysUserController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return sysUserAO.queryMenuPage(userCode, userName, status, start,
-            limit, orderColumn, orderDir);
+        return sysUserAO.queryMenuPage(userCode, userName, status, start, limit,
+            orderColumn, orderDir);
     }
 
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView queryDetailUser(@RequestParam("operate") String operate) {
+    public ModelAndView queryDetailUser(
+            @RequestParam("operate") String operate) {
         ModelAndView view = new ModelAndView("/system/user_detail");
         return view;
     }
@@ -201,8 +199,8 @@ public class SysUserController extends BaseController {
             @RequestParam("status") String status) {
         // 修改状态验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
-        return sysUserAO
-            .editUserSta(userCode, status, sessionUser.getUser_id());
+        return sysUserAO.editUserSta(userCode, status,
+            sessionUser.getUser_id());
     }
 
 }
