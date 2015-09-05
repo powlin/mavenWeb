@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IRoleAO;
+import com.xnjr.cpzc.ao.IRoleMenuAO;
 import com.xnjr.cpzc.ao.ISysUserAO;
 import com.xnjr.cpzc.ao.ISysUserRoleAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
+import com.xnjr.cpzc.dto.res.ZC703661Res;
 
 /**
  * 系统用户模块
@@ -35,19 +37,50 @@ public class SysUserController extends BaseController {
     @Autowired
     protected ISysUserRoleAO sysUserRoleAO;
 
+    @Autowired
+    protected IRoleMenuAO roleMenuAO;
+
+    @Autowired
+    protected ISysUserRoleAO sysUserRoleAO;
+
     // ******** 用户登录 *****
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(@RequestParam("login_name") String loginName,
+    public ModelAndView doLogin(@RequestParam("login_name") String loginName,
             @RequestParam("login_pwd") String loginPwd) {
         // 校验用户名密码
         boolean flag = sysUserAO.login(loginName, loginPwd, getRemoteHost());
+        ModelAndView view = null;
         if (flag == true) {
             // 创建session
             sessionProvider.setUserDetail(new SessionUser(loginName));
-            return "/main";
+            view = new ModelAndView("/main");
+            view.addObject("userCode", loginName);
         } else {
-            return "/login";
+            view = new ModelAndView("/login");
         }
+        return view;
+    }
+
+    // ******** 用户登录 *****
+    @RequestMapping(value = "/top/menu", method = RequestMethod.GET)
+    public ModelAndView doGetTopMenu() {
+        String userCode = getSessionUser().getUser_id();
+        sysUserRoleAO.queryRoleList(userCode);
+        // 根据用户的编号获取对应的角色
+        String roleCode = "admin";
+        List<ZC703661Res> bannerList = queryRoleMenu(roleCode, "10000", false);
+        // view.addObject("bannerList", bannerList);
+
+        return null;
+    }
+
+    @RequestMapping(value = "/user/roleMenu/list", method = RequestMethod.POST)
+    @ResponseBody
+    public List<ZC703661Res> queryRoleMenu(
+            @RequestParam(value = "role_code", required = false) String roleCode,
+            @RequestParam(value = "pmenu_code", required = false) String pMenuCode,
+            @RequestParam(value = "is_get_child", required = false) boolean isGetChild) {
+        return roleMenuAO.queryMenuList(roleCode, pMenuCode, isGetChild);
     }
 
     @SuppressWarnings("rawtypes")
@@ -61,14 +94,13 @@ public class SysUserController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return sysUserAO.queryMenuPage(userCode, userName, status, start, limit,
-            orderColumn, orderDir);
+        return sysUserAO.queryMenuPage(userCode, userName, status, start,
+            limit, orderColumn, orderDir);
     }
 
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView queryDetailUser(
-            @RequestParam("operate") String operate) {
+    public ModelAndView queryDetailUser(@RequestParam("operate") String operate) {
         ModelAndView view = new ModelAndView("/system/user_detail");
         return view;
     }
@@ -169,8 +201,8 @@ public class SysUserController extends BaseController {
             @RequestParam("status") String status) {
         // 修改状态验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
-        return sysUserAO.editUserSta(userCode, status,
-            sessionUser.getUser_id());
+        return sysUserAO
+            .editUserSta(userCode, status, sessionUser.getUser_id());
     }
 
 }

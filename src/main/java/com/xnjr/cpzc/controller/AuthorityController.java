@@ -9,7 +9,9 @@
 package com.xnjr.cpzc.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IMenuAO;
 import com.xnjr.cpzc.ao.IRoleAO;
+import com.xnjr.cpzc.ao.IRoleMenuAO;
+import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.LTreeRes;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703632Res;
 import com.xnjr.cpzc.dto.res.ZC703633Res;
 import com.xnjr.cpzc.dto.res.ZC703643Res;
+import com.xnjr.cpzc.dto.res.ZC703661Res;
 
 /** 
  * @author: 茜茜 
@@ -42,6 +47,9 @@ public class AuthorityController extends BaseController {
 
     @Autowired
     protected IMenuAO menuAO;
+
+    @Autowired
+    protected IRoleMenuAO roleMenuAO;
 
     // ******************** 角色模块 ***************************
     @RequestMapping(value = "/role/add", method = RequestMethod.POST)
@@ -168,19 +176,25 @@ public class AuthorityController extends BaseController {
             orderColumn, orderDir);
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes" })
     @RequestMapping(value = "/menu/nodelist", method = RequestMethod.GET)
     @ResponseBody
-    public List queryMenuNodeList(
-            @RequestParam(value = "menu_code", required = false) String menuCode,
-            @RequestParam(value = "parent_code", required = false) String parentCode) {
-        List<ZC703632Res> list = menuAO.queryMenuList(menuCode, parentCode);
+    public List queryMenuNodeList(@RequestParam("role_code") String roleCode) {
+        List<ZC703632Res> menulist = menuAO.queryMenuList(null, null);
+        List<ZC703661Res> roleMenuList = roleMenuAO.queryMenuList(roleCode);
+        Map<String, String> roleMenuMap = new HashMap<String, String>();
+        for (ZC703661Res res : roleMenuList) {
+            roleMenuMap.put(res.getMenuCode(), res.getMenuName());
+        }
         List<LTreeRes> resultList = new ArrayList<LTreeRes>();
-        for (ZC703632Res result : list) {
+        for (ZC703632Res result : menulist) {
             LTreeRes lTreeRes = new LTreeRes();
             lTreeRes.setId(result.getMenuCode());
             lTreeRes.setPid(result.getParentCode());
             lTreeRes.setText(result.getMenuName());
+            if (roleMenuMap.containsKey(result.getMenuCode())) {
+                lTreeRes.setIschecked(true);
+            }
             resultList.add(lTreeRes);
         }
         return resultList;
@@ -189,9 +203,15 @@ public class AuthorityController extends BaseController {
     @RequestMapping(value = "/roleMenu/edit", method = RequestMethod.POST)
     @ResponseBody
     public boolean editRoleMenus(@RequestParam("role_code") String roleCode,
-            @RequestParam(value = "menus[]") String[] menus) {
-        System.out.println(roleCode);
-        System.out.println(menus.length);
+            @RequestParam(value = "menu_codes[]") String[] menuCodes) {
+        // 删除原有关系
+        roleMenuAO.dropMenuRoleByRole(roleCode);
+        SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        // 建立新关系
+        for (int i = 0; i < menuCodes.length; i++) {
+            roleMenuAO.addMenuRole(roleCode, menuCodes[i],
+                sessionUser.getUser_id());
+        }
         return true;
     }
 

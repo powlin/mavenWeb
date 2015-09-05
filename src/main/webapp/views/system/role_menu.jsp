@@ -9,7 +9,7 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>分配菜单</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/components/ligerui/css/ligerui-tree.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/components/css/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/components/css/style.css">
 <script src="<%=request.getContextPath()%>/components/js/jquery-1.11.3.js"></script>
 <script src="<%=request.getContextPath()%>/components/ligerui/js/base.js"></script>
 <script src="<%=request.getContextPath()%>/components/ligerui/js/ligerTree.resource.js"></script>
@@ -18,7 +18,8 @@
 <script type="text/javascript" language="javascript">
 $(function() {
 	//下拉菜单
-	doGetAjax($("#base_path").val()+"/sysAuth/menu/nodelist", null, doMenuNode);
+	var data = {role_code:$("input[name='role_code']").val()};
+	doGetAjax($("#base_path").val()+"/sysAuth/menu/nodelist", data, doMenuNode);
 });
 function doMenuNode(nodes){
 	$("#treeMenu").ligerTree({
@@ -37,7 +38,7 @@ function doMenuNode(nodes){
 			nodeArr[i] = nodeData[i]['data']['id'];
 		}
 		var url = $("#base_path").val() + "/sysAuth/roleMenu/edit";
-    	var data = {role_code:"1111",menus:nodeArr};
+    	var data = {role_code:$("input[name='role_code']").val(),menu_codes:nodeArr};
 		doPostAjax(url, data, doSuccessBack);
 	});
 	
@@ -59,15 +60,21 @@ function doMenuNode(nodes){
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">系统管理</a></li>
-		    <li><a href="#">分配菜单</a></li>
+		    <li><a href="#">权限设置</a></li>
 	    </ul>
     </div>
     <form>
 	    <div class="formbody">
-	    <div class="formtitle"><span>菜单列表</span></div>
-		    <div id="treeMenu"></div>
+	    <div class="formtitle"><span>分配菜单</span></div>
+		     <ul class="forminfo">
+		       <li><label>角色编号:</label><input type="text" name="role_code" value ="<%=request.getParameter("role_code") %>" readonly="readonly" class="dfinput"/></li>
+			   <li><label>角色名称:</label><input type="text" name="role_name" value ="<%=request.getParameter("role_name") %>" readonly="readonly" class="dfinput"/></li>
+			   <li><label>菜单权限:</label>
+			   <div id="treeMenu"></div></li>
+			   <li><input id="subBtn" type="button" class="btn mr40" value="保存"/>
+			 </ul>
 	    </div>
-	    <input id="subBtn" type="button" class="btn mr40" value="提交"/>
+	    
     </form>
 </body>
 </html>

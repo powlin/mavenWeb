@@ -11,7 +11,6 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
-		
 		var data = {};
 		data['menuCode'] = $("#menuCode").val();
 		var url = $("#base_path").val() + "/menumgr/menu/detailjson";
