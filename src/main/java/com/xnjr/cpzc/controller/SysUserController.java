@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xnjr.cpzc.ao.IRoleAO;
 import com.xnjr.cpzc.ao.IRoleMenuAO;
 import com.xnjr.cpzc.ao.ISysUserAO;
+import com.xnjr.cpzc.ao.ISysUserRoleAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703661Res;
@@ -34,10 +35,10 @@ public class SysUserController extends BaseController {
     protected ISysUserAO sysUserAO;
 
     @Autowired
-    protected IRoleMenuAO roleMenuAO;
+    protected ISysUserRoleAO sysUserRoleAO;
 
-    // @Autowired
-    // protected ISysUserRoleAO sysUserRoleAO;
+    @Autowired
+    protected IRoleMenuAO roleMenuAO;
 
     // ******** 用户登录 *****
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -197,11 +198,11 @@ public class SysUserController extends BaseController {
     public boolean editUserRole(@RequestParam("userCode") String userCode,
             @RequestParam("roleCode") String roleCode) {
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
-        boolean del = sysUserAO.deleteUserRole(userCode);// 删除当前用户纪录
+        boolean del = sysUserRoleAO.deleteUserRole(userCode);// 删除当前用户纪录
         if (!del) {// 删除失败
             return false;
         }
-        return sysUserAO.addUserRole(userCode, roleCode,
+        return sysUserRoleAO.addUserRole(userCode, roleCode,
             sessionUser.getUser_id());
     }
 

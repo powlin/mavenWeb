@@ -16,11 +16,33 @@ import java.util.List;
  * @history:
  */
 public interface ISysUserRoleAO {
-    public boolean editUserRole(String userCode, String roleCode, String creator);
+    public boolean editUserRole(String userCode, String roleCode,
+            String creator);
 
     public boolean dropUserRole(String id);
 
     @SuppressWarnings("rawtypes")
     public List queryRoleList(String userId);
+
+    /**
+     * 删除用户角色
+     * @param userCode
+     * @return 
+     * @create: 2015年9月4日 下午3:04:16 yuexia
+     * @history:
+     */
+    public boolean deleteUserRole(String userCode);
+
+    /**
+     * 添加用户角色
+     * @param userCode
+     * @param roleCode
+     * @param creator
+     * @return 
+     * @create: 2015年9月3日 上午10:18:08 yuexia
+     * @history:
+     */
+    public boolean addUserRole(String userCode, String roleCode,
+            String creator);
 
 }
