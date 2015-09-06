@@ -74,7 +74,7 @@ $(function() {
 			valign : 'middle',
 			sortable : false
 		}, {
-			field : 'creater',
+			field : 'creator',
 			title : '创建人',
 			align : 'left',
 			valign : 'middle',
