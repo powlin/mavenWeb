@@ -63,7 +63,7 @@
 			    <li><label>角色编号:</label><input type="text" name="role_code" value ="${role.roleCode}"  class="dfinput"/></li>
 			    <li><label>角色名称:</label><input type="text" name="role_name" value ="${role.roleName}"  class="dfinput"/></li>
 			    <li><label>角色等级:</label>
-				    <select name="role_level">
+				    <select name="role_level" class="dfinput">
 			  			<option value="">请选择</option>
 						<option value="1">1 财务级别</option>
 						<option value="2">2 运营推广级别</option>
