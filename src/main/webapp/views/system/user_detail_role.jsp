@@ -34,19 +34,6 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
-			/* var roleVal = "input.roleVal";
-			var roleStr = "";
-			for(var i = 0;i < $(roleVal).length;i++){
-				if($(roleVal).eq(i).is(":checked")){
-					roleStr += $(roleVal).eq(i).val() + ",";
-				}
-			}
-			if(roleStr.length > 0){
-				roleStr = roleStr.substring(0, roleStr.length-1);
-			}else{
-				roleStr = "0";
-			}
-			data['roleStr'] = roleStr; */
 			data['userCode'] = $("#userCode").val();
 			var url = $("#base_path").val() + "/sysUser/user/editRole";
 			doPostAjax(url, data, doSuccessBack);
@@ -67,19 +54,19 @@
 		var html = "";
 		if(typeof(data) != "undefined"){
 			for(var i = 0;i < data.length;i++){
-				html += "<input type='radio' class='roleCode' name='roleCode' value='"+data[i].roleCode+"'/>&nbsp;" + data[i].roleName + "&nbsp;&nbsp;&nbsp;";
+				html += "<option value='"+data[i].roleCode+"'>" + data[i].roleName + "</option>";
 			}
 		}
-		$("label.roleList").html(html);
+		$("select.roleList").html(html);
 	}
 	
 	function doQueryUserRoleSuccessBack(res){
 		var data = res.data;
-		var roleCode = "input.roleCode";
+		var roleCode = "select.roleCode>option";
 		if(typeof(data) != "undefined"){
 			for(var i = 0;i < $(roleCode).length;i++){
 				if($(roleCode).eq(i).val() == data[0].roleCode){
-					$(roleCode).eq(i).attr("checked", "checked");
+					$(roleCode).eq(i).attr("selected", "selected");
 				}
 			}
 		}
@@ -106,7 +93,7 @@
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
 			    <li><label>用户编号:</label><label>${user.userCode}</label></li>
-			    <li><label>用户角色:</label><label class="roleList">正在加载...</label></li>
+			    <li><label>用户角色:</label><select class="input-sm roleList roleCode" name="roleCode"></select></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

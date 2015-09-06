@@ -31,7 +31,7 @@ $(function() {
 			return {
 				userCode : $("#user_code_search").val(),
 				userName : $("#user_name_search").val(),
-				staus : $("#status_search").val(),
+				status : $("#status_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit
 			};
@@ -111,7 +111,7 @@ $(function() {
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-primary btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-primary btn-xs editRole">设置角色</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs editSta">设置状态</button>'].join('');
+    return ['<button class="btn btn-link btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editRole">设置角色</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editSta">设置状态</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
@@ -151,14 +151,17 @@ function doSuccessDel(res) {
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
 						<div class="form-group mr40">
+							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
+						</div>
+						<div class="form-group mr40">
 							<label for="userCode" class="control-label-first">用户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="user_code_search" placeholder="请输入用户编号">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="userName" class="control-label">用户姓名:</label> <input class="input-sm" type="text"
 								class="form-control" id="user_name_search" placeholder="请输入用户姓名">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="status" class="control-label">状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
 									<option value="">请选择</option>
@@ -167,7 +170,6 @@ function doSuccessDel(res) {
 								</select>
 						</div>&nbsp;
 						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
-						<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
 					</div>
 				</div>
 				<table id="tableList"></table>

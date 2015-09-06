@@ -119,7 +119,7 @@ $(function() {
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>'].join('');
+    return ['<button class="btn btn-link btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs del">删除</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
@@ -207,15 +207,17 @@ function fillSelSuccessBack(res){
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
 						<div class="form-group mr40">
+							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
+						</div>
+						<div class="form-group mr40">
 							<label for="menuCode" class="control-label-first">菜单编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="menu_code_search" placeholder="请输入菜单编号">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="parentCode" class="control-label">父菜单编号:</label> <select class="input-sm"
 								class="form-control" id="parent_code_search"></select>
 						</div>&nbsp;
 						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
-						<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
 					</div>
 				</div>
 				<table id="tableList"></table>
