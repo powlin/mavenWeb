@@ -161,7 +161,7 @@ function doSuccessDel(res) {
 							<label for="userName" class="control-label">用户姓名:</label> <input class="input-sm" type="text"
 								class="form-control" id="user_name_search" placeholder="请输入用户姓名">
 						</div>
-						<div class="form-group mr40">
+						<div class="form-group">
 							<label for="status" class="control-label">状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
 									<option value="">请选择</option>

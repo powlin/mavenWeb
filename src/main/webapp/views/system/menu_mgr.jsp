@@ -213,7 +213,7 @@ function fillSelSuccessBack(res){
 							<label for="menuCode" class="control-label-first">菜单编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="menu_code_search" placeholder="请输入菜单编号">
 						</div>
-						<div class="form-group mr40">
+						<div class="form-group">
 							<label for="parentCode" class="control-label">父菜单编号:</label> <select class="input-sm"
 								class="form-control" id="parent_code_search"></select>
 						</div>&nbsp;
