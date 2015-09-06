@@ -133,23 +133,23 @@ public class RoleMenuAOImpl implements IRoleMenuAO {
             new TypeToken<List<ZC703661Res>>() {
             }.getType());
         List<ZC703661Res> cList = new ArrayList<ZC703661Res>();
-        if (!isGetChild) {
-            for (ZC703661Res res : list) {
-                if (pMenuCode.equals(res.getParentCode())) {
-                    cList.add(res);
-                }
+        List<ZC703661Res> resList = new ArrayList<ZC703661Res>();
+        for (ZC703661Res res : list) {
+            if (pMenuCode.equals(res.getParentCode())) {
+                cList.add(res);
+                resList.add(res);
             }
         }
         if (isGetChild) {
             for (ZC703661Res res : cList) {
                 for (ZC703661Res result : list) {
                     if (res.getMenuCode().equals(result.getParentCode())) {
-                        cList.add(result);
+                        resList.add(result);
                     }
                 }
             }
         }
-        return cList;
+        return resList;
     }
 
     /** 

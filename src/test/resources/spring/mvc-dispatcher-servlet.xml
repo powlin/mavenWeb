@@ -144,7 +144,7 @@
 			<property name="paramName" value="lang" />
 		</bean>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/sysUser/**" />
 			<mvc:mapping path="/sysAuth/**" />
 			<mvc:mapping path="/mana/msg/**" />
 			<mvc:mapping path="/msg/**" />
@@ -152,13 +152,10 @@
 			<mvc:mapping path="/interest/**" />
 			<mvc:mapping path="/gene/smscaptcha/send" />
 			<mvc:mapping path="/lifecycle/**" />
-		 	<mvc:exclude-mapping path="/user/mobile/check"/>
-		 	<mvc:exclude-mapping path="/user/regist"/>
-		 	<mvc:exclude-mapping path="/user/loginpwd/find"/>
+		 	<mvc:exclude-mapping path="/sysUser/login*"/>
 		 	<mvc:exclude-mapping path="/mobile/css/**" />
 		 	<mvc:exclude-mapping path="/mobile/js/**" />
 		 	<mvc:exclude-mapping path="/mobile/images/**" />
-		 	<mvc:exclude-mapping path="/user/login*"/>
 		 	<mvc:exclude-mapping path="/user/logout"/>
 		 	<mvc:exclude-mapping path="/index*" />
 		 	<mvc:exclude-mapping path="/spread/*" />

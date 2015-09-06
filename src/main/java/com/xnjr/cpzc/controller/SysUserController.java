@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xnjr.cpzc.ao.IRoleAO;
 import com.xnjr.cpzc.ao.IRoleMenuAO;
 import com.xnjr.cpzc.ao.ISysUserAO;
-import com.xnjr.cpzc.ao.ISysUserRoleAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703661Res;
@@ -37,8 +36,8 @@ public class SysUserController extends BaseController {
     @Autowired
     protected IRoleMenuAO roleMenuAO;
 
-    @Autowired
-    protected ISysUserRoleAO sysUserRoleAO;
+    // @Autowired
+    // protected ISysUserRoleAO sysUserRoleAO;
 
     // ******** 用户登录 *****
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -58,26 +57,41 @@ public class SysUserController extends BaseController {
         return view;
     }
 
-    // ******** 用户登录 *****
-    @RequestMapping(value = "/top/menu", method = RequestMethod.GET)
-    public ModelAndView doGetTopMenu() {
+    // ******** 顶级菜单 *****
+    @RequestMapping(value = "/top_menu", method = RequestMethod.GET)
+    public ModelAndView doTopMenu() {
         String userCode = getSessionUser().getUser_id();
-        sysUserRoleAO.queryRoleList(userCode);
+        // sysUserRoleAO.queryRoleList(userCode);
         // 根据用户的编号获取对应的角色
         String roleCode = "admin";
-        List<ZC703661Res> bannerList = queryRoleMenu(roleCode, "10000", false);
-        // view.addObject("bannerList", bannerList);
-
-        return null;
+        List<ZC703661Res> bannerList = roleMenuAO.queryMenuList(roleCode,
+            "10000", false);
+        ModelAndView view = new ModelAndView("/top");
+        view.addObject("bannerList", bannerList);
+        view.addObject("userCode", userCode);
+        return view;
     }
 
-    @RequestMapping(value = "/user/roleMenu/list", method = RequestMethod.POST)
+    // ******** 顶级菜单 *****
+    @RequestMapping(value = "/left_menu", method = RequestMethod.GET)
+    public ModelAndView doLeftMenu(
+            @RequestParam(value = "pmenu_code") String pMenuCode) {
+        ModelAndView view = new ModelAndView("/menu");
+        view.addObject("pMenuCode", pMenuCode);
+        return view;
+    }
+
+    @RequestMapping(value = "/roleMenu/list", method = RequestMethod.POST)
     @ResponseBody
     public List<ZC703661Res> queryRoleMenu(
-            @RequestParam(value = "role_code", required = false) String roleCode,
-            @RequestParam(value = "pmenu_code", required = false) String pMenuCode,
-            @RequestParam(value = "is_get_child", required = false) boolean isGetChild) {
-        return roleMenuAO.queryMenuList(roleCode, pMenuCode, isGetChild);
+            @RequestParam(value = "pmenuCode", required = false) String pMenuCode,
+            @RequestParam(value = "isGetChild", required = false) boolean isGetChild) {
+        String roleCode = "admin";
+        // sysUserRoleAO.queryRoleList(userCode);
+        // 根据用户的编号获取对应的角色
+        List<ZC703661Res> menuList = roleMenuAO.queryMenuList(roleCode,
+            pMenuCode, true);
+        return menuList;
     }
 
     @SuppressWarnings("rawtypes")

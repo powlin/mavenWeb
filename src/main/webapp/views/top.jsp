@@ -10,31 +10,25 @@
 <jsp:include page="../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 $(function(){
-	alert($("#user_code").val());
-	
 	//顶部导航切换
 	$(".nav li a").click(function(){
 		$(".nav li a.selected").removeClass("selected")
 		$(this).addClass("selected");
 	});
-	doChoiceNav();
+	//获取第一个菜单链接，显示左边属性
+	$("#menu0")[0].click();
 })	
-
-function doChoiceNav(){
-	$("input[name='role_code']").val()
-}
 </script>
 </head>
 <body style="background:url(../components/images/topbg.gif) repeat-x;">
-<input type="hidden" id="user_code" name="user_code" value="${requestScope.userCode}" />
     <div class="topleft">
     <a href="main.jsp" target="_parent"><img src="../components/images/logo.png" title="系统首页" /></a>
     </div>
-        
     <ul class="nav">
-  
+    	<c:forEach var="menu" items="${bannerList}" varStatus="status">     
+      		<li><a id="menu${status.index}" href="<%=request.getContextPath()%>${menu.menuUrl}?pmenu_code=${menu.menuCode}" target="leftFrame"><img src="../components/images/icon01.png" title="${menu.menuName}" /><h2>${menu.menuName}</h2></a></li>
+		</c:forEach> 
     </ul>
-    
     <div class="topright">    
     <ul>
     <li><span><img src="../components/images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
@@ -43,7 +37,7 @@ function doChoiceNav(){
     </ul>
      
     <div class="user">
-    <span>${requestScope.userCode}</span>
+    <span>${userCode}</span>
     <i>消息</i>
     <b>5</b>
     </div>    

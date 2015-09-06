@@ -8,10 +8,10 @@
 <title>信息管理系统界面</title>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
-  <frame src="<%=request.getContextPath()%>/views/top.jsp" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
+  <frame src="<%=request.getContextPath()%>/sysUser/top_menu" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
   <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
     <frame src="<%=request.getContextPath()%>/views/menu.jsp" name="leftFrame" scrolling="no" noresize="noresize" id="leftFrame" title="leftFrame" />
-    <frame src="#" name="rightFrame" id="rightFrame" title="rightFrame" />
+    <frame src="<%=request.getContextPath()%>/views/default.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
   </frameset>
 </frameset>
 <noframes><body>
