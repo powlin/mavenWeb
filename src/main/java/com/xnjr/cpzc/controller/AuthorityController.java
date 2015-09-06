@@ -58,8 +58,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("role_name") String roleName,
             @RequestParam("role_level") String roleLevel,
             @RequestParam(value = "remark", required = false) String remark) {
-        return roleAO.addRole(roleCode, roleName, roleLevel,
-            this.getSessionUser().getUser_id(), remark);
+        return roleAO.addRole(roleCode, roleName, roleLevel, this
+            .getSessionUser().getUserCode(), remark);
     }
 
     @RequestMapping(value = "/role/edit", method = RequestMethod.POST)
@@ -68,8 +68,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("role_name") String roleName,
             @RequestParam("role_level") String roleLevel,
             @RequestParam("remark") String remark) {
-        return roleAO.editRole(roleCode, roleName, roleLevel,
-            this.getSessionUser().getUser_id(), remark);
+        return roleAO.editRole(roleCode, roleName, roleLevel, this
+            .getSessionUser().getUserCode(), remark);
     }
 
     @RequestMapping(value = "/role/drop", method = RequestMethod.POST)
@@ -125,7 +125,8 @@ public class AuthorityController extends BaseController {
     // ******************** 菜单模块 ***************************
     @RequestMapping(value = "/menu/add", method = RequestMethod.POST)
     @ResponseBody
-    public ZC703633Res addMenu(@RequestParam("menu_code") String menuCode,
+    public ZC703633Res addMenu(
+            @RequestParam("menu_code") String menuCode,
             @RequestParam("menu_name") String menuName,
             @RequestParam("menu_url") String menuUrl,
             @RequestParam(value = "parent_code", required = false) String parentCode,
@@ -149,8 +150,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("parent_code") String parentCode,
             @RequestParam("order_no") String orderNo,
             @RequestParam("remark") String remark) {
-        return menuAO.editMenu(menuCode, menuName, menuUrl, parentCode, orderNo,
-            remark);
+        return menuAO.editMenu(menuCode, menuName, menuUrl, parentCode,
+            orderNo, remark);
     }
 
     @SuppressWarnings("rawtypes")
@@ -210,7 +211,7 @@ public class AuthorityController extends BaseController {
         // 建立新关系
         for (int i = 0; i < menuCodes.length; i++) {
             roleMenuAO.addMenuRole(roleCode, menuCodes[i],
-                sessionUser.getUser_id());
+                sessionUser.getUserCode());
         }
         return true;
     }

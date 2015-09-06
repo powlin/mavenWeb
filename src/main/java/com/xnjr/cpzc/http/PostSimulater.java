@@ -62,7 +62,7 @@ public class PostSimulater {
                     con.setRequestProperty(key, value);
                 }
             }
-
+            con.setConnectTimeout(10000);
             con.setRequestMethod(METHOD_POST); // 置为POST方法
             con.setDoInput(true); // 开启输入流
             con.setDoOutput(true); // 开启输出流

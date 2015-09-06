@@ -14,36 +14,35 @@ package com.xnjr.cpzc.base.session;
  * @history:
  */
 public class SessionUser extends AUserDetail {
-    private String user_id;
+    private String userCode;
 
-    private String account_number;
+    private String roleCode;
 
     public SessionUser() {
     }
 
-    public SessionUser(String user_id) {
-        this.user_id = user_id;
+    public SessionUser(String userCode) {
+        this.userCode = userCode;
     }
 
-    public SessionUser(String user_id, String account_number) {
-        this.user_id = user_id;
-        this.account_number = account_number;
+    public SessionUser(String userCode, String roleCode) {
+        this.userCode = userCode;
+        this.roleCode = roleCode;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public String getAccount_number() {
-        return account_number;
+    public String getRoleCode() {
+        return roleCode;
     }
 
-    public void setAccount_number(String account_number) {
-        this.account_number = account_number;
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
     }
-
 }

@@ -10,19 +10,19 @@ package com.xnjr.cpzc.ao;
 
 import java.util.List;
 
+import com.xnjr.cpzc.dto.res.ZC703652Res;
+
 /** 
  * @author: miyb 
  * @since: 2015-5-14 上午9:17:07 
  * @history:
  */
 public interface ISysUserRoleAO {
-    public boolean editUserRole(String userCode, String roleCode,
-            String creator);
+    public boolean editUserRole(String userCode, String roleCode, String creator);
 
     public boolean dropUserRole(String id);
 
-    @SuppressWarnings("rawtypes")
-    public List queryRoleList(String userId);
+    public List<ZC703652Res> queryRoleList(String userCode);
 
     /**
      * 删除用户角色
@@ -42,7 +42,6 @@ public interface ISysUserRoleAO {
      * @create: 2015年9月3日 上午10:18:08 yuexia
      * @history:
      */
-    public boolean addUserRole(String userCode, String roleCode,
-            String creator);
+    public boolean addUserRole(String userCode, String roleCode, String creator);
 
 }

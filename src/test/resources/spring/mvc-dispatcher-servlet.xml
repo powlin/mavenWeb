@@ -24,7 +24,8 @@
 	</context:component-scan>
 	
 	<!-- 对静态资源文件的访问  start-->
-	<mvc:resources mapping="/frontend/**" location="/frontend/" />
+	<mvc:resources mapping="/cpzc-oss/components/**" location="/components/" />
+	
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>
@@ -146,23 +147,8 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/sysUser/**" />
 			<mvc:mapping path="/sysAuth/**" />
-			<mvc:mapping path="/mana/msg/**" />
-			<mvc:mapping path="/msg/**" />
-			<mvc:mapping path="/supei/**" />
-			<mvc:mapping path="/interest/**" />
-			<mvc:mapping path="/gene/smscaptcha/send" />
-			<mvc:mapping path="/lifecycle/**" />
 		 	<mvc:exclude-mapping path="/sysUser/login*"/>
-		 	<mvc:exclude-mapping path="/mobile/css/**" />
-		 	<mvc:exclude-mapping path="/mobile/js/**" />
-		 	<mvc:exclude-mapping path="/mobile/images/**" />
 		 	<mvc:exclude-mapping path="/user/logout"/>
-		 	<mvc:exclude-mapping path="/index*" />
-		 	<mvc:exclude-mapping path="/spread/*" />
-		 	<mvc:exclude-mapping path="/time" />
-		 	<mvc:exclude-mapping path="/sms/registercode" />
-		 	<mvc:exclude-mapping path="/sms/loginpwdcode" />
-		 	<mvc:exclude-mapping path="/user/certification.htm" />
 			<ref bean="sessionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

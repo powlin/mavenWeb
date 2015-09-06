@@ -29,7 +29,7 @@
 	<bean id="applicationProperties" class="com.xnjr.cpzc.base.ApplicationProperties" />
 	
 	
-	<!-- 验证码配置 start -->
+	<!-- 验证码配置 start 
 	<bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
 	<bean id="captchaEngineEx" class="com.xnjr.cpzc.base.captcha.MyCaptchaEngine"/>
     <bean id="imageCaptchaService" class="com.xnjr.cpzc.base.captcha.CustomGenericManageableCaptchaService">
@@ -48,7 +48,7 @@
         <constructor-arg index="4">
             <value>75000</value>
         </constructor-arg>
-    </bean>
+    </bean>-->
     <!-- 验证码配置 end -->
     <!-- <bean id="dictManager" class="com.hsnet.frontcore.dictionary.DictManager" >
     	<property name="dictionaryServiceImpl" ref="dictionaryServiceImpl" ></property>

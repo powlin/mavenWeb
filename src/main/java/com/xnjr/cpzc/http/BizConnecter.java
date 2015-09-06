@@ -22,35 +22,35 @@ import com.xnjr.cpzc.util.RegexUtils;
 public class BizConnecter {
     public static final String YES = "0";
 
-    public static final String POST_URL = "http://127.0.0.1:8080/xn-cpzcapi/api";
-
     // public static final String POST_URL =
-    // "http://115.29.140.31:8087/cpzc/api";
+    // "http://127.0.0.1:8080/xn-cpzcapi/api";
+
+    public static final String POST_URL = "http://115.29.140.31:8087/cpzc/api";
 
     public static <T> T getBizData(String code, String json, Class<T> clazz) {
         String data = null;
+        String resJson = null;
         try {
             Properties formProperties = new Properties();
             formProperties.put("code", code);
             formProperties.put("json", json);
             System.out.println(json);
-            String resJson = PostSimulater.requestPostForm(POST_URL,
-                formProperties);
-            // 开始解析json
-            String errorCode = RegexUtils.find(resJson,
-                "errorCode\":\"(.+?)\"", 1);
-            if (YES.equalsIgnoreCase(errorCode)) {
-                data = RegexUtils.find(resJson, "data\":(.*)\\}", 1);
-            } else {
-                String errorInfo = RegexUtils.find(resJson,
-                    "errorInfo\":\"(.+?)\"", 1);
-                System.out.println("errorCode:" + errorCode + "<" + errorInfo
-                        + ">");
-                throw new BizException("JD000001", errorInfo);
-            }
+            resJson = PostSimulater.requestPostForm(POST_URL, formProperties);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 开始解析json
+        String errorCode = RegexUtils.find(resJson, "errorCode\":\"(.+?)\"", 1);
+        if (YES.equalsIgnoreCase(errorCode)) {
+            data = RegexUtils.find(resJson, "data\":(.*)\\}", 1);
+        } else {
+            String errorInfo = RegexUtils.find(resJson,
+                "errorInfo\":\"(.+?)\"", 1);
+            System.out
+                .println("errorCode:" + errorCode + "<" + errorInfo + ">");
+            throw new BizException("Biz000", errorInfo);
+        }
+
         return JsonUtils.json2Bean(data, clazz);
     }
 

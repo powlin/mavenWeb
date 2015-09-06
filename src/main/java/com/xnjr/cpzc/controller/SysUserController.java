@@ -17,7 +17,9 @@ import com.xnjr.cpzc.ao.ISysUserAO;
 import com.xnjr.cpzc.ao.ISysUserRoleAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
+import com.xnjr.cpzc.dto.res.ZC703652Res;
 import com.xnjr.cpzc.dto.res.ZC703661Res;
+import com.xnjr.cpzc.exception.BizException;
 
 /**
  * 系统用户模块
@@ -49,7 +51,14 @@ public class SysUserController extends BaseController {
         ModelAndView view = null;
         if (flag == true) {
             // 创建session
-            sessionProvider.setUserDetail(new SessionUser(loginName));
+            // 根据用户的编号获取对应的角色
+            List<ZC703652Res> roleList = sysUserRoleAO.queryRoleList(loginName);
+
+            if (roleList == null || roleList.size() == 0) {
+                throw new BizException("ZC779045", "该用户未分配角色");
+            }
+            String roleCode = roleList.get(0).getRoleCode();
+            sessionProvider.setUserDetail(new SessionUser(loginName, roleCode));
             view = new ModelAndView("/main");
             view.addObject("userCode", loginName);
         } else {
@@ -61,15 +70,11 @@ public class SysUserController extends BaseController {
     // ******** 顶级菜单 *****
     @RequestMapping(value = "/top_menu", method = RequestMethod.GET)
     public ModelAndView doTopMenu() {
-        String userCode = getSessionUser().getUser_id();
-        // sysUserRoleAO.queryRoleList(userCode);
-        // 根据用户的编号获取对应的角色
-        String roleCode = "admin";
-        List<ZC703661Res> bannerList = roleMenuAO.queryMenuList(roleCode,
-            "10000", false);
+        List<ZC703661Res> bannerList = roleMenuAO.queryMenuList(
+            getSessionUser().getRoleCode(), "10000", false);
         ModelAndView view = new ModelAndView("/top");
         view.addObject("bannerList", bannerList);
-        view.addObject("userCode", userCode);
+        view.addObject("userCode", getSessionUser().getUserCode());
         return view;
     }
 
@@ -87,11 +92,8 @@ public class SysUserController extends BaseController {
     public List<ZC703661Res> queryRoleMenu(
             @RequestParam(value = "pmenuCode", required = false) String pMenuCode,
             @RequestParam(value = "isGetChild", required = false) boolean isGetChild) {
-        String roleCode = "admin";
-        // sysUserRoleAO.queryRoleList(userCode);
-        // 根据用户的编号获取对应的角色
-        List<ZC703661Res> menuList = roleMenuAO.queryMenuList(roleCode,
-            pMenuCode, true);
+        List<ZC703661Res> menuList = roleMenuAO.queryMenuList(getSessionUser()
+            .getRoleCode(), pMenuCode, true);
         return menuList;
     }
 
@@ -126,7 +128,7 @@ public class SysUserController extends BaseController {
         // 添加用户验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return sysUserAO.addUser(userCode, userName, password,
-            sessionUser.getUser_id());
+            sessionUser.getUserCode());
     }
 
     @SuppressWarnings("rawtypes")
@@ -189,7 +191,7 @@ public class SysUserController extends BaseController {
         // 修改密码验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return sysUserAO.editUserPas(userCode, oldPwd, newPwd,
-            sessionUser.getUser_id());
+            sessionUser.getUserCode());
     }
 
     // ******** 修改用户角色 *****
@@ -203,7 +205,7 @@ public class SysUserController extends BaseController {
             return false;
         }
         return sysUserRoleAO.addUserRole(userCode, roleCode,
-            sessionUser.getUser_id());
+            sessionUser.getUserCode());
     }
 
     // ******** 修改用户密码 *****
@@ -213,8 +215,8 @@ public class SysUserController extends BaseController {
             @RequestParam("status") String status) {
         // 修改状态验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
-        return sysUserAO
-            .editUserSta(userCode, status, sessionUser.getUser_id());
+        return sysUserAO.editUserSta(userCode, status,
+            sessionUser.getUserCode());
     }
 
 }

@@ -12,10 +12,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xnjr.cpzc.ao.ISysUserRoleAO;
 import com.xnjr.cpzc.dto.req.ZC703654Req;
 import com.xnjr.cpzc.dto.req.ZC703665Req;
 import com.xnjr.cpzc.dto.res.SuccessRes;
+import com.xnjr.cpzc.dto.res.ZC703652Res;
 import com.xnjr.cpzc.http.BizConnecter;
 import com.xnjr.cpzc.util.JsonUtils;
 
@@ -31,8 +34,7 @@ public class SysUserRoleAOImpl implements ISysUserRoleAO {
      * @see com.xnjr.cpzc.ao.ISysUserRoleAO#addUserRole(java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean editUserRole(String userCode, String roleCode,
-            String creator) {
+    public boolean editUserRole(String userCode, String roleCode, String creator) {
         return true;
     }
 
@@ -45,14 +47,13 @@ public class SysUserRoleAOImpl implements ISysUserRoleAO {
         return false;
     }
 
-    /** 
-     * @see com.xnjr.cpzc.ao.ISysUserRoleAO#queryRoleList(java.lang.String)
-     */
-    @SuppressWarnings("rawtypes")
     @Override
-    public List queryRoleList(String userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<ZC703652Res> queryRoleList(String userCode) {
+        String jsonStr = BizConnecter.getBizData("703652",
+            JsonUtils.string2Json("userCode", userCode));
+        Gson gson = new Gson();
+        return gson.fromJson(jsonStr, new TypeToken<List<ZC703652Res>>() {
+        }.getType());
     }
 
     @Override
@@ -64,8 +65,7 @@ public class SysUserRoleAOImpl implements ISysUserRoleAO {
     }
 
     @Override
-    public boolean addUserRole(String userCode, String roleCode,
-            String creator) {
+    public boolean addUserRole(String userCode, String roleCode, String creator) {
         ZC703654Req zc703654Req = new ZC703654Req();
         zc703654Req.setUserCode(userCode);
         zc703654Req.setRoleCode(roleCode);
