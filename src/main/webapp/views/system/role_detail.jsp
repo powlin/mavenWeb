@@ -22,6 +22,9 @@
 		
 		//提交
 		$('#subBtn').click(function() {
+			if(!checkForm()){
+				return false;
+			}
 			var data = {};
 			var t = $('form').serializeArray();
 			$.each(t, function() {
@@ -33,12 +36,39 @@
 		});
 	});
 	
+	function checkForm(){
+		var roleCode = $("#roleCode");
+		if(roleCode.val() == ""){
+			roleCode.next().removeClass("hid");
+			return false;
+		}
+		var roleName = $("#roleName");
+		if(roleName.val() == ""){
+			roleName.next().removeClass("hid");
+			return false;
+		}
+		var roleLevel = $("#roleLevel");
+		if(roleLevel.val() == ""){
+			roleLevel.next().removeClass("hid");
+			return false;
+		}
+		return true;
+	}
+	
 	function doSuccessBack(res) {
 		if (res.success == true) {
 			alert("操作成功");
 			window.location.href = $("#base_path").val() + "/views/system/role.htm";
 		}else{
 			alert(res.msg);
+		}
+	}
+	
+	function toggleMess(e){
+		if($(e).val() != ""){
+			$(e).next().addClass("hid");
+		}else{
+			$(e).next().removeClass("hid");
 		}
 	}
 </script>
@@ -60,17 +90,16 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>角色信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>角色编号:</label><input type="text" name="role_code" value ="${role.roleCode}"  class="dfinput"/></li>
-			    <li><label>角色名称:</label><input type="text" name="role_name" value ="${role.roleName}"  class="dfinput"/></li>
-			    <li><label>角色等级:</label>
-				    <select name="role_level" class="dfinput">
-			  			<option value="">请选择</option>
+			    <li><label><span class="inline_red">*</span>角色编号:</label><input type="text" id="roleCode" name="role_code" value ="${role.roleCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="role_name" value ="${role.roleName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色名称不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>角色等级:</label>
+				    <select id="roleLevel" name="role_level" class="dfinput">
 						<option value="1">1 财务级别</option>
 						<option value="2">2 运营推广级别</option>
 						<option value="3">3 风控级别</option>
 					</select>
 				</li>
-			    <li><label>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

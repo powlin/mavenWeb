@@ -92,8 +92,8 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>用户编号:</label><label>${user.userCode}</label></li>
-			    <li><label>用户角色:</label><select class="dfinput roleList roleCode" name="roleCode"></select></li>
+			    <li><label><span class="inline_red">*</span>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label><span class="inline_red">*</span>用户角色:</label><select class="dfinput roleList roleCode" name="roleCode"></select></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

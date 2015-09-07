@@ -19,6 +19,9 @@
 		
 		//提交
 		$('#subBtn').click(function() {
+			if(!checkForm()){
+				return false;
+			}
 			var data = {};
 			var t = $('form').serializeArray();
 			$.each(t, function() {
@@ -29,12 +32,39 @@
 		});
 	});
 	
+	function checkForm(){
+		var userCode = $("#userCode");
+		if(userCode.val() == ""){
+			userCode.next().removeClass("hid");
+			return false;
+		}
+		var oldPwd = $("#oldPwd");
+		if(oldPwd.val() == ""){
+			oldPwd.next().removeClass("hid");
+			return false;
+		}
+		var newPwd = $("#newPwd");
+		if(newPwd.val() == ""){
+			newPwd.next().removeClass("hid");
+			return false;
+		}
+		return true;
+	}
+	
 	function doSuccessBack(res) {
 		if (res.success == true) {
 			alert("操作成功");
 			window.location.href = $("#base_path").val() + "/views/system/user_mgr.htm";
 		}else{
 			alert(res.msg);
+		}
+	}
+	
+	function toggleMess(e){
+		if($(e).val() != ""){
+			$(e).next().addClass("hid");
+		}else{
+			$(e).next().removeClass("hid");
 		}
 	}
 </script>
@@ -54,9 +84,9 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput"/></li>
-			    <li><label>旧密码:</label><input type="password" name="oldPwd" value ="${user.oldPwd}"  class="dfinput"/></li>
-			    <li><label>新密码:</label><input type="password" name="newPwd" value ="${user.newPwd}"  class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>旧密码:</label><input type="password" id="oldPwd" name="oldPwd" value ="${user.oldPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="newPwd" name="newPwd" value ="${user.newPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

@@ -29,6 +29,7 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
+			data['userCode'] = $("#userCode").val();
 			var url = $("#base_path").val() + "/sysUser/user/editSta";
 			doPostAjax(url, data, doSuccessBack);
 		});
@@ -46,6 +47,7 @@
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
+	<input type="hidden" id="userCode" name="userCode" value = "${user.userCode}"/>
 	<input type="hidden" id="operate" value = "${operate}"/>
 	<input type="hidden" id="status" value ="${user.status}" />
 	<div class="place">
@@ -60,8 +62,8 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput"/></li>
-			    <li><label>状态:</label><select type="text" id="statusSel" name="status" class="dfinput">
+			    <li><label><span class="inline_red">*</span>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label><span class="inline_red">*</span>状态:</label><select type="text" id="statusSel" name="status" class="dfinput">
 			    	<option value="1">正常</option>
 			    	<option value="2">锁定</option>
 			    </select></li>
