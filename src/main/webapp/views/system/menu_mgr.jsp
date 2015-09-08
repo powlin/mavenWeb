@@ -119,7 +119,7 @@ $(function() {
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-link btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs del">删除</button>'].join('');
+    return ['<button class="btn btn-link btn-xs edit">修改</button><button class="btn btn-link btn-xs del">删除</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
