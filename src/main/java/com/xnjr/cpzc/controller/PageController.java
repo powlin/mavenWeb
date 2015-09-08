@@ -34,19 +34,9 @@ public class PageController {
         return module;
     }
 
-    @RequestMapping(value = "/home/{module}.htm", method = RequestMethod.GET)
-    public String homeAction(@PathVariable("module") String module) {
-        return "home/" + module;
-    }
-
     @RequestMapping(value = "/account/{page}.htm", method = RequestMethod.GET)
     public String accountAction(@PathVariable("page") String page) {
         return "account/" + page;
-    }
-
-    @RequestMapping(value = "/trade/{page}.htm", method = RequestMethod.GET)
-    public String tradeAction(@PathVariable("page") String page) {
-        return "trade/" + page;
     }
 
     @RequestMapping(value = "/account/{module}/{page}.htm", method = RequestMethod.GET)
@@ -60,15 +50,15 @@ public class PageController {
         return "user/" + view;
     }
 
-    @RequestMapping(value = "/financing/{page}.htm", method = RequestMethod.GET)
-    public String financingAction(@PathVariable("page") String page) {
-        return "financing/" + page;
+    @RequestMapping(value = "/program/{page}.htm", method = RequestMethod.GET)
+    public String planningAction(@PathVariable("page") String page) {
+        return "program/" + page;
     }
 
-    @RequestMapping(value = "/financing/{module}/{page}.htm", method = RequestMethod.GET)
-    public String financingAction(@PathVariable("module") String module,
+    @RequestMapping(value = "/program/{module}/{page}.htm", method = RequestMethod.GET)
+    public String planning2Action(@PathVariable("module") String module,
             @PathVariable("page") String page) {
-        return "financing/" + module + "/" + page;
+        return "program/" + module + "/" + page;
     }
 
     @RequestMapping(value = "/msg/{page}.htm", method = RequestMethod.GET)
@@ -96,31 +86,4 @@ public class PageController {
         }
         return "user/login";
     }
-
-    @RequestMapping(value = "/planning/{page}.htm", method = RequestMethod.GET)
-    public String planningAction(@PathVariable("page") String page) {
-        return "planning/" + page;
-    }
-
-    @RequestMapping(value = "/planning/{module}/{page}.htm", method = RequestMethod.GET)
-    public String planning2Action(@PathVariable("module") String module,
-            @PathVariable("page") String page) {
-        return "planning/" + module + "/" + page;
-    }
-
-    @RequestMapping(value = "/heyi/{page}.htm", method = RequestMethod.GET)
-    public String heyiPageAction(@PathVariable("page") String page) {
-        return "heyi/" + page;
-    }
-
-    @RequestMapping(value = "/standard/{page}.htm", method = RequestMethod.GET)
-    public String xingxiaPageAction(@PathVariable("page") String page) {
-        return "standard/" + page;
-    }
-
-    @RequestMapping(value = "/popularize/{page}.htm", method = RequestMethod.GET)
-    public String popularizeAction(@PathVariable("page") String page) {
-        return "popularize/" + page;
-    }
-
 }
