@@ -54,8 +54,8 @@ $(function() {
 			valign : 'middle',
 			sortable : false
 		}, {
-			field : 'refNo',
-			title : '相关订单号',
+			field : 'accountNumber ',
+			title : '账户编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -96,23 +96,12 @@ $(function() {
 			valign : 'middle',
 			sortable : false
 		}, {
-			field : 'userId',
-			title : '用户编号',
-			align : 'left',
+			field : 'operate',
+			title : '操作',
+			align : 'center',
 			valign : 'middle',
-			sortable : false
-		}, {
-			field : 'realName',
-			title : '真实姓名',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
-			field : 'accountNumber ',
-			title : '账户编号',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
+			formatter : operateFormatter,
+			events : operateEvents
 		}]
 	});
 
@@ -121,7 +110,15 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+function operateFormatter(value, row) {
+	return ['<button class="btn btn-link btn-xs detail">详情</button>'].join('');
+}
 
+window.operateEvents = {
+	'click .detail': function (e, value, row, index) {
+		window.location.href = $("#base_path").val() + "/account/detail?ajNo="+row.ajNo;
+	}
+};
 </script>
 </head>
 <body>
@@ -155,12 +152,12 @@ $(function() {
 								</select>
 						</div>
 						<div class="form-group mr40 mt10">
-							<label for="createDatetimeStart" class="control-label-first">产生时间起:</label> <input class="input-sm" type="text"
-								class="form-control" id="create_datetime_start_search" placeholder="请输入产生时间起">
+							<label for="createDatetimeStart" class="control-label-first">产生时间起:</label> <input type="text" class="input-sm dfdate" id="create_datetime_start_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间起"/>
 						</div>
 						<div class="form-group mr40 mt10">
-							<label for="createDatetimeEnd" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
-								class="form-control" id="create_datetime_end_search" placeholder="请输入产生时间止">
+							<label for="createDatetimeEnd" class="control-label-first">流水号:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间止"/>
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="realName" class="control-label-first">真实姓名:</label> <input class="input-sm" type="text"
@@ -170,7 +167,9 @@ $(function() {
 							<label for="accountNumber" class="control-label-first">账户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="account_number_search" placeholder="请输入账户编号">
 						</div>&nbsp;
-						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+						<div class="form-group mt10">
+							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+						</div>
 					</div>
 				</div>
 				<table id="tableList"></table>

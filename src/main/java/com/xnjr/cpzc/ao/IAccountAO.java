@@ -1,5 +1,7 @@
 package com.xnjr.cpzc.ao;
 
+import java.util.List;
+
 import com.xnjr.cpzc.dto.res.Page;
 
 /**
@@ -16,6 +18,12 @@ public interface IAccountAO {
 
     @SuppressWarnings("rawtypes")
     Page queryAccountMoneyList(String ajNo, String bizType,
+            String createDatetimeStart, String createDatetimeEnd,
+            String realName, String accountNumber, String start, String limit,
+            String orderColumn, String orderDir);
+
+    @SuppressWarnings("rawtypes")
+    List queryAccountDetail(String ajNo, String bizType,
             String createDatetimeStart, String createDatetimeEnd,
             String realName, String accountNumber, String start, String limit,
             String orderColumn, String orderDir);

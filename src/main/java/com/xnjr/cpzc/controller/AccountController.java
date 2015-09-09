@@ -8,12 +8,16 @@
  */
 package com.xnjr.cpzc.controller;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IAccountAO;
 import com.xnjr.cpzc.dto.res.Page;
@@ -63,5 +67,29 @@ public class AccountController extends BaseController {
         return accountAO.queryAccountMoneyList(ajNo, bizType,
             createDatetimeStart, createDatetimeEnd, realName, accountNumber,
             start, limit, orderColumn, orderDir);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView queryAccountDetail(
+            @RequestParam(value = "ajNo", required = false) String ajNo,
+            @RequestParam(value = "bizType", required = false) String bizType,
+            @RequestParam(value = "createDatetimeStart", required = false) String createDatetimeStart,
+            @RequestParam(value = "createDatetimeEnd", required = false) String createDatetimeEnd,
+            @RequestParam(value = "realName", required = false) String realName,
+            @RequestParam(value = "accountNumber", required = false) String accountNumber,
+            @RequestParam(value = "orderColumn", required = false) String orderColumn,
+            @RequestParam(value = "orderDir", required = false) String orderDir) {
+        ModelAndView view = new ModelAndView("/account/account_detail");
+        if (StringUtils.isNotBlank(ajNo)) {
+            List list = accountAO.queryAccountDetail(ajNo, bizType,
+                createDatetimeStart, createDatetimeEnd, realName, accountNumber,
+                "0", "10", orderColumn, orderDir);
+            if (list != null && list.size() > 0) {
+                view.addObject("account", list.get(0));
+            }
+        }
+        return view;
     }
 }
