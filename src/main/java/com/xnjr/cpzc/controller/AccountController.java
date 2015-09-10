@@ -8,8 +8,6 @@
  */
 package com.xnjr.cpzc.controller;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,11 +81,11 @@ public class AccountController extends BaseController {
             @RequestParam(value = "orderDir", required = false) String orderDir) {
         ModelAndView view = new ModelAndView("/account/account_detail");
         if (StringUtils.isNotBlank(ajNo)) {
-            List list = accountAO.queryAccountDetail(ajNo, bizType,
+            Page page = accountAO.queryAccountMoneyList(ajNo, bizType,
                 createDatetimeStart, createDatetimeEnd, realName, accountNumber,
                 "0", "10", orderColumn, orderDir);
-            if (list != null && list.size() > 0) {
-                view.addObject("account", list.get(0));
+            if (page != null && page.getList() != null) {
+                view.addObject("account", page.getList().get(0));
             }
         }
         return view;
