@@ -146,6 +146,13 @@
 		}
 	}
 </script>
+<style>
+.add-from-group{float:left; margin-left:5px;padding-top: 5px;
+    float: left;
+    padding-left: 10px;
+    margin:0; padding-bottom:5px;
+    border-left: 1px dashed #dedede;}
+</style>
 </head>
 <body>
 	<input type="hidden" id="base_path"
@@ -157,15 +164,15 @@
 		    <li><a href="#">系统管理</a></li>
 		    <li><a href="#">菜单设置</a></li>
 	    </ul>
-	    
+	    <div class="form-group mr40 add-from-group">
+			<button id="addBtn" class="btn btn-info btn-sm">新增</button>
+		</div>
     </div>
 	<div class="panel-body">
 		<div>
 			<div id="custom-toolbar" style="margin-bottom: 8px">
 				<div class="form-inline" role="form">
-					<div class="form-group mr40">
-						<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
-					</div>
+					
 					<div class="form-group mr40">
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
 							class="form-control" id="role_code_search">

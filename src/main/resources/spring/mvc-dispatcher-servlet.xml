@@ -50,10 +50,10 @@
 	<!-- 对静态资源文件的访问  end-->
 
 	<!-- 配置 文件上传的支持 -->
-	<bean
+	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!--  指定所上传文件的总大小不能超过1M -->
-		<property name="maxUploadSize" value="1000" />
+		<property name="maxUploadSize" value="1048576" />
 		<property name="resolveLazily" value="true" />
 		<property name="maxInMemorySize" value="4096" />
 	</bean>
@@ -113,6 +113,18 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->  
+    <!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 -->  
+    <bean id="exceptionResolver"  
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+        <property name="exceptionMappings">  
+            <props>  
+                <!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->  
+                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>  
+            </props>  
+        </property>  
+    </bean> 
 
 	<!-- 国际化配置 -->
 	<!-- 资源配置 -->
