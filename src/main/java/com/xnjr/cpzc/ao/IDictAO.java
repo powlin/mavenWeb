@@ -43,4 +43,9 @@ public interface IDictAO {
     public List queryDictList(String key, String value, String pKey,
             String pValue);
 
+    @SuppressWarnings("rawtypes")
+    public Page queryDictPage(String key, String value, String pKey,
+            String pValue, String start, String limit, String orderColumn,
+            String orderDir);
+
 }

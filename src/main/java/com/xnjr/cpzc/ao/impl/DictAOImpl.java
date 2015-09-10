@@ -50,4 +50,23 @@ public class DictAOImpl implements IDictAO {
             JsonUtils.object2Json(zc703701Req), List.class);
     }
 
+    @SuppressWarnings("rawtypes")
+    @Override
+    public Page queryDictPage(String key, String value, String pKey,
+            String pValue, String start, String limit, String orderColumn,
+            String orderDir) {
+        ZC703701Req zc703701Req = new ZC703701Req();
+        zc703701Req.setKey(key);
+        zc703701Req.setValue(value);
+        zc703701Req.setpKey(pKey);
+        zc703701Req.setpValue(pValue);
+        zc703701Req.setStart(start);
+        zc703701Req.setLimit(limit);
+        zc703701Req.setOrderColumn(orderColumn);
+        zc703701Req.setOrderDir(orderDir);
+        String jsonStr = BizConnecter.getBizData("703701",
+            JsonUtils.object2Json(zc703701Req));
+        return JsonUtils.json2Bean(jsonStr, Page.class);
+    }
+
 }
