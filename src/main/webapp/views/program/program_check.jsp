@@ -56,13 +56,6 @@
 				valign : 'middle',
 				width : 300,
 				sortable : false
-			}, {
-				field : 'type',
-				title : '项目类型',
-				align : 'left',
-				valign : 'middle',
-				width : 200,
-				sortable : false
 			},{
 				field : 'userId',
 				title : '发起人编号',
@@ -70,7 +63,14 @@
 				valign : 'middle',
 				width : 200,
 				sortable : false
-			},{
+			}, {
+				field : 'type',
+				title : '项目类型',
+				align : 'left',
+				valign : 'middle',
+				width : 200,
+				sortable : false
+			}, {
 				field : 'targetAmount',
 				title : '目标筹集金额',
 				align : 'left',
@@ -130,10 +130,12 @@
 	
     window.operateEvents = {
         'click .detail': function (e, value, row, index) {
-        	window.location.href = $("#base_path").val() + "/program/detail?proId="+row.proId;
+        	//window.location.href = $("#base_path").val() + "/sysAuth/role/detail?role_code="+row.roleCode+"&operate=edit";
         },
         'click .check': function (e, value, row, index) {
-            window.location.href = $("#base_path").val() + "/program/check?proId="+row.proId;
+        	var url = $("#base_path").val() + "/sysAuth/role/drop";
+        	//var data = {role_code:row.roleCode};
+			//doPostAjax(url, data, doSuccessDel);
         }
     };
 </script>
@@ -156,24 +158,24 @@
 		<div id="custom-toolbar" style="margin-bottom: 8px">
 			<div class="form-inline" role="form">
 					<div class="form-group">
-						<label for="proIdSearch" class="control-label-first">项目编号:</label> <input class="input-sm" type="text"
-							class="form-control" id="proIdSearch" placeholder="请输入项目编号">
+						<label for="menu_code" class="control-label-first">项目编号:</label> <input class="input-sm" type="text"
+							class="form-control" id="prodIdSearch" placeholder="请输入项目编号">
 					</div>
 					<div class="form-group">
-						<label for="nameSearch" class="control-label">项目名称:</label> <input class="input-sm" type="text"
-							class="form-control" id="nameSearch" placeholder="请输入项目名称">
-					</div><br/>
-					<div class="form-group">
-						<label for="typeSearch" class="control-label">项目类型:</label> <input class="input-sm" type="text"
-							class="form-control" id="typeSearch" placeholder="请选择项目类型">
+						<label for="parent_code" class="control-label">发起人编号:</label> <input class="input-sm" type="text"
+							class="form-control" id="userIdSearch" placeholder="请选择父级菜单编号">
 					</div>
 					<div class="form-group">
-						<label for="userIdSearch" class="control-label">发起人编号:</label> <input class="input-sm" type="text"
-							class="form-control" id="userIdSearch" placeholder="请输入发起人编号">
+						<label for="parent_code" class="control-label">项目名称:</label> <input class="input-sm" type="text"
+							class="form-control" id="nameSearch" placeholder="请选择父级菜单编号">
 					</div>
 					<div class="form-group">
-						<label for="statusSearch" class="control-label">项目状态:</label> <input class="input-sm" type="text"
-							class="form-control" id="statusSearch" placeholder="请选择项目状态">
+						<label for="parent_code" class="control-label">项目类型:</label> <input class="input-sm" type="text"
+							class="form-control" id="typeSearch" placeholder="请选择父级菜单编号">
+					</div>
+					<div class="form-group">
+						<label for="parent_code" class="control-label">项目状态:</label> <input class="input-sm" type="text"
+							class="form-control" id="statusSearch" placeholder="请选择父级菜单编号">
 					</div>&nbsp;
 					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 				</div>

@@ -8,7 +8,6 @@
 <title>无标题文档</title>
 <jsp:include page="../components/jsp/include_f.jsp" />
 <script type="text/javascript">
-$(function(){
 	$(function() {
 		var data = {"pmenuCode":$("#pMenuCode").val(),"isGetChild":true};
 		doPostAjax($("#basePath").val() + "/sysUser/roleMenu/list", data, doSuccessMenu);
@@ -48,7 +47,6 @@ $(function(){
 			$(this).next('ul').slideDown();
 		}
 	});
-})	
 </script>
 </head>
 <body style="background:#f0f9fd;">

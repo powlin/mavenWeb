@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="../components/js/jquery-1.11.3.js"></script>
+<script src="../components/js/ajax_com.js"></script>
+<script type="text/javascript">
+$(function() {
+	//添加菜单
+	$('#subBtn').click(function() {
+		var data = {"file":image,"fileName":$("#fileName").val()};
+		var url = "/file/upload_2";
+		alert("123");
+		doPostAjax(url, data, doSuccessMenu);
+	});
+	
+	function doSuccessMenu(){
+		
+	}
+});
+
+var image = '';
+function selectImage(file){
+	if(!file.files || !file.files[0]){
+		return;
+	}
+	var reader = new FileReader();
+	reader.onload = function(evt){
+		document.getElementById('file').src = evt.target.result;
+		image = evt.target.result;
+	}
+	reader.readAsDataURL(file.files[0]);
+}
+</script>
+</head>
+<body>
+    <form id="fileupload" action="" method="post" enctype="multipart/form-data">
+  		<p>选择图片:<input type="file" onchange="selectImage(this);" name="file" id="file"/></p>
+  		<p>图片名称:<input type="text" name="fileName" id="fileName"/></p>
+  		<input type="button" id="subBtn" value="提交" />
+    </form>
+</body>
+</html>
