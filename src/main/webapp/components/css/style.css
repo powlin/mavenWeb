@@ -17,6 +17,11 @@ table{border-collapse:collapse;border-spacing: 0;}
 cite{font-style:normal;}
 h2{font-weight:normal;}
 .mt10{margin-top: 10px;}
+.fl{float: left;}
+
+.cfl{*zoom:1}
+.cfl:after{content:"\0020";display:block;height:0;clear:both;overflow:hidden;visibility:hidden}
+
 
 /*cloud*/
 
@@ -42,7 +47,7 @@ h2{font-weight:normal;}
 .loginbox ul li label a:hover{color:#3d96c9;}
 .loginbox ul li label input{margin-right:5px;}
 .loginuser{width:299px; height:48px; background:url(../images/loginuser.png) no-repeat; border:none; line-height:48px; padding-left:44px; font-size:14px; font-weight:bold;}
-.loginpwd{width:299px; height:48px; background:url(../images/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; font-weight:bold;}
+.loginpwd{width:299px; height:48px; background:url(../images/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .loginbtn{width:111px;height:35px; background:url(../images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;}
 .loginbm{height:50px; line-height:50px; text-align:center; background:url(../images/loginbg2.png) repeat-x;position:absolute; bottom:0; width:100%; color:#0b3a58;}
 .loginbm a{font-weight:bold;color:#0b3a58;}
@@ -195,6 +200,14 @@ h2{font-weight:normal;}
 .dfinput{width:345px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .textinput{border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; padding:10px; width:504px; height:135px; line-height:20px; overflow:hidden;}
 .btn{width:137px;height:35px; background:url(../images/btnbg.png) no-repeat; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;}
+input.error{border-color: red; background: none;margin: 0; width: 345px;}
+input[type="radio"].error{width: auto;}
+input[type="checkbox"].error{width: auto;}
+
+span.error{background: none;margin: 0; width: auto; display: inline-block; color: red; font-size: 13px; margin-left: 8px}
+select.error{background: none;margin: 0; width: auto;}
+select{ border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; height: 28px; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; }
+textarea.error{background: none;margin: 0; width: 504px;}
 
 
 /*tip*/
@@ -323,9 +336,19 @@ h2{font-weight:normal;}
 .article_details .list_1.content{margin-left: 15%; padding-left: 10px; margin-right: 4%;}
 
 
-/*表单验证*/
-.inline_red{display: inline;color: red;margin-right: 4px;margin-left: 4px;}
-.hid{display: none;}
-.visibility_hid{visibility: hidden;}
-
 .dfdate{width:155px; font-size: 14px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; padding-right: 35px; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/icon-time.png) right center no-repeat; text-indent:10px;}
+/*图片上传*/
+.smt_imgBtn{width:137px;height:35px; margin-left: 15px; overflow: hidden; position: relative; line-height: 35px; color: #fff; text-align: center; background:url(../images/btnbg.png) no-repeat; font-size:14px; cursor:pointer;}
+.smt_imgBtn .smt_file{position:absolute; right:0; top: 0; width: 300px; height: 100px; opacity: 0; filter:opacity(alpha=0); cursor: pointer;}
+
+.smt_imgItem{width: 700px; clear: both;  margin: 10px 0 0 85px;}
+.smt_imgItem li{width: 150px; height: 150px; float: left; position: relative; clear: none; margin-right: 15px; }
+.smt_imgItem li img{width: 150px; height: 150px;}
+
+.smt_imgItem li .smt_operation{width: 100px; position: absolute; top: 5px; right: 5px;}
+.smt_imgItem li .smt_operation .close,.smt_imgItem li .smt_operation .successful{width: 22px; height: 22px;  display: block; overflow: hidden; text-indent: -9999em; float: right; margin-left: 5px;}
+.smt_imgItem li .smt_operation .close{background: url(../images/close1.png) no-repeat;}
+.smt_imgItem li .smt_operation .successful{background: url(../images/correct.png) no-repeat;}
+
+.upload_submit_btn{width: 137px; height: 35px; background-color: #449d44; border: 1px solid #398439; border-radius: 5px; font-size: 14px; color: #fff; margin-left: 83px;}
+

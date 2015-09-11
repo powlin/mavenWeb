@@ -14,7 +14,7 @@
 		var data = {};
 		data['menuCode'] = $("#menuCode").val();
 		var url = $("#base_path").val() + "/menumgr/menu/detailjson";
-		doGetAjax(url, data, fillSelSuccessBack);
+		doGetAjax(url, data,fillSelSuccessBack);
 		
 		var operate = $("#operate").val();
 		if(operate == "edit"){

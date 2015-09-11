@@ -22,10 +22,10 @@ import com.xnjr.cpzc.util.RegexUtils;
 public class BizConnecter {
     public static final String YES = "0";
 
-    // public static final String POST_URL =
-    // "http://127.0.0.1:8080/xn-cpzcapi/api";
+    public static final String POST_URL = "http://127.0.0.1:8080/xn-cpzcapi/api";
 
-    public static final String POST_URL = "http://115.29.140.31:8087/cpzc/api";
+    // public static final String POST_URL =
+    // "http://115.29.140.31:8087/cpzc/api";
 
     public static <T> T getBizData(String code, String json, Class<T> clazz) {
         String data = null;

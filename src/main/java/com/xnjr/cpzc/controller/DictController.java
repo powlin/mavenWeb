@@ -8,6 +8,8 @@
  */
 package com.xnjr.cpzc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +46,16 @@ public class DictController extends BaseController {
             @RequestParam(value = "orderDir", required = false) String orderDir) {
         return dictAO.queryDictPage(key, value, pKey, pValue, start, limit,
             orderColumn, orderDir);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public List queryDictList(
+            @RequestParam(value = "key", required = false) String key,
+            @RequestParam(value = "value", required = false) String value,
+            @RequestParam(value = "pKey", required = false) String pKey,
+            @RequestParam(value = "pValue", required = false) String pValue) {
+        return dictAO.queryDictList(key, value, pKey, pValue);
     }
 }

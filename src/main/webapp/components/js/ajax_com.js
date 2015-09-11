@@ -44,6 +44,29 @@ function doGetAjax(url, data, successfn) {
  * ajax 请求
  * @param url 请求地址
  * @param data 请求参数 {"date": new Date().getTime(),"state": 1}
+ * @param async false 异步， true 同步
+ * @param successfn 成功回调函数
+ */
+function doGetAjaxIsAsync(url, data, async, successfn,errorfn) {
+    $.ajax({
+        type: 'get',
+        async: async,
+        data: data,
+        url: url,
+        dataType: 'json',
+        success: function (d) {
+            successfn(d);
+        },
+        error: function (e) {
+            errorfn(e);
+        }
+    });
+};
+
+/**
+ * ajax 请求
+ * @param url 请求地址
+ * @param data 请求参数 {"date": new Date().getTime(),"state": 1}
  * @param type 发送类型(get/post/...)
  * @param successfn 成功回调函数
  */

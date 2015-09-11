@@ -159,6 +159,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/sysUser/**" />
 			<mvc:mapping path="/sysAuth/**" />
+			<mvc:mapping path="/program/**" />
 		 	<mvc:exclude-mapping path="/sysUser/login*"/>
 		 	<mvc:exclude-mapping path="/user/logout"/>
 			<ref bean="sessionInterceptor" />

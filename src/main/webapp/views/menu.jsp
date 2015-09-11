@@ -11,6 +11,22 @@
 	$(function() {
 		var data = {"pmenuCode":$("#pMenuCode").val(),"isGetChild":true};
 		doPostAjax($("#basePath").val() + "/sysUser/roleMenu/list", data, doSuccessMenu);
+		
+		//导航切换
+		$(".menuson li").click(function(){
+			$(".menuson li.active").removeClass("active")
+			$(this).addClass("active");
+		});
+		
+		$('.title').click(function(){
+			var $ul = $(this).next('ul');
+			$('dd').find('ul').slideUp();
+			if($ul.is(':visible')){
+				$(this).next('ul').slideUp();
+			}else{
+				$(this).next('ul').slideDown();
+			}
+		});
 	});
 
 	function doSuccessMenu(res) {
@@ -32,21 +48,7 @@
 			alert("系统异常，请重新登录");
 		}
 	}
-	//导航切换
-	$(".menuson li").click(function(){
-		$(".menuson li.active").removeClass("active")
-		$(this).addClass("active");
-	});
 	
-	$('.title').click(function(){
-		var $ul = $(this).next('ul');
-		$('dd').find('ul').slideUp();
-		if($ul.is(':visible')){
-			$(this).next('ul').slideUp();
-		}else{
-			$(this).next('ul').slideDown();
-		}
-	});
 </script>
 </head>
 <body style="background:#f0f9fd;">

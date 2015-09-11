@@ -8,4 +8,5 @@
 <script src="<%=request.getContextPath()%>/components/bootstrap/js/bootstrap-table.js"></script>
 <script src="<%=request.getContextPath()%>/components/bootstrap/js/bootstrap-table-zh-CN.js"></script>
 <script src="<%=request.getContextPath()%>/components/js/ajax_com.js"></script>
+<script src="<%=request.getContextPath()%>/components/js/common.js"></script>
 <script src="<%=request.getContextPath()%>/components/js/laydate.js"></script>
