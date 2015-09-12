@@ -12,14 +12,14 @@
 <script type="text/javascript">
 	$(function() {
 		$('#backBtn').click(function() {
-			window.location.href = $("#base_path").val() + "/views/program/approve_program.htm";
+			window.location.href = $("#base_path").val() + "/views/project/approve_project.htm";
 		});
 	});
 	
 	//流标
 	$('#flowBtn').click(function() {
 		var data = {"proId":$("#proId").val(),"checkResult":"0","remark":"审核通过"};
-		var url = $("#base_path").val() + "/program/approve";
+		var url = $("#base_path").val() + "/project/approve";
 		doPostAjax(url,data,doSuccessBackApp);
 	});
 </script>
@@ -41,19 +41,19 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>项目信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>项目编号:</label><label>${program.proId}</label></li>
-			    <li><label>项目名称:</label><label>${program.name}</label></li>
-			    <li><label>项目类型:</label><label>${program.type}</label></li>
-			    <li><label>发起省份:</label><label>${program.province}</label></li>
-			    <li><label>发起城市:</label><label>${program.city}</label></li>
-			    <li><label>项目图片:</label><label>${program.picture}</label></li>
-			    <li><label>项目视频:</label><label>${program.video}</label></li>
-			    <li><label>项目概述:</label><label>${program.summary}</label></li>
-			    <li><label>项目详情:</label><label>${program.detail}</label></li>
-			    <li><label>目标筹集金额(元):</label><label>${program.targetAmount}</label></li>
-			    <li><label>筹集期限(天):</label><label>${program.raiseDays}</label></li>
-			    <li><label>发起人编号:</label><label>${program.userId}</label></li>
-			    <li><label>申请时间:</label><label>${program.createDatetime}</label></li>
+			    <li><label>项目编号:</label><label>${project.proId}</label></li>
+			    <li><label>项目名称:</label><label>${project.name}</label></li>
+			    <li><label>项目类型:</label><label>${project.type}</label></li>
+			    <li><label>发起省份:</label><label>${project.province}</label></li>
+			    <li><label>发起城市:</label><label>${project.city}</label></li>
+			    <li><label>项目图片:</label><label>${project.picture}</label></li>
+			    <li><label>项目视频:</label><label>${project.video}</label></li>
+			    <li><label>项目概述:</label><label>${project.summary}</label></li>
+			    <li><label>项目详情:</label><label>${project.detail}</label></li>
+			    <li><label>目标筹集金额(元):</label><label>${project.targetAmount}</label></li>
+			    <li><label>筹集期限(天):</label><label>${project.raiseDays}</label></li>
+			    <li><label>发起人编号:</label><label>${project.userId}</label></li>
+			    <li><label>申请时间:</label><label>${project.createDatetime}</label></li>
 			   <li><input id="payBtn" type="button" class="btn mr40" value="放款"/>&nbsp;<input id="flowBtn" type="button" class="btn mr40" value="流标"/>&nbsp;<input id="backBtn" type="button" class="btn mr40" value="返回"/>&nbsp;</li>
 			</ul>
 	    </div>

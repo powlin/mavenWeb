@@ -23,14 +23,14 @@
 		// 审核通过
 		$('#appPassBtn').click(function() {
 			var data = {"proId":$("#proId").val(),"checkResult":"0","remark":"审核通过"};
-			var url = $("#base_path").val() + "/program/approve";
+			var url = $("#base_path").val() + "/project/approve";
 			doPostAjax(url,data,doSuccessBackApp);
 		});
 		
 		// 审核不通过
 		$('#unAppPassBtn').click(function() {
 			var data = {"proId":$("#proId").val(),"checkResult":"1","remark":"审核不通过"};
-			var url = $("#base_path").val() + "/program/approve";
+			var url = $("#base_path").val() + "/project/approve";
 			doPostAjax(url,data,doSuccessBackUnApp);
 		});
 	});
@@ -38,7 +38,7 @@
 	function doSuccessBackApp(res){
 		if (res.success == true) {
 			alert("审核通过操作成功!");
-			window.location.href = $("#base_path").val() + "/views/program/approve_program.htm";
+			window.location.href = $("#base_path").val() + "/views/project/approve_project.htm";
 		}else{
 			alert(res.msg);
 		}
@@ -47,7 +47,7 @@
 	function doSuccessBackUnApp(res){
 		if (res.success == true) {
 			alert("申请不通过审核成功!");
-			window.location.href = $("#base_path").val() + "/views/program/approve_program.htm";
+			window.location.href = $("#base_path").val() + "/views/project/approve_project.htm";
 		}else{
 			alert(res.msg);
 		}
@@ -86,25 +86,25 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>申请信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>项目编号:</label><input type="text" id="proId" name="proId" value ="${program.proId}"  class="dfinput"/></li>
-			    <li><label>项目名称:</label><input type="text" id="name" name="name" value ="${program.name}"  class="dfinput"/></li>
+			    <li><label>项目编号:</label><input type="text" id="proId" name="proId" value ="${project.proId}"  class="dfinput"/></li>
+			    <li><label>项目名称:</label><input type="text" id="name" name="name" value ="${project.name}"  class="dfinput"/></li>
 			    <li><label>项目类型:</label>
 				    <select id="type" name="type" class="dfinput">
-				    	<option value="${program.type}"></option>
+				    	<option value="${project.type}"></option>
 					</select>
 				</li>
-				<li><label>发起省份:</label><input type="text" id="province" name="province" value ="${program.province}"  class="dfinput"/></li>
-				<li><label>发起城市:</label><input type="text" id="city" name="city" value ="${program.city}"  class="dfinput"/></li>
-				<li><label>项目图片:</label><input type="text" id="picture" name="picture" value ="${program.picture}"  class="dfinput"/></li>
-				<li><label>项目视频:</label><input type="text" id="video" name="video" value ="${program.video}"  class="dfinput"/></li>
-				<li><label>项目概述:</label><textarea id="summary" name="summary" value ="${program.summary}"  class="dfinput"></textarea></li>
+				<li><label>发起省份:</label><input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
+				<li><label>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput"/></li>
+				<li><label>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput"/></li>
+				<li><label>项目视频:</label><input type="text" id="video" name="video" value ="${project.video}"  class="dfinput"/></li>
+				<li><label>项目概述:</label><textarea id="summary" name="summary" value ="${project.summary}"  class="dfinput"></textarea></li>
 				<li class="cfl"><label>项目详情:</label>
     				<script id="editor" type="text/plain" style="width:900px;height:250px;float:left"></script>
 				</li>
-				<li><label>目标筹集金额(元):</label><input type="text" id="targetAmount" name="targetAmount" value ="${program.targetAmount}"  class="dfinput"/></li>
-				<li><label>筹集期限(天):</label><input type="text" id="raiseDays" name="raiseDays" value ="${program.raiseDays}"  class="dfinput"/></li>
-				<li><label>发起人编号:</label><input type="text" id="userId" name="userId" value ="${program.userId}"  class="dfinput"/></li>
-				 <li><label>申请时间:</label><input type="text" id="createDatetime" name="createDatetime" value ="${program.createDatetime}"  class="dfinput"/></li>
+				<li><label>目标筹集金额(元):</label><input type="text" id="targetAmount" name="targetAmount" value ="${project.targetAmount}"  class="dfinput"/></li>
+				<li><label>筹集期限(天):</label><input type="text" id="raiseDays" name="raiseDays" value ="${project.raiseDays}"  class="dfinput"/></li>
+				<li><label>发起人编号:</label><input type="text" id="userId" name="userId" value ="${project.userId}"  class="dfinput"/></li>
+				 <li><label>申请时间:</label><input type="text" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/>&nbsp;<input id="appPassBtn" type="button" class="btn mr40" value="审核通过"/>&nbsp;<input id="unappPassBtn" type="button" class="btn mr40" value="审核不通过"/></li>
 			</ul>
 			<script type="text/javascript"> 

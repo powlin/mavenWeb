@@ -53,12 +53,12 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "operate", required = true) String operate,
             @PathVariable("module") String module) {
-        ModelAndView view = new ModelAndView("/program/program_" + module);
+        ModelAndView view = new ModelAndView("/project/project_" + module);
         if (StringUtils.isNotBlank(proId)) {
             Page page = projectAO.queryProjectPage(proId, null, null, null,
                 null, "0", "10");
             if (page != null && page.getList() != null) {
-                view.addObject("program", page.getList().get(0));
+                view.addObject("project", page.getList().get(0));
                 view.addObject("operate", operate);
             }
         }

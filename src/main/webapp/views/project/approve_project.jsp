@@ -23,7 +23,7 @@ var statusData=null;
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
-			url :  $("#base_path").val() + "/program/page",
+			url :  $("#base_path").val() + "/project/page",
 			height : $(window).height() - 60,
 			striped : true,
 			singleSelect : true,
@@ -177,10 +177,10 @@ var statusData=null;
 	
     window.operateEvents = {
         'click .detail': function (e, value, row, index) {
-        	window.location.href = $("#base_path").val() + "/program/detail?proId="+row.proId;
+        	window.location.href = $("#base_path").val() + "/project/detail?proId="+row.proId;
         },
         'click .check': function (e, value, row, index) {
-            window.location.href = $("#base_path").val() + "/program/check?proId="+row.proId;
+            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId;
         }
     };
 </script>

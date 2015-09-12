@@ -29,6 +29,11 @@ public class PageController {
         return "/system/" + module;
     }
 
+    @RequestMapping(value = "/base/{module}.htm", method = RequestMethod.GET)
+    public String baseAction(@PathVariable("module") String module) {
+        return "/base/" + module;
+    }
+
     @RequestMapping(value = "/{module}.htm", method = RequestMethod.GET)
     public String indexAction(@PathVariable("module") String module) {
         return module;
@@ -50,15 +55,15 @@ public class PageController {
         return "user/" + view;
     }
 
-    @RequestMapping(value = "/program/{page}.htm", method = RequestMethod.GET)
-    public String planningAction(@PathVariable("page") String page) {
-        return "program/" + page;
+    @RequestMapping(value = "/project/{module}.htm", method = RequestMethod.GET)
+    public String planningAction(@PathVariable("module") String module) {
+        return "project/" + module;
     }
 
-    @RequestMapping(value = "/program/{module}/{page}.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/project/{module}/{page}.htm", method = RequestMethod.GET)
     public String planning2Action(@PathVariable("module") String module,
             @PathVariable("page") String page) {
-        return "program/" + module + "/" + page;
+        return "project/" + module + "/" + page;
     }
 
     @RequestMapping(value = "/msg/{page}.htm", method = RequestMethod.GET)
