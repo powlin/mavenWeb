@@ -104,6 +104,14 @@ $(function() {
 			align : 'left',
 			valign : 'middle',
 			sortable : false
+		}, {
+			field : 'operate',
+			title : '操作',
+			width : 100,
+			align : 'center',
+			valign : 'middle',
+			formatter : operateFormatter,
+			events : operateEvents
 		}]
 	});
 
@@ -113,6 +121,32 @@ $(function() {
 	});
 });
 
+function operateFormatter(value, row) {
+	return ['<button class="btn btn-link btn-xs edit">修改</button><button class="btn btn-link btn-xs del">删除</button>'].join('');
+}
+
+window.operateEvents = {
+	'click .edit': function (e, value, row, index) {
+    	window.location.href = $("#base_path").val() + "/dict/detail?key="+row.key+"&id="+row.id+"&operate=edit";
+    },
+	'click .del': function (e, value, row, index) {
+		if(!confirm("是否确认删除数据字典"+row.id+"?")){
+    		return false;
+    	}
+    	var url = $("#base_path").val() + "/dict/drop";
+    	var data = {id:row.id};
+		doPostAjax(url, data, doSuccessDel);
+	}
+};
+
+function doSuccessDel(res) {
+	if (res.success == true) {
+		alert("删除成功");
+		$('#tableList').bootstrapTable('refresh');
+	}else{
+		alert("删除失败");
+	}
+}
 </script>
 </head>
 <body>
