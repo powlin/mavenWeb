@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IAccountAO;
+import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
 
 /** 
@@ -89,5 +90,60 @@ public class AccountController extends BaseController {
             }
         }
         return view;
+    }
+
+    // ******** 红冲蓝补申请 *****
+    @RequestMapping(value = "/redBlueApply", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean redBlueApply(
+            @RequestParam("accountNumber") String accountNumber,
+            @RequestParam("amount") String amount,
+            @RequestParam("applyNote") String applyNote) {
+        SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        return accountAO.redBlueApply(accountNumber, amount,
+            sessionUser.getUserCode(), applyNote);
+    }
+
+    @RequestMapping(value = "/redBlueSearchDetail", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView redBlueSearchDetail(
+            @RequestParam(value = "rbNo", required = false) String rbNo) {
+        ModelAndView view = new ModelAndView("/account/red_blue_search_edit");
+        if (StringUtils.isNotBlank(rbNo)) {
+            view.addObject("rbNo", rbNo);
+        }
+        return view;
+    }
+
+    // ******** 红冲蓝补申请 *****
+    @RequestMapping(value = "/redBlueSearchEdit", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean redBlueSearchEdit(@RequestParam("rbNo") String rbNo,
+            @RequestParam("checkResult") String checkResult,
+            @RequestParam("remark") String remark) {
+        SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        return accountAO.redBlueSearchEdit(rbNo, sessionUser.getUserCode(),
+            checkResult, remark);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/redBlueSearch", method = RequestMethod.GET)
+    @ResponseBody
+    public Page redBlueSearch(
+            @RequestParam(value = "rbNo", required = false) String rbNo,
+            @RequestParam(value = "accountNumber", required = false) String accountNumber,
+            @RequestParam(value = "direction", required = false) String direction,
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "applyUser", required = false) String applyUser,
+            @RequestParam(value = "checkUser", required = false) String checkUser,
+            @RequestParam(value = "applyDatetimeStart", required = false) String applyDatetimeStart,
+            @RequestParam(value = "applyDatetimeEnd", required = false) String applyDatetimeEnd,
+            @RequestParam("start") String start,
+            @RequestParam("limit") String limit,
+            @RequestParam(value = "orderColumn", required = false) String orderColumn,
+            @RequestParam(value = "orderDir", required = false) String orderDir) {
+        return accountAO.redBlueSearch(rbNo, accountNumber, direction, status,
+            applyUser, checkUser, applyDatetimeStart, applyDatetimeEnd, start,
+            limit, orderColumn, orderDir);
     }
 }

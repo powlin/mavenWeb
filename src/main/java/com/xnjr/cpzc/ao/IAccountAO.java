@@ -20,4 +20,16 @@ public interface IAccountAO {
             String realName, String accountNumber, String start, String limit,
             String orderColumn, String orderDir);
 
+    boolean redBlueApply(String accountNumber, String amount, String applyNote,
+            String userCode);
+
+    boolean redBlueSearchEdit(String rbNo, String checkUser, String checkResult,
+            String remark);
+
+    @SuppressWarnings("rawtypes")
+    Page redBlueSearch(String rbNo, String accountNumber, String direction,
+            String status, String applyUser, String checkUser,
+            String applyDatetimeStart, String applyDatetimeEnd, String start,
+            String limit, String orderColumn, String orderDir);
+
 }
