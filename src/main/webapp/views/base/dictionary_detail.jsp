@@ -15,13 +15,12 @@
 		var data = {};
 		data['pId'] = '0';
 		var url = $("#base_path").val() + "/dict/list";
-		doGetAjax(url, data, fillSelSuccessBack);
 		doAjax(url, data, false, "GET", 'json', fillSelSuccessBack, doError);
 		
 		var pId = "#pId>option";
 		for(var i = 0;i < $(pId).length;i++){
-			if($(pId).val() == $("#pIdHid").val()){
-				$(pId).attr("selected", "selected");
+			if($(pId).eq(i).val() == parseInt($("#pIdHid").val())){
+				$(pId).eq(i).attr("selected", "selected");
 			}
 		}
 		//提交
