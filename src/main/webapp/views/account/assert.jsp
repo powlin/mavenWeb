@@ -120,11 +120,11 @@ $(function() {
 							<label for="realName" class="control-label-first">用户姓名:</label> <input class="input-sm" type="text"
 								class="form-control" id="real_name_search" placeholder="请输入用户姓名">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="account_number_search" placeholder="请输入账户编号">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
 									<option value="">请选择</option>
