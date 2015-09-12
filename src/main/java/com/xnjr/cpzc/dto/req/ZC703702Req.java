@@ -19,9 +19,19 @@ public class ZC703702Req {
 
     private String value;
 
+    private String pId;
+
     private String pKey;
 
     private String pValue;
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
+    }
 
     public String getKey() {
         return key;
