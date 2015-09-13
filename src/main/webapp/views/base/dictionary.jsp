@@ -129,7 +129,7 @@ function operateFormatter(value, row) {
 
 window.operateEvents = {
 	'click .edit': function (e, value, row, index) {
-    	window.location.href = $("#base_path").val() + "/dict/detail?key="+row.key+"&id="+row.id+"&operate=edit";
+    	window.location.href = $("#base_path").val() + "/dict/detail?key="+row.key+"&pKey="+row.pKey+"&id="+row.id+"&operate=edit";
     },
 	'click .del': function (e, value, row, index) {
 		if(!confirm("是否确认删除数据字典"+row.id+"?")){

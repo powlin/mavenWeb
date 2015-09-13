@@ -33,7 +33,7 @@
 	
 	function fillSelSuccessBack(res){
 		var data = res.data;
-		var html = "<option value=''>请选择</option>";
+		var html = "<option value=''>请选择</option>"+"<option value='0'>父级节点</option>";
 		if(typeof(data) != "undefined"){
 			for(var i = 0;i < data.length;i++){
 				html += "<option value='"+data[i].id+"'>"+data[i].key+"</option>";

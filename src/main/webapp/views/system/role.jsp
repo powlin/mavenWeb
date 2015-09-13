@@ -10,7 +10,11 @@
 <title>角色管理</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
+var typeData=null;
 	$(function() {
+		var data = {"pKey":"r_level"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
@@ -56,7 +60,8 @@
 				title : '角色等级',
 				align : 'left',
 				valign : 'middle',
-				sortable : false
+				sortable : false,
+				formatter : roleLevelFormatter
 			}, {
 				field : 'creator',
 				title : '创建人',
@@ -113,6 +118,30 @@
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
+	
+	function roleLevelFormatter(value, row) {
+		for(var i = 0;i < typeData.length;i++){
+			if(typeData[i].key == value){
+				return typeData[i].value;
+			}
+		}
+    }
+	
+	function doSuccessBackType(res){
+		var data = res.data;
+		typeData = data;
+		var html = "<option value=''>请选择</option>";
+		if(typeof(data) != "undefined"){//判断undifined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == $("#role_level_search").val()){
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				}else{
+					html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				}
+			}
+		}
+		$("#role_level_search").html(html);
+	}
 	
 	function dateFormatter(value, row){
 		return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
@@ -185,10 +214,6 @@
 					<div class="form-group">
 						<label for="parent_code" class="control-label">角色等级:</label>
 						<select id="role_level_search" class="form-control" name="role_level">
-							<option value="">请选择</option>
-							<option value="1">1 财务级别</option>
-							<option value="2">2 运营推广级别</option>
-							<option value="3">3 风控级别</option>
 						</select>
 					</div>&nbsp;
 					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>

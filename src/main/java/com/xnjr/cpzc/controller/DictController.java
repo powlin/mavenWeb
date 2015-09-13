@@ -86,11 +86,11 @@ public class DictController extends BaseController {
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView queryDetailDict(@RequestParam("id") String id,
-            @RequestParam("key") String key,
+            @RequestParam("key") String key, @RequestParam("pKey") String pKey,
             @RequestParam("operate") String operate) {
         ModelAndView view = new ModelAndView("/base/dictionary_detail");
         if (StringUtils.isNotBlank(key) && "edit".equals(operate)) {// 是修改则查询数据库
-            List list = dictAO.queryDictList(key, null, null, null, null);// 根据key查询记录
+            List list = dictAO.queryDictList(key, null, null, pKey, null);// 根据key和pKey查询记录
             if (list != null && list.size() > 0) {
                 view.addObject("dict", list.get(0));
                 view.addObject("operate", operate);
