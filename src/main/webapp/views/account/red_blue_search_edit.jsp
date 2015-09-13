@@ -101,7 +101,7 @@
 			    <li><label><span class="inline_red">*</span>方向:</label><label id="directionLabel"></label></li>
 			    <li><label><span class="inline_red">*</span>申请人ID:</label><label>${account.applyUser}</label></li>
 			    <li><label><span class="inline_red">*</span>申请说明:</label><label>${account.applyNote}</label></li>
-			    <li><label><span class="inline_red">*</span>审核结果:</label><select id="checkResult" name="checkResult" class="dfinput">
+			    <li><label><span class="inline_red">*</span>审核意见:</label><select id="checkResult" name="checkResult" class="dfinput">
 			    	<option value="1">通过</option>
 			    	<option value="0">不通过</option>
 			    </select></li>
