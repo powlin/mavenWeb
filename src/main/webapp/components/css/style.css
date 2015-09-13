@@ -18,6 +18,8 @@ cite{font-style:normal;}
 h2{font-weight:normal;}
 .mt10{margin-top: 10px;}
 .fl{float: left;}
+.mr40{margin-right:40px;}
+.ml40{margin-right:100px;}
 
 .cfl{*zoom:1}
 .cfl:after{content:"\0020";display:block;height:0;clear:both;overflow:hidden;visibility:hidden}

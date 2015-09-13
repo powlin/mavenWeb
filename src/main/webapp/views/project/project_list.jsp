@@ -7,11 +7,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>角色管理</title>
+<title>众筹管理</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
 var typeData=null;
 var statusData=null;
+var op_status=null;
 	$(function() {
 		var data = {"pKey":"p_type"};
 		var url = $("#base_path").val() + "/dict/list";
@@ -19,12 +20,12 @@ var statusData=null;
 		var data = {"pKey":"p_status"};
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data, false, doSuccessBackStatus);
-		
+		op_status = $("#op_status").val();
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
 			url :  $("#base_path").val() + "/project/page",
-			height : $(window).height() - 60,
+			height : $(window).height() - 120,
 			striped : true,
 			singleSelect : true,
 			queryParams : function(params) {
@@ -33,7 +34,7 @@ var statusData=null;
 					userId : $("#userIdSearch").val(),
 					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
-					status : "1",
+					status : $("#op_status").val(),
 					start : params.offset / params.limit + 1,
 					limit : params.limit
 					};
@@ -152,7 +153,19 @@ var statusData=null;
 	}
 	
 	function operateFormatter(value, row) {
-        return ['<button class="btn btn-link btn-xs check">审核</button>'].join('');
+		var returnText = "";
+		if(op_status != null && op_status != undefined){
+			if("1" == op_status){
+				returnText = ['<button class="btn btn-link btn-xs approve">审核</button>'].join('');
+			}else if("2" == op_status){
+				returnText = ['<button class="btn btn-link btn-xs flow">流标</button>'].join('');
+			}else if("3" == op_status){
+				returnText = ['<button class="btn btn-link btn-xs recheck">复核</button>'].join('');
+			}else if("5" == op_status){
+				returnText = ['<button class="btn btn-link btn-xs confirmRepay">确认偿还</button>'].join('');
+			}
+		}
+		return returnText;
     }
 	
 	function typeFormatter(value, row) {
@@ -176,11 +189,21 @@ var statusData=null;
 	}
 	
     window.operateEvents = {
-        'click .detail': function (e, value, row, index) {
-        	window.location.href = $("#base_path").val() + "/project/detail?proId="+row.proId;
+    	//首次审核
+        'click .approve': function (e, value, row, index) {
+            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId+"&operate=approve";
         },
-        'click .check': function (e, value, row, index) {
-            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId;
+    	//筹款中
+    	'click .flow': function (e, value, row, index) {
+            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId+"&operate=flow";
+        },
+        //等待复核
+    	'click .recheck': function (e, value, row, index) {
+            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId+"&operate=recheck";
+        },
+        //平台确认偿还
+    	'click .confirmRepay': function (e, value, row, index) {
+            window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId+"&operate=confirmRepay";
         }
     };
 </script>
@@ -188,7 +211,7 @@ var statusData=null;
 <body>
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
-	<input type="hidden" id="operate_id"/>
+	<input type="hidden" id="op_status" value="${op_status}"/>
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">

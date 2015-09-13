@@ -25,3 +25,28 @@ function dateFormat (date, format) {
      }
      return format;
 }
+
+function checknumber(String) { 
+	var Letters = "1234567890"; 
+	var i; 
+	var c; 
+	for( i = 0; i < Letters.length(); i ++ )   {   //Letters.length() ->>>>取字符长度
+		c = Letters.charAt( i ); 
+		if (Letters.indexOf( c ) ==-1)   { //在"Letters"中找不到"c"   见下面的此函数的返回值
+			return true; 
+		} 
+	}
+	return false; 
+}
+
+/**
+ * 提示信息显示隐藏
+ * @param e
+ */
+function toggleMess(e){
+	if($(e).val() != ""){
+		$(e).next().addClass("hid");
+	}else{
+		$(e).next().removeClass("hid");
+	}
+}

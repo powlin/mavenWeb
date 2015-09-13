@@ -19,12 +19,11 @@ var statusData=null;
 		var data = {"pKey":"p_status"};
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data, false, doSuccessBackStatus);
-		
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
-			url :  $("#base_path").val() + "/program/page",
-			height : $(window).height() - 60,
+			url :  $("#base_path").val() + "/project/page",
+			height : $(window).height() - 120,
 			striped : true,
 			singleSelect : true,
 			queryParams : function(params) {
@@ -33,7 +32,7 @@ var statusData=null;
 					userId : $("#userIdSearch").val(),
 					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
-					status : "2",
+					status : $("#statusSearch").val(),
 					start : params.offset / params.limit + 1,
 					limit : params.limit
 					};
@@ -96,12 +95,12 @@ var statusData=null;
 				sortable : false,
 				formatter : statusFormatter
 			 },{
-					field : 'userId',
-					title : '发起人',
-					align : 'left',
-					valign : 'middle',
-					width : 200,
-					sortable : false
+				field : 'userId',
+				title : '发起人',
+				align : 'left',
+				valign : 'middle',
+				width : 200,
+				sortable : false
 			 },{
 				field : 'createDatetime',
 				title : '创建时间',
@@ -164,7 +163,7 @@ var statusData=null;
 	}
 	
 	function operateFormatter(value, row) {
-        return ['<button class="btn btn-link btn-xs detail">查看详情</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs check">审核</button>'].join('');
+        return ['<button class="btn btn-link btn-xs detail">查看详情</button>'].join('');
     }
 	
 	function typeFormatter(value, row) {
@@ -187,29 +186,22 @@ var statusData=null;
 		return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
 	}
 	
-    window.operateEvents = {
+	window.operateEvents = {
         'click .detail': function (e, value, row, index) {
-        	window.location.href = $("#base_path").val() + "/program/detail?proId="+row.proId;
-        },
-        'click .check': function (e, value, row, index) {
-            window.location.href = $("#base_path").val() + "/program/check?proId="+row.proId;
+        	window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId;
         }
-    };
+	};
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
-	<input type="hidden" id="operate_id"/>
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">项目管理</a></li>
 		    <li><a href="#">众筹审批</a></li>
 	    </ul>
-	    <div class="form-group mr40 add-from-group">
-			<button id="addBtn" class="btn btn-info btn-sm">新增</button>
-		</div>
     </div>
     <div class="panel-body">
 		<div id="custom-toolbar" style="margin-bottom: 8px">
@@ -221,7 +213,7 @@ var statusData=null;
 					<div class="form-group">
 						<label for="nameSearch" class="control-label">项目名称:</label> <input class="input-sm" type="text"
 							class="form-control" id="nameSearch" placeholder="请输入项目名称">
-					</div><br/>
+					</div>
 					<div class="form-group">
 						<label for="typeSearch" class="control-label">项目类型:</label>
 							<select id="typeSearch" name="typeSearch" class="form-control"></select>
@@ -231,9 +223,9 @@ var statusData=null;
 							class="form-control" id="userIdSearch" placeholder="请输入发起人编号">
 					</div>
 					<div class="form-group">
-						<label for="statusSearch" class="control-label">项目状态:</label> 
-						<select id="statusSearch" name="statusSearch" class="form-control"></select>
-					</div>&nbsp;
+						<label for="statusSearch" class="control-label">项目状态:</label>
+							<select id="statusSearch" name="statusSearch" class="form-control"></select>
+					</div>
 					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 				</div>
 			</div>

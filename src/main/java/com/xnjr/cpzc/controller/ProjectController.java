@@ -8,10 +8,11 @@
  */
 package com.xnjr.cpzc.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IProjectAO;
+import com.xnjr.cpzc.ao.IReturnAO;
 import com.xnjr.cpzc.dto.res.Page;
+import com.xnjr.cpzc.dto.res.ZC703309Res;
 
 /** 
  * @author: xieyj 
@@ -31,6 +34,18 @@ import com.xnjr.cpzc.dto.res.Page;
 public class ProjectController extends BaseController {
     @Autowired
     IProjectAO projectAO;
+
+    @Autowired
+    IReturnAO returnAO;
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView doForwardView(
+            @RequestParam(value = "op_status") String op_status) {
+        ModelAndView view = new ModelAndView("/project/project_list");
+        view.addObject("op_status", op_status);
+        return view;
+    }
 
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
@@ -48,17 +63,22 @@ public class ProjectController extends BaseController {
     }
 
     @SuppressWarnings("rawtypes")
-    @RequestMapping(value = "/{module}", method = RequestMethod.GET)
+    @RequestMapping(value = "/check", method = RequestMethod.GET)
     public ModelAndView getProject(
             @RequestParam(value = "proId", required = true) String proId,
-            @RequestParam(value = "operate", required = true) String operate,
-            @PathVariable("module") String module) {
-        ModelAndView view = new ModelAndView("/project/project_" + module);
+            @RequestParam(value = "operate", required = false) String operate) {
+        String url = "/project/project_detail";
+        if ("approve".equals(operate)) {
+            url = "/project/project_approve";
+        }
+        ModelAndView view = new ModelAndView(url);
         if (StringUtils.isNotBlank(proId)) {
             Page page = projectAO.queryProjectPage(proId, null, null, null,
                 null, "0", "10");
             if (page != null && page.getList() != null) {
+                List<ZC703309Res> returnList = returnAO.queryReturnList(proId);
                 view.addObject("project", page.getList().get(0));
+                view.addObject("returnList", returnList);
                 view.addObject("operate", operate);
             }
         }
@@ -95,7 +115,7 @@ public class ProjectController extends BaseController {
             .getUserCode(), firstPayAmount, firstPayFee, remark);
     }
 
-    @RequestMapping(value = "/confirmSend", method = RequestMethod.POST)
+    @RequestMapping(value = "/repay", method = RequestMethod.POST)
     @ResponseBody
     public boolean confirmSendProject(
             @RequestParam(value = "proId", required = true) String proId,
@@ -104,5 +124,4 @@ public class ProjectController extends BaseController {
         return projectAO.confirmSendOut(proId, this.getSessionUser()
             .getUserCode(), checkResult, remark);
     }
-
 }
