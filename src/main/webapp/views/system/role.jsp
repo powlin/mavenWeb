@@ -211,7 +211,7 @@ var typeData=null;
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
 							class="form-control" id="role_code_search">
 					</div>
-					<div class="form-group">
+					<div class="form-group mr40">
 						<label for="parent_code" class="control-label">角色等级:</label>
 						<select id="role_level_search" class="form-control" name="role_level">
 						</select>
