@@ -72,13 +72,15 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updateDatetime',
 			title : '更改时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'userId',
 			title : '用户id',
@@ -99,6 +101,10 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 
 </script>
 </head>

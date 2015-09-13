@@ -68,7 +68,8 @@
 				title : '创建时间',
 				align : 'left',
 				valign : 'middle',
-				sortable : false
+				sortable : false,
+				formatter : dateFormatter
 			}, {
 				field : 'remark',
 				title : '备注',
@@ -112,6 +113,10 @@
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
+	
+	function dateFormatter(value, row){
+		return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+	}
 	
 	function doSuccessBack(res) {
 		if (res.success == true) {

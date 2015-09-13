@@ -94,7 +94,8 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'operate',
 			title : '操作',
@@ -110,6 +111,10 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 function operateFormatter(value, row) {
 	return ['<button class="btn btn-link btn-xs detail">详情</button>'].join('');
 }

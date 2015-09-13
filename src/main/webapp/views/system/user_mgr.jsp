@@ -72,7 +72,8 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'creator',
 			title : '创建人',
@@ -84,7 +85,8 @@ $(function() {
 			title : '更新时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updater',
 			title : '更新人',
@@ -107,6 +109,10 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>

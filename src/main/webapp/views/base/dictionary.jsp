@@ -85,7 +85,8 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'creator',
 			title : '创建人',
@@ -97,7 +98,8 @@ $(function() {
 			title : '更改时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updater',
 			title : '修改人',
@@ -146,6 +148,10 @@ function doSuccessDel(res) {
 	}else{
 		alert("删除失败");
 	}
+}
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
 }
 </script>
 </head>

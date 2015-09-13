@@ -89,7 +89,8 @@ $(function() {
 			title : '申请时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'checkUser',
 			title : '审核人ID',
@@ -101,7 +102,8 @@ $(function() {
 			title : '审核时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'remark',
 			title : '备注',
@@ -138,6 +140,10 @@ window.operateEvents = {
   	window.location.href = $("#base_path").val() + "/account/redBlueSearchDetail?rbNo="+row.rbNo;
   }
 };
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 </script>
 </head>
 <body>

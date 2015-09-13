@@ -5,6 +5,9 @@
  * @returns
  */
 function dateFormat (date, format) {
+	if(date == '' || typeof(date) == 'undefined'){
+		return '-';
+	}
      date = new Date(date);
      var o = {
          'M+' : date.getMonth() + 1, //month
