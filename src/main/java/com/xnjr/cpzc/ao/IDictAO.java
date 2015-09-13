@@ -33,6 +33,7 @@ public interface IDictAO {
     /**
      * @param key
      * @param value
+     * @param pId
      * @param pKey
      * @param pValue
      * @return 
@@ -40,12 +41,63 @@ public interface IDictAO {
      * @history:
      */
     @SuppressWarnings("rawtypes")
-    public List queryDictList(String key, String value, String pKey,
+    public List queryDictList(String key, String value, String pId, String pKey,
             String pValue);
 
+    /**
+     * 数据字典分页查询
+     * @param key
+     * @param value
+     * @param pKey
+     * @param pValue
+     * @param start
+     * @param limit
+     * @param orderColumn
+     * @param orderDir
+     * @return 
+     * @create: 2015年9月12日 下午9:29:58 yuexia
+     * @history:
+     */
     @SuppressWarnings("rawtypes")
     public Page queryDictPage(String key, String value, String pKey,
             String pValue, String start, String limit, String orderColumn,
             String orderDir);
+
+    /**
+     * 数据字典新增
+     * @param key
+     * @param value
+     * @param pId
+     * @param remark
+     * @param creator
+     * @return 
+     * @create: 2015年9月12日 下午9:30:07 yuexia
+     * @history:
+     */
+    public boolean addDict(String key, String value, String pId, String remark,
+            String creator);
+
+    /**
+     * 数据字典删除
+     * @param id
+     * @return 
+     * @create: 2015年9月12日 下午9:30:15 yuexia
+     * @history:
+     */
+    public boolean dropDict(String id);
+
+    /**
+     * 数据字典修改
+     * @param id
+     * @param value
+     * @param pId
+     * @param remark
+     * @param updater
+     * @return 
+     * @create: 2015年9月12日 下午9:52:32 yuexia
+     * @history:
+     */
+    public boolean editMenu(String id, String value, String pId, String remark,
+            String updater);
 
 }

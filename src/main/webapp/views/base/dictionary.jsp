@@ -85,7 +85,8 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'creator',
 			title : '创建人',
@@ -97,13 +98,22 @@ $(function() {
 			title : '更改时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updater',
 			title : '修改人',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
+		}, {
+			field : 'operate',
+			title : '操作',
+			width : 100,
+			align : 'center',
+			valign : 'middle',
+			formatter : operateFormatter,
+			events : operateEvents
 		}]
 	});
 
@@ -113,6 +123,40 @@ $(function() {
 	});
 });
 
+function operateFormatter(value, row) {
+	return ['<button class="btn btn-link btn-xs edit">修改</button><button class="btn btn-link btn-xs del">删除</button>'].join('');
+}
+
+window.operateEvents = {
+	'click .edit': function (e, value, row, index) {
+		var pKey = row.pKey;
+		if(typeof(pKey) == 'undefined'){
+			pKey = '';
+		}
+    	window.location.href = $("#base_path").val() + "/dict/detail?key="+row.key+"&pKey="+pKey+"&id="+row.id+"&operate=edit";
+    },
+	'click .del': function (e, value, row, index) {
+		if(!confirm("是否确认删除数据字典"+row.id+"?")){
+    		return false;
+    	}
+    	var url = $("#base_path").val() + "/dict/drop";
+    	var data = {id:row.id};
+		doPostAjax(url, data, doSuccessDel);
+	}
+};
+
+function doSuccessDel(res) {
+	if (res.success == true) {
+		alert("删除成功");
+		$('#tableList').bootstrapTable('refresh');
+	}else{
+		alert("删除失败");
+	}
+}
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 </script>
 </head>
 <body>

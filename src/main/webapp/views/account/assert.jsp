@@ -7,7 +7,11 @@
 <title>账户管理</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
+var typeData=null;
 $(function() {
+	var data = {"pKey":"a_status"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 	// 绑定列表
 	$('#tableList').bootstrapTable({
 		method : "get",
@@ -66,19 +70,22 @@ $(function() {
 			title : '账户状态',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : accountStatusFormatter
 		}, {
 			field : 'createDatetime',
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updateDatetime',
 			title : '更改时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'userId',
 			title : '用户id',
@@ -99,6 +106,34 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
+
+function doSuccessBackType(res){
+	var data = res.data;
+	typeData = data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#status_search").val()){
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}else{
+				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}
+		}
+	}
+	$("#status_search").html(html);
+}
+
+function accountStatusFormatter(value, row) {
+	for(var i = 0;i < typeData.length;i++){
+		if(typeData[i].key == value){
+			return typeData[i].value;
+		}
+	}
+}
 
 </script>
 </head>
@@ -127,10 +162,6 @@ $(function() {
 						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
-									<option value="">请选择</option>
-									<option value="0">正常</option>
-									<option value="1">程序锁定</option>
-									<option value="2">人工锁定</option>
 								</select>
 						</div>&nbsp;
 						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>

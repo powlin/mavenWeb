@@ -7,10 +7,11 @@
 <title>用户设置</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
+var typeData=null;
 $(document).ready(function(){
-	/* var data = {};
-	var url = $("#base_path").val() + "/sysUser/user/detailjson";
-	doGetAjax(url, data, fillSelSuccessBack); */
+	var data = {"pKey":"u_status"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 	
 	//添加用户
 	$('#addBtn').click(function() {
@@ -66,13 +67,15 @@ $(function() {
 			title : '状态',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : userStatusFormatter
 		}, {
 			field : 'createDatetime',
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'creator',
 			title : '创建人',
@@ -84,7 +87,8 @@ $(function() {
 			title : '更新时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'updater',
 			title : '更新人',
@@ -107,6 +111,34 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function doSuccessBackType(res){
+	var data = res.data;
+	typeData = data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#status_search").val()){
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}else{
+				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}
+		}
+	}
+	$("#status_search").html(html);
+}
+
+function userStatusFormatter(value, row) {
+	for(var i = 0;i < typeData.length;i++){
+		if(typeData[i].key == value){
+			return typeData[i].value;
+		}
+	}
+}
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
@@ -161,12 +193,9 @@ function doSuccessDel(res) {
 							<label for="userName" class="control-label">用户姓名:</label> <input class="input-sm" type="text"
 								class="form-control" id="user_name_search" placeholder="请输入用户姓名">
 						</div>
-						<div class="form-group">
+						<div class="form-group mr40">
 							<label for="status" class="control-label">状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
-									<option value="">请选择</option>
-									<option value="1">正常</option>
-									<option value="2">锁定</option>
 								</select>
 						</div>&nbsp;
 						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>

@@ -7,7 +7,11 @@
 <title>账户管理</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
+var typeData=null;
 $(function() {
+	var data = {"pKey":"biz_type"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 	// 绑定列表
 	$('#tableList').bootstrapTable({
 		method : "get",
@@ -48,11 +52,12 @@ $(function() {
 			sortable : false,
 			width: 100
 		}, {
-			field : 'bizType ',
+			field : 'bizType',
 			title : '业务类型',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : bizTypeFormatter
 		}, {
 			field : 'accountNumber ',
 			title : '账户编号',
@@ -94,7 +99,8 @@ $(function() {
 			title : '创建时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'operate',
 			title : '操作',
@@ -110,6 +116,34 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function bizTypeFormatter(value, row) {
+	for(var i = 0;i < typeData.length;i++){
+		if(typeData[i].key == value){
+			return typeData[i].value;
+		}
+	}
+}
+
+function doSuccessBackType(res){
+	var data = res.data;
+	typeData = data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#biz_type_search").val()){
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}else{
+				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}
+		}
+	}
+	$("#biz_type_search").html(html);
+}
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 function operateFormatter(value, row) {
 	return ['<button class="btn btn-link btn-xs detail">详情</button>'].join('');
 }
@@ -142,13 +176,6 @@ window.operateEvents = {
 						<div class="form-group mr40 mt10">
 							<label for="bizType" class="control-label">业务类型:</label> <select class="input-sm"
 								class="form-control" id="biz_type_search">
-									<option value="">请选择</option>
-									<option value="12">转入</option>
-									<option value="-12">转出</option>
-									<option value="19">蓝补</option>
-									<option value="-19">红冲</option>
-									<option value="51">冻结</option>
-									<option value="-51">解冻</option>
 								</select>
 						</div>
 						<div class="form-group mr40 mt10">

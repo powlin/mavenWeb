@@ -7,7 +7,15 @@
 <title>账户管理</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
+var typeData=null;
+var statusData=null;
 $(function() {
+	var data = {"pKey":"direction_type"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+	var data = {"pKey":"rb_status"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data, false, doSuccessBackStatus);
 	// 绑定列表
 	$('#tableList').bootstrapTable({
 		method : "get",
@@ -65,13 +73,15 @@ $(function() {
 			title : '方向',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : directionFormatter
 		}, {
 			field : 'status',
 			title : '账户状态',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : statusFormatter
 		}, {
 			field : 'applyUser',
 			title : '申请人ID',
@@ -89,7 +99,8 @@ $(function() {
 			title : '申请时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'checkUser',
 			title : '审核人ID',
@@ -101,7 +112,8 @@ $(function() {
 			title : '审核时间',
 			align : 'left',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : dateFormatter
 		}, {
 			field : 'remark',
 			title : '备注',
@@ -125,6 +137,46 @@ $(function() {
 	});
 });
 
+function doSuccessBackStatus(res){
+	var data = res.data;
+	typeData = data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#status_search").val()){
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}else{
+				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}
+		}
+	}
+	$("#status_search").html(html);
+}
+
+function directionFormatter(value, row) {
+	for(var i = 0;i < typeData.length;i++){
+		if(typeData[i].key == value){
+			return typeData[i].value;
+		}
+	}
+}
+
+function doSuccessBackType(res){
+	var data = res.data;
+	statusData = data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#direction_search").val()){
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}else{
+				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+			}
+		}
+	}
+	$("#direction_search").html(html);
+}
+
 function operateFormatter(value, row) {
 	if(row.status == 1){
 		return ['<button class="btn btn-link btn-xs examine">审核</button>'].join('');
@@ -138,6 +190,18 @@ window.operateEvents = {
   	window.location.href = $("#base_path").val() + "/account/redBlueSearchDetail?rbNo="+row.rbNo;
   }
 };
+
+function dateFormatter(value, row){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
+
+function statusFormatter(value, row) {
+	for(var i = 0;i < statusData.length;i++){
+		if(statusData[i].key == value){
+			return statusData[i].value;
+		}
+	}
+}
 </script>
 </head>
 <body>
@@ -165,18 +229,11 @@ window.operateEvents = {
 						<div class="form-group mr40 mt10">
 							<label for="direction" class="control-label">方向:</label> <select class="input-sm"
 								class="form-control" id="direction_search">
-									<option value="">请选择</option>
-									<option value="1">蓝补，价钱</option>
-									<option value="0">红冲，减钱</option>
 								</select>
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="status" class="control-label">状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
-									<option value="">请选择</option>
-									<option value="1">待审批</option>
-									<option value="2">审批不通过</option>
-									<option value="3">审批已通过</option>
 								</select>
 						</div>
 						<div class="form-group mr40 mt10">
