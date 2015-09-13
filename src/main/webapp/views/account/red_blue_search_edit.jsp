@@ -11,6 +11,9 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
+		var data = {"pKey":"direction_type"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		
 		//提交
 		$('#subBtn').click(function() {
@@ -63,11 +66,23 @@
 			$(e).next().removeClass("hid");
 		}
 	}
+
+	function doSuccessBackType(res){
+		var data = res.data;
+		if(typeof(data) != "undefined"){//判断undifined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == $("#direction").val()){
+					$("#directionLabel").text(data[i].value);
+				}
+			}
+		}
+	}
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
-	<input type="hidden" id="rbNo" name="rbNo" value="${rbNo}"/>
+	<input type="hidden" id="rbNo" name="rbNo" value="${account.rbNo}"/>
+	<input type="hidden" id="direction" value="${account.direction}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -80,7 +95,12 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>红冲蓝补审核</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>红冲蓝补申请编号:</label><label>${rbNo}</label></li>
+			    <li><label><span class="inline_red">*</span>申请编号:</label><label>${account.rbNo}</label></li>
+			    <li><label><span class="inline_red">*</span>账户编号:</label><label>${account.accountNumber}</label></li>
+			    <li><label><span class="inline_red">*</span>金额:</label><label>${account.amount}</label></li>
+			    <li><label><span class="inline_red">*</span>方向:</label><label id="directionLabel"></label></li>
+			    <li><label><span class="inline_red">*</span>申请人ID:</label><label>${account.applyUser}</label></li>
+			    <li><label><span class="inline_red">*</span>申请说明:</label><label>${account.applyNote}</label></li>
 			    <li><label><span class="inline_red">*</span>审核结果:</label><select id="checkResult" name="checkResult" class="dfinput">
 			    	<option value="1">通过</option>
 			    	<option value="0">不通过</option>

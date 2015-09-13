@@ -104,13 +104,18 @@ public class AccountController extends BaseController {
             sessionUser.getUserCode(), applyNote);
     }
 
+    @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/redBlueSearchDetail", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView redBlueSearchDetail(
             @RequestParam(value = "rbNo", required = false) String rbNo) {
         ModelAndView view = new ModelAndView("/account/red_blue_search_edit");
         if (StringUtils.isNotBlank(rbNo)) {
-            view.addObject("rbNo", rbNo);
+            Page page = accountAO.redBlueSearch(rbNo, null, null, null, null,
+                null, null, null, "1", "10", null, null);
+            if (page != null && page.getList() != null) {
+                view.addObject("account", page.getList().get(0));
+            }
         }
         return view;
     }
