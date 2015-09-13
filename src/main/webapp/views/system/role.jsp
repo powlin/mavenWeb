@@ -196,7 +196,7 @@ var typeData=null;
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">系统管理</a></li>
-		    <li><a href="#">菜单设置</a></li>
+		    <li><a href="#">角色设置</a></li>
 	    </ul>
 	    <div class="form-group mr40 add-from-group">
 			<button id="addBtn" class="btn btn-info btn-sm">新增</button>
