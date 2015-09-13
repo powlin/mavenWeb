@@ -10,7 +10,12 @@
 <title>财务管理</title>
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
+var statusData=null;
 	$(function() {
+		var data = {"pKey":"rb_examin_status"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackStatus);
+		
 		var data = {"pKey":"direction_type"};
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
@@ -30,6 +35,22 @@
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
+
+	function doSuccessBackStatus(res){
+		var data = res.data;
+		statusData = data;
+		var html = "";
+		if(typeof(data) != "undefined"){//判断undifined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == $("#checkResult").val()){
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				}else{
+					html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				}
+			}
+		}
+		$("#checkResult").html(html);
+	}
 	
 	function checkForm(){
 		var rbNo = $("#rbNo");
@@ -102,8 +123,6 @@
 			    <li><label><span class="inline_red">*</span>申请人ID:</label><label>${account.applyUser}</label></li>
 			    <li><label><span class="inline_red">*</span>申请说明:</label><label>${account.applyNote}</label></li>
 			    <li><label><span class="inline_red">*</span>审核意见:</label><select id="checkResult" name="checkResult" class="dfinput">
-			    	<option value="1">通过</option>
-			    	<option value="0">不通过</option>
 			    </select></li>
 			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
