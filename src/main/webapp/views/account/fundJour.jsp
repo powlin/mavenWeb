@@ -52,7 +52,7 @@ $(function() {
 			sortable : false,
 			width: 100
 		}, {
-			field : 'bizType ',
+			field : 'bizType',
 			title : '业务类型',
 			align : 'left',
 			valign : 'middle',

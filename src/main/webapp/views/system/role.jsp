@@ -198,15 +198,14 @@ var typeData=null;
 		    <li><a href="#">系统管理</a></li>
 		    <li><a href="#">角色设置</a></li>
 	    </ul>
-	    <div class="form-group mr40 add-from-group">
-			<button id="addBtn" class="btn btn-info btn-sm">新增</button>
-		</div>
     </div>
 	<div class="panel-body">
 		<div>
 			<div id="custom-toolbar" style="margin-bottom: 8px">
 				<div class="form-inline" role="form">
-					
+					<div class="form-group mr40">
+							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
+						</div>
 					<div class="form-group mr40">
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
 							class="form-control" id="role_code_search">
