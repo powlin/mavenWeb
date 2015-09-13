@@ -10,10 +10,17 @@
 <title>资金流水详情</title>
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
+$(function(){
+	$("#createDatetimeLabel").text(dateFormatter($("#createDatetime").val()));
+});
+function dateFormatter(value){
+	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
+	<input type="text" id="createDatetime" value="${account.createDatetime}">
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -34,7 +41,7 @@
 			    <li><label>发生后金额:</label><label>${account.postAmount}</label></li>
 			    <li><label>状态:</label><label>${account.status}</label></li>
 			    <li><label>备注:</label><label>${account.remark}</label></li>
-			    <li><label>创建时间:</label><label>${account.createDatetime}</label></li>
+			    <li><label>创建时间:</label><label id="createDatetimeLabel"></label></li>
 			    <li><label>用户编号:</label><label>${account.userId}</label></li>
 			    <li><label>真实姓名:</label><label>${account.realName}</label></li>
 			    <li><label>账户编号:</label><label>${account.accountNumber}</label></li>
