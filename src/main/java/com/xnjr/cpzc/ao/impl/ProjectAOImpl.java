@@ -11,6 +11,7 @@ package com.xnjr.cpzc.ao.impl;
 import org.springframework.stereotype.Service;
 
 import com.xnjr.cpzc.ao.IProjectAO;
+import com.xnjr.cpzc.dto.req.ZC703303Req;
 import com.xnjr.cpzc.dto.req.ZC703405Req;
 import com.xnjr.cpzc.dto.req.ZC703502Req;
 import com.xnjr.cpzc.dto.req.ZC703503Req;
@@ -47,6 +48,31 @@ public class ProjectAOImpl implements IProjectAO {
         zc703405Req.setLimit(limit);
         return BizConnecter.getBizData("703405",
             JsonUtils.object2Json(zc703405Req), Page.class);
+    }
+
+    /** 
+     * @see com.xnjr.cpzc.ao.IProjectAO#editProject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+     */
+    @Override
+    public boolean editProject(String proId, String name, String type,
+            String province, String city, String picture, String video,
+            String summary, String detail, Integer targetAmount,
+            Integer raiseDays) {
+        ZC703303Req req = new ZC703303Req();
+        req.setProId(proId);
+        req.setName(name);
+        req.setType(type);
+        req.setProvince(province);
+        req.setCity(city);
+        req.setVideo(video);
+        req.setPicture(picture);
+        req.setSummary(summary);
+        req.setDetail(detail);
+        req.setTargetAmount(String.valueOf(targetAmount));
+        req.setRaiseDays(String.valueOf(raiseDays));
+        return BizConnecter.getBizData("703303",
+            com.xnjr.cpzc.util.JsonUtils.object2Json(req), SuccessRes.class)
+            .isSuccess();
     }
 
     /** 
@@ -107,5 +133,4 @@ public class ProjectAOImpl implements IProjectAO {
         return BizConnecter.getBizData("703505",
             JsonUtils.object2Json(zc703505Req), SuccessRes.class).isSuccess();
     }
-
 }

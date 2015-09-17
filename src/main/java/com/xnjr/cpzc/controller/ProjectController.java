@@ -62,6 +62,41 @@ public class ProjectController extends BaseController {
             start, limit);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public ModelAndView editProject(
+            @RequestParam(value = "proId", required = true) String proId,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "type", required = true) String type,
+            @RequestParam(value = "province", required = true) String province,
+            @RequestParam(value = "city", required = true) String city,
+            @RequestParam(value = "picture", required = true) String picture,
+            @RequestParam(value = "video", required = true) String video,
+            @RequestParam(value = "summary", required = true) String summary,
+            @RequestParam(value = "detail", required = true) String detail,
+            @RequestParam(value = "targetAmount", required = true) Integer targetAmount,
+            @RequestParam(value = "raiseDays", required = true) Integer raiseDays) {
+        boolean flag = projectAO.editProject(proId, name, type, province, city,
+            picture, video, summary, detail, targetAmount, raiseDays);
+        ModelAndView view = null;
+        if (flag == true) {
+            view = new ModelAndView("/project/project_approve");
+            if (StringUtils.isNotBlank(proId)) {
+                @SuppressWarnings("rawtypes")
+                Page page = projectAO.queryProjectPage(proId, null, null, null,
+                    null, "0", "10");
+                if (page != null && page.getList() != null) {
+                    List<ZC703309Res> returnList = returnAO
+                        .queryReturnList(proId);
+                    view.addObject("project", page.getList().get(0));
+                    view.addObject("returnList", returnList);
+                }
+            }
+        } else {
+            view = new ModelAndView("/error/error");
+        }
+        return view;
+    }
+
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/check", method = RequestMethod.GET)
     public ModelAndView getProject(

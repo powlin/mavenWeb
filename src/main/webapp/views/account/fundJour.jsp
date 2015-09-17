@@ -59,7 +59,7 @@ $(function() {
 			sortable : false,
 			formatter : bizTypeFormatter
 		}, {
-			field : 'accountNumber ',
+			field : 'accountNumber',
 			title : '账户编号',
 			align : 'left',
 			valign : 'middle',

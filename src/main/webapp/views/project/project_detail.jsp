@@ -12,6 +12,11 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
+		var data = {"pKey":"p_type"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+		$("#createDatetime").text(dateFormat($("#createDatetime").text(),'yyyy-MM-dd HH:mm:ss'));
+		
 		$('#backBtn').click(function() {
 			if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
 				window.location.href = $("#base_path").val() + "/views/project/project_all.htm";
@@ -67,7 +72,8 @@
 				alert("首付金额不能为空");
 				return;
 			}
-			if(checknumber(firstPayAmount)) { 
+			var reg = new RegExp("^[0-9]+(.[0-9]+)?$");
+			if(!reg.test(firstPayAmount)) { 
 				alert("首付金额只允许输入数字！"); 
 				return false; 
 			}
@@ -76,7 +82,7 @@
 				alert("手续费不能为空");
 				return;
 			}
-			if(checknumber(firstPayFee)) { 
+			if(!reg.test(firstPayFee)) { 
 				alert("手续费只允许输入数字！"); 
 				return false; 
 			}
@@ -87,7 +93,7 @@
 			}
 			var data = {"proId":$("#proId").val(),"firstPayAmount":"firstPayAmount","firstPayFee":firstPayFee,"remark":remark};
 			var url = $("#base_path").val() + "/project/flow";
-			doPostAjax(url,data,doSuccessBackFlow);
+			doPostAjax(url,data,doSuccessBackPay);
 		});
 		
 		//平台偿还确认，审批通过
@@ -99,7 +105,7 @@
 			}
 			var data = {"proId":$("#proId").val(),"checkResult":"0","remark":remark};
 			var url = $("#base_path").val() + "/project/repay";
-			doPostAjax(url,data,doSuccessBackFlow);
+			doPostAjax(url,data,doSuccessBackRepay);
 		});
 		
 		//平台偿还确认，审批不通过
@@ -111,19 +117,63 @@
 			}
 			var data = {"proId":$("#proId").val(),"checkResult":"1","remark":remark};
 			var url = $("#base_path").val() + "/project/repay";
-			doPostAjax(url,data,doSuccessBackFlow);
+			doPostAjax(url,data,doSuccessBackRepay);
 		});
 	});
+	
+	function doSuccessBackType(res){
+		var data = res.data;
+		var proType = $("#proType").text();
+		if(typeof(data) != "undefined"){//判断undefined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == proType){
+					$("#proType").text(data[i].value);
+					return;
+				}
+			}
+		}
+	}
 	
 	function doSuccessBackFlow(res){
 		if (res.success == true) {
 			alert("操作成功!");
-			window.location.href = $("#base_path").val() + "/project/_list?op_status=2";
+			var url = $("#base_path").val() + "/project/list?op_status=2";
+			if($("#operate").val() == "recheck"){
+				url = $("#base_path").val() + "/project/list?op_status=3";
+			}
+			window.location.href = url;
+		}else{
+			alert(res.msg);
+		}
+	}
+	
+	function doSuccessBackPay(res){
+		if (res.success == true) {
+			alert("操作成功!");
+			window.location.href = $("#base_path").val() + "/project/list?op_status=3";
+		}else{
+			alert(res.msg);
+		}
+	}
+	
+	function doSuccessBackRepay(res){
+		if (res.success == true) {
+			alert("操作成功!");
+			window.location.href = $("#base_path").val() + "/project/list?op_status=5";
 		}else{
 			alert(res.msg);
 		}
 	}
 </script>
+<style type="text/css">
+.filetable{}
+.filetable tr{line-height:30px; padding:3px 0;}
+.filetable tbody tr td{line-height:30px;}
+.filetable th{font-size:14px;}
+.filetable td{font-size:13px; color:#555}
+.imgtable{width:95%; margin:7px 0;}
+.filetable .dfinput{height:24px;}
+</style>
 </head>
 <body>
 	<input type="hidden" id="base_path"
@@ -150,7 +200,7 @@
 	        	</tr>
 	        	<tr>
 	        		<th>项目类型:</th>
-	        		<td>${project.type}</td>
+	        		<td id="proType">${project.type}</td>
 	        		<th>发起城市:</th>
 	        		<td>${project.province} &nbsp;${project.city}</td>
 	        	</tr>
@@ -168,7 +218,7 @@
 	        		<th>发起人编号:</th>
 	        		<td>${project.userId}</td>
 	        		<th>申请时间:</th>
-	        		<td>${project.createDatetime}</td>
+	        		<td id="createDatetime">${project.createDatetime}</td>
 	        	</tr>
 	        	<tr>
 	        		<th>回报方式:</th>
@@ -241,11 +291,11 @@
 	        	</tr>
 	        </table>
 	        <br/>
-			<input id="flowBtn" type="button" class="btn mr40" value="流标"/>&nbsp;
-			<input id="payBtn" type="button" class="btn mr40" value="放款"/>&nbsp;
-			<input id="repayBtn" type="button" class="btn mr40" value="审批通过"/>&nbsp;
-			<input id="unRepayBtn" type="button" class="btn mr40" value="审批不通过"/>&nbsp;
-			<input id="backBtn" type="button" class="btn ml40" value="返回"/>&nbsp;
+			<input id="flowBtn" type="button" class="btn mr20" value="流标"/>&nbsp;
+			<input id="payBtn" type="button" class="btn mr20" value="放款"/>&nbsp;
+			<input id="repayBtn" type="button" class="btn mr20" value="审批通过"/>&nbsp;
+			<input id="unRepayBtn" type="button" class="btn mr20" value="审批不通过"/>&nbsp;
+			<input id="backBtn" type="button" class="btn ml20" value="返回"/>&nbsp;
 	    </div>
     </form>
 </body>

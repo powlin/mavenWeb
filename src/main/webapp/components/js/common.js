@@ -29,17 +29,21 @@ function dateFormat (date, format) {
      return format;
 }
 
-function checknumber(String) { 
-	var Letters = "1234567890"; 
-	var i; 
-	var c; 
-	for( i = 0; i < Letters.length(); i ++ )   {   //Letters.length() ->>>>取字符长度
-		c = Letters.charAt( i ); 
-		if (Letters.indexOf( c ) ==-1)   { //在"Letters"中找不到"c"   见下面的此函数的返回值
-			return true; 
-		} 
+function checkData(colNames,isNulls,colValues,colLengths){
+	for(var i=0;i < colValues.length;i++){
+	    if(isNulls[i] == 1){
+			if(undefined == colValues[i] || null == colValues[i] || '' == colValues[i]){
+				 alert('提示:'+colNames[i]+'不能为空');
+				 return false;
+			}
+		}
+		
+		if(undefined != colValues[i] && null != colValues[i] && '' != colValues[i] && colValues[i].length > colLengths[i]){
+		 	alert('提示:'+colNames[i]+'长度不能超过'+colLengths[i]+'位');
+		 	return false;
+		}
 	}
-	return false; 
+	return true;
 }
 
 /**

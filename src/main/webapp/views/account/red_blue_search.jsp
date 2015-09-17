@@ -52,7 +52,7 @@ $(function() {
 		pageList : [ 10, 20, 30, 40, 50 ],
 		columns : [{
 			field : 'rbNo',
-			title : '红冲蓝补申请编号',
+			title : '申请编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -77,7 +77,7 @@ $(function() {
 			formatter : directionFormatter
 		}, {
 			field : 'status',
-			title : '账户状态',
+			title : '状态',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
@@ -88,13 +88,7 @@ $(function() {
 			align : 'left',
 			valign : 'middle',
 			sortable : false
-		}, {
-			field : 'applyNote',
-			title : '申请说明',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
+		},{
 			field : 'applyDatetime',
 			title : '申请时间',
 			align : 'left',
@@ -115,12 +109,6 @@ $(function() {
 			sortable : false,
 			formatter : dateFormatter
 		}, {
-			field : 'remark',
-			title : '备注',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
 			field : 'operate',
 			title : '操作',
 			width : 100,
@@ -139,7 +127,7 @@ $(function() {
 
 function doSuccessBackStatus(res){
 	var data = res.data;
-	typeData = data;
+	statusData = data;
 	var html = "<option value=''>请选择</option>";
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
@@ -163,7 +151,7 @@ function directionFormatter(value, row) {
 
 function doSuccessBackType(res){
 	var data = res.data;
-	statusData = data;
+	typeData = data;
 	var html = "<option value=''>请选择</option>";
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
@@ -210,7 +198,7 @@ function statusFormatter(value, row) {
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">财务管理</a></li>
-		    <li><a href="#">红冲蓝补记录查询</a></li>
+		    <li><a href="#">红冲蓝补查询</a></li>
 	    </ul>
     </div>
     <div class="leftinfo">
@@ -219,7 +207,7 @@ function statusFormatter(value, row) {
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
 						<div class="form-group mr40 mt10">
-							<label for="rbNo" class="control-label-first">红冲蓝补申请编号:</label> <input class="input-sm" type="text"
+							<label for="rbNo" class="control-label-first">申请编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="rb_no_search" placeholder="请输入红冲蓝补申请">
 						</div>
 						<div class="form-group mr40 mt10">
@@ -239,10 +227,6 @@ function statusFormatter(value, row) {
 						<div class="form-group mr40 mt10">
 							<label for="applyUser" class="control-label">申请人ID:</label> <input class="input-sm" type="text"
 								class="form-control" id="apply_user_search" placeholder="请输入申请人ID">
-						</div>
-						<div class="form-group mr40 mt10">
-							<label for="checkUser" class="control-label">审核人ID:</label> <input class="input-sm" type="text"
-								class="form-control" id="check_user_search" placeholder="请输入审核人ID">
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="applyDatetimeStart" class="control-label">申请时间start:</label> <input class="input-sm dfdate" type="text"
