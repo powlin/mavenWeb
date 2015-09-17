@@ -20,7 +20,6 @@ function dateFormatter(value){
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
-	<input type="text" id="createDatetime" value="${account.createDatetime}">
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">

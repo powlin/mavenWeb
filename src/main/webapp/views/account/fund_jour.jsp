@@ -52,18 +52,18 @@ $(function() {
 			sortable : false,
 			width: 100
 		}, {
+			field : 'accountNumber',
+			title : '账户编号',
+			align : 'left',
+			valign : 'middle',
+			sortable : false
+		}, {
 			field : 'bizType',
 			title : '业务类型',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
 			formatter : bizTypeFormatter
-		}, {
-			field : 'accountNumber',
-			title : '账户编号',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
 		}, {
 			field : 'transAmount',
 			title : '发生金额',
@@ -150,7 +150,7 @@ function operateFormatter(value, row) {
 
 window.operateEvents = {
 	'click .detail': function (e, value, row, index) {
-		window.location.href = $("#base_path").val() + "/account/detail?ajNo="+row.ajNo;
+		window.location.href = $("#base_path").val() + "/account/jour/detail?ajNo="+row.ajNo;
 	}
 };
 </script>
@@ -161,7 +161,7 @@ window.operateEvents = {
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li><a href="#">账户管理</a></li>
-		    <li><a href="#">账户查询</a></li>
+		    <li><a href="#">资金流水查询</a></li>
 	    </ul>
     </div>
     <div class="leftinfo">
@@ -169,7 +169,7 @@ window.operateEvents = {
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="ajNo" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
 								class="form-control" id="aj_no_search" placeholder="请输入流水号">
 						</div>

@@ -69,7 +69,7 @@ public class AccountController extends BaseController {
     }
 
     @SuppressWarnings("rawtypes")
-    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @RequestMapping(value = "/jour/detail", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView queryAccountDetail(
             @RequestParam(value = "ajNo", required = false) String ajNo,
@@ -80,11 +80,11 @@ public class AccountController extends BaseController {
             @RequestParam(value = "accountNumber", required = false) String accountNumber,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        ModelAndView view = new ModelAndView("/account/account_detail");
+        ModelAndView view = new ModelAndView("/account/fund_jour_detail");
         if (StringUtils.isNotBlank(ajNo)) {
             Page page = accountAO.queryAccountMoneyList(ajNo, bizType,
-                createDatetimeStart, createDatetimeEnd, realName, accountNumber,
-                "0", "10", orderColumn, orderDir);
+                createDatetimeStart, createDatetimeEnd, realName,
+                accountNumber, "0", "10", orderColumn, orderDir);
             if (page != null && page.getList() != null) {
                 view.addObject("account", page.getList().get(0));
             }
