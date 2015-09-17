@@ -92,7 +92,7 @@
 				return;
 			}
 			var data = {"proId":$("#proId").val(),"firstPayAmount":"firstPayAmount","firstPayFee":firstPayFee,"remark":remark};
-			var url = $("#base_path").val() + "/project/flow";
+			var url = $("#base_path").val() + "/project/payAmount";
 			doPostAjax(url,data,doSuccessBackPay);
 		});
 		
