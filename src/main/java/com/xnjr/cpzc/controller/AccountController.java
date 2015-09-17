@@ -83,8 +83,8 @@ public class AccountController extends BaseController {
         ModelAndView view = new ModelAndView("/account/fund_jour_detail");
         if (StringUtils.isNotBlank(ajNo)) {
             Page page = accountAO.queryAccountMoneyList(ajNo, bizType,
-                createDatetimeStart, createDatetimeEnd, realName,
-                accountNumber, "0", "10", orderColumn, orderDir);
+                createDatetimeStart, createDatetimeEnd, realName, accountNumber,
+                "0", "10", orderColumn, orderDir);
             if (page != null && page.getList() != null) {
                 view.addObject("account", page.getList().get(0));
             }
@@ -150,5 +150,58 @@ public class AccountController extends BaseController {
         return accountAO.redBlueSearch(rbNo, accountNumber, direction, status,
             applyUser, checkUser, applyDatetimeStart, applyDatetimeEnd, start,
             limit, orderColumn, orderDir);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/sysCheck", method = RequestMethod.GET)
+    @ResponseBody
+    public Page querySysCheckPage(
+            @RequestParam(value = "ubNo", required = false) String ubNo,
+            @RequestParam(value = "refNo", required = false) String refNo,
+            @RequestParam(value = "bizType", required = false) String bizType,
+            @RequestParam(value = "checkDateStart", required = false) String checkDateStart,
+            @RequestParam(value = "checkDateEnd", required = false) String checkDateEnd,
+            @RequestParam(value = "checkResult", required = false) String checkResult,
+            @RequestParam(value = "adjustUser", required = false) String adjustUser,
+            @RequestParam(value = "adjustDatetimeStart", required = false) String adjustDatetimeStart,
+            @RequestParam(value = "adjustDatetimeEnd", required = false) String adjustDatetimeEnd,
+            @RequestParam(value = "adjustResult", required = false) String adjustResult,
+            @RequestParam(value = "accountNumber", required = false) String accountNumber,
+            @RequestParam("start") String start,
+            @RequestParam("limit") String limit,
+            @RequestParam(value = "orderColumn", required = false) String orderColumn,
+            @RequestParam(value = "orderDir", required = false) String orderDir) {
+        return accountAO.querySysCheckPage(ubNo, refNo, bizType, checkDateStart,
+            checkDateEnd, checkResult, adjustUser, adjustDatetimeStart,
+            adjustDatetimeEnd, adjustResult, accountNumber, start, limit,
+            orderColumn, orderDir);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/sysCheckDetail", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView querySysCheckDetail(
+            @RequestParam(value = "ubNo", required = false) String ubNo) {
+        ModelAndView view = new ModelAndView("/account/sys_check_edit");
+        if (StringUtils.isNotBlank(ubNo)) {
+            Page page = accountAO.querySysCheckPage(ubNo, null, null, null,
+                null, null, null, null, null, null, null, "1", "10", null,
+                null);
+            if (page != null && page.getList() != null) {
+                view.addObject("sysCheck", page.getList().get(0));
+            }
+        }
+        return view;
+    }
+
+    // ******** 红冲蓝补申请 *****
+    @RequestMapping(value = "/sysCheckEdit", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean sysCheckEdit(@RequestParam("ubNo") String ubNo,
+            @RequestParam("adjustResult") String adjustResult,
+            @RequestParam("remark") String remark) {
+        SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        return accountAO.sysCheckEdit(ubNo, sessionUser.getUserCode(),
+            adjustResult, remark);
     }
 }

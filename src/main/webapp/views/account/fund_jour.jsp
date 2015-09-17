@@ -183,7 +183,7 @@ window.operateEvents = {
 								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间起"/>
 						</div>
 						<div class="form-group mr40 mt10">
-							<label for="createDatetimeEnd" class="control-label-first">流水号:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
+							<label for="createDatetimeEnd" class="control-label-first">产生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
 								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间止"/>
 						</div>
 						<div class="form-group mr40 mt10">

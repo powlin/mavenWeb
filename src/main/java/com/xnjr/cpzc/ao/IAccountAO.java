@@ -32,4 +32,14 @@ public interface IAccountAO {
             String applyDatetimeStart, String applyDatetimeEnd, String start,
             String limit, String orderColumn, String orderDir);
 
+    @SuppressWarnings("rawtypes")
+    Page querySysCheckPage(String ubNo, String refNo, String bizType,
+            String checkDateStart, String checkDateEnd, String checkResult,
+            String adjustUser, String adjustDatetimeStart,
+            String adjustDatetimeEnd, String adjustResult, String accountNumber,
+            String start, String limit, String orderColumn, String orderDir);
+
+    boolean sysCheckEdit(String ubNo, String adjustUser, String adjustResult,
+            String remark);
+
 }
