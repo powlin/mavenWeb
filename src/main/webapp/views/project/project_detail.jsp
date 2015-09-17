@@ -143,7 +143,7 @@
 			}
 			window.location.href = url;
 		}else{
-			alert(res.msg);
+			alert("系统报错:"+res.msg);
 		}
 	}
 	
@@ -152,7 +152,7 @@
 			alert("操作成功!");
 			window.location.href = $("#base_path").val() + "/project/list?op_status=3";
 		}else{
-			alert(res.msg);
+			alert("系统报错:"+res.msg);
 		}
 	}
 	
@@ -161,7 +161,7 @@
 			alert("操作成功!");
 			window.location.href = $("#base_path").val() + "/project/list?op_status=5";
 		}else{
-			alert(res.msg);
+			alert("系统报错:"+res.msg);
 		}
 	}
 </script>
