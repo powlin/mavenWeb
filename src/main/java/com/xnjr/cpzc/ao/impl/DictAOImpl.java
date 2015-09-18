@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import com.xnjr.cpzc.ao.IDictAO;
 import com.xnjr.cpzc.dto.req.ZC703701Req;
 import com.xnjr.cpzc.dto.req.ZC703702Req;
+import com.xnjr.cpzc.dto.req.ZC703703Req;
+import com.xnjr.cpzc.dto.req.ZC703704Req;
 import com.xnjr.cpzc.dto.req.ZC703705Req;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.SuccessRes;
-import com.xnjr.cpzc.dto.res.ZC703703Res;
-import com.xnjr.cpzc.dto.res.ZC703704Res;
 import com.xnjr.cpzc.exception.BizException;
 import com.xnjr.cpzc.http.BizConnecter;
 import com.xnjr.cpzc.util.JsonUtils;
@@ -89,7 +89,7 @@ public class DictAOImpl implements IDictAO {
         if (StringUtils.isBlank(pId)) {
             throw new BizException("ZC703703", "数据字典父级键");
         }
-        ZC703703Res zc703703Req = new ZC703703Res();
+        ZC703703Req zc703703Req = new ZC703703Req();
         zc703703Req.setKey(key);
         zc703703Req.setValue(value);
         zc703703Req.setpId(pId);
@@ -101,7 +101,7 @@ public class DictAOImpl implements IDictAO {
 
     @Override
     public boolean dropDict(String id) {
-        ZC703704Res zc703704Req = new ZC703704Res();
+        ZC703704Req zc703704Req = new ZC703704Req();
         zc703704Req.setId(id);
         return BizConnecter.getBizData("703704",
             JsonUtils.object2Json(zc703704Req), SuccessRes.class).isSuccess();

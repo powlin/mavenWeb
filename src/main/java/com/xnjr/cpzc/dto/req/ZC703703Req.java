@@ -1,4 +1,4 @@
-package com.xnjr.cpzc.dto.res;
+package com.xnjr.cpzc.dto.req;
 
 /**
  * 数据字典新增
@@ -6,7 +6,7 @@ package com.xnjr.cpzc.dto.res;
  * @since: 2015年9月12日 下午8:56:18 
  * @history:
  */
-public class ZC703703Res {
+public class ZC703703Req {
     // 数据字典键
     private String key;
 
