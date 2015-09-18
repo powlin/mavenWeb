@@ -75,20 +75,31 @@ public class AccountAOImpl implements IAccountAO {
     }
 
     @Override
-    public boolean redBlueApply(String accountNumber, String amount,
-            String applyUser, String applyNote) {
+    public boolean redBlueApply(String accountNumber, String direction,
+            Long amount, String applyUser, String applyNote) {
         if (StringUtils.isBlank(accountNumber)) {
-            throw new BizException("ZC703206", "账户编号");
+            throw new BizException("ZC703206", "账户编号不能为空");
         }
-        if (StringUtils.isBlank(amount)) {
-            throw new BizException("ZC703206", "金额");
+        if (amount == null || amount.longValue() <= 0) {
+            throw new BizException("ZC703206", "金额不能为空，或者小于等于0");
         }
         if (StringUtils.isBlank(applyNote)) {
-            throw new BizException("ZC703206", "申请理由");
+            throw new BizException("ZC703206", "申请理由不能为空");
+        }
+        if (StringUtils.isBlank(direction)) {
+            throw new BizException("ZC703206", "方向不能为空");
+        }
+        String amountVal = null;
+        if (direction.equals("0")) {
+            amountVal = "-" + amount;
+        } else if (direction.equals("1")) {
+            amountVal = "" + amount;
+        } else {
+            throw new BizException("ZC703206", "方向值不在枚举中");
         }
         ZC703206Res zc703206Req = new ZC703206Res();
         zc703206Req.setAccountNumber(accountNumber);
-        zc703206Req.setAmount(amount);
+        zc703206Req.setAmount(amountVal);
         zc703206Req.setApplyUser(applyUser);
         zc703206Req.setApplyNote(applyNote);
         return BizConnecter.getBizData("703206",
@@ -99,13 +110,13 @@ public class AccountAOImpl implements IAccountAO {
     public boolean redBlueSearchEdit(String rbNo, String checkUser,
             String checkResult, String remark) {
         if (StringUtils.isBlank(rbNo)) {
-            throw new BizException("ZC703207", "红冲蓝补申请编号");
+            throw new BizException("ZC703207", "申请编号不能为空");
         }
         if (StringUtils.isBlank(checkResult)) {
-            throw new BizException("ZC703207", "审核结果");
+            throw new BizException("ZC703207", "审核结果不能为空");
         }
         if (StringUtils.isBlank(remark)) {
-            throw new BizException("ZC703207", "备注");
+            throw new BizException("ZC703207", "备注不能为空");
         }
         ZC703207Res zc703207Res = new ZC703207Res();
         zc703207Res.setRbNo(rbNo);
@@ -119,9 +130,10 @@ public class AccountAOImpl implements IAccountAO {
     @SuppressWarnings("rawtypes")
     @Override
     public Page redBlueSearch(String rbNo, String accountNumber,
-            String direction, String status, String applyUser, String checkUser,
-            String applyDatetimeStart, String applyDatetimeEnd, String start,
-            String limit, String orderColumn, String orderDir) {
+            String direction, String status, String applyUser,
+            String checkUser, String applyDatetimeStart,
+            String applyDatetimeEnd, String start, String limit,
+            String orderColumn, String orderDir) {
         ZC703208Req zc703208Req = new ZC703208Req();
         zc703208Req.setRbNo(rbNo);
         zc703208Req.setAccountNumber(accountNumber);
@@ -145,8 +157,9 @@ public class AccountAOImpl implements IAccountAO {
     public Page querySysCheckPage(String ubNo, String refNo, String bizType,
             String checkDateStart, String checkDateEnd, String checkResult,
             String adjustUser, String adjustDatetimeStart,
-            String adjustDatetimeEnd, String adjustResult, String accountNumber,
-            String start, String limit, String orderColumn, String orderDir) {
+            String adjustDatetimeEnd, String adjustResult,
+            String accountNumber, String start, String limit,
+            String orderColumn, String orderDir) {
         ZC703209Req zc703209Req = new ZC703209Req();
         zc703209Req.setUbNo(ubNo);
         zc703209Req.setRefNo(refNo);
@@ -172,13 +185,13 @@ public class AccountAOImpl implements IAccountAO {
     public boolean sysCheckEdit(String ubNo, String adjustUser,
             String adjustResult, String remark) {
         if (StringUtils.isBlank(ubNo)) {
-            throw new BizException("ZC703210", "不平账编号");
+            throw new BizException("ZC703210", "编号不能为空");
         }
         if (StringUtils.isBlank(adjustResult)) {
-            throw new BizException("ZC703210", "调账结果");
+            throw new BizException("ZC703210", "调账结果不能为空");
         }
         if (StringUtils.isBlank(remark)) {
-            throw new BizException("ZC703210", "备注");
+            throw new BizException("ZC703210", "备注不能为空");
         }
         ZC703210Res zc703210Res = new ZC703210Res();
         zc703210Res.setUbNo(ubNo);

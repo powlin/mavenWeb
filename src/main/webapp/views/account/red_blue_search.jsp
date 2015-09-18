@@ -132,9 +132,9 @@ function doSuccessBackStatus(res){
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
 			if(data[i].key == $("#status_search").val()){
-				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}else{
-				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}
 		}
 	}
@@ -156,9 +156,9 @@ function doSuccessBackType(res){
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
 			if(data[i].key == $("#direction_search").val()){
-				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}else{
-				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}
 		}
 	}
@@ -229,12 +229,12 @@ function statusFormatter(value, row) {
 								class="form-control" id="apply_user_search" placeholder="请输入申请人ID">
 						</div>
 						<div class="form-group mr40 mt10">
-							<label for="applyDatetimeStart" class="control-label">申请时间start:</label> <input class="input-sm dfdate" type="text"
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="form-control" id="apply_datetime_start_search" placeholder="请输入申请时间start">
+							<label for="applyDatetimeStart" class="control-label">申请时间起:</label> <input class="input-sm dfdate" type="text"
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="form-control" id="apply_datetime_start_search" placeholder="请输入申请时间起">
 						</div>
 						<div class="form-group mr40 mt10">
-							<label for="applyDatetimeEnd" class="control-label">申请时间end:</label> <input class="input-sm dfdate" type="text"
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="form-control" id="apply_datetime_end_search" placeholder="请输入申请时间start">
+							<label for="applyDatetimeEnd" class="control-label">申请时间止:</label> <input class="input-sm dfdate" type="text"
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="form-control" id="apply_datetime_end_search" placeholder="请输入申请时间止">
 						</div>&nbsp;
 						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 					</div>

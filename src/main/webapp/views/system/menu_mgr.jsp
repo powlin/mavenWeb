@@ -197,8 +197,8 @@ function fillSelSuccessBack(res){
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">系统管理</a></li>
-		    <li><a href="#">菜单设置</a></li>
+		    <li>系统管理</li>
+		    <li>菜单设置</li>
 	    </ul>
     </div>
     <div class="leftinfo">

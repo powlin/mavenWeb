@@ -46,6 +46,15 @@ function checkData(colNames,isNulls,colValues,colLengths){
 	return true;
 }
 
+function checkNum(amount,name){
+	var reg = new RegExp("^[0-9]+(.[0-9]+)?$");
+	if(!reg.test(amount)) { 
+		alert(name+"只能输入数字！"); 
+		return false; 
+	}
+}
+
+
 /**
  * 提示信息显示隐藏
  * @param e

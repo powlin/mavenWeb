@@ -20,11 +20,11 @@ public interface IAccountAO {
             String realName, String accountNumber, String start, String limit,
             String orderColumn, String orderDir);
 
-    boolean redBlueApply(String accountNumber, String amount, String applyNote,
-            String userCode);
+    boolean redBlueApply(String accountNumber, String direction, Long amount,
+            String applyNote, String userCode);
 
-    boolean redBlueSearchEdit(String rbNo, String checkUser, String checkResult,
-            String remark);
+    boolean redBlueSearchEdit(String rbNo, String checkUser,
+            String checkResult, String remark);
 
     @SuppressWarnings("rawtypes")
     Page redBlueSearch(String rbNo, String accountNumber, String direction,
@@ -36,8 +36,9 @@ public interface IAccountAO {
     Page querySysCheckPage(String ubNo, String refNo, String bizType,
             String checkDateStart, String checkDateEnd, String checkResult,
             String adjustUser, String adjustDatetimeStart,
-            String adjustDatetimeEnd, String adjustResult, String accountNumber,
-            String start, String limit, String orderColumn, String orderDir);
+            String adjustDatetimeEnd, String adjustResult,
+            String accountNumber, String start, String limit,
+            String orderColumn, String orderDir);
 
     boolean sysCheckEdit(String ubNo, String adjustUser, String adjustResult,
             String remark);

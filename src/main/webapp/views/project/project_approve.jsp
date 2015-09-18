@@ -92,9 +92,9 @@ var ue = UE.getEditor('editor');
 		if(typeof(data) != "undefined"){//判断undifined
 			for(var i = 0;i < data.length;i++){
 				if(data[i].key == $("#type").val()){
-					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 				}else{
-					html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+					html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 				}
 			}
 		}
@@ -170,21 +170,27 @@ var ue = UE.getEditor('editor');
 						    <td>其他</td>
 						    <!-- <td></td> -->
 						</tr>
-						<c:forEach var="domain" items="${returnList}" varStatus="status">     
-						    <td>${domain.id}</td>
-						    <td>${domain.name}</td>
-						    <td>${domain.amount}</td>
-						    <td><c:choose>
-						    <c:when test="${domain.needLimit == '1'}">  
-						    是
-						    </c:when>
-						    <c:otherwise>否</c:otherwise>
-						    </c:choose></td>
-						    <td>${domain.limitNum}</td>
-						    <td>${domain.returnExpectedDays}</td>
-						    <td>
-						    </td>
-						     <!--<td>修改  &nbsp;删除</td> -->
+						<c:forEach var="domain" items="${returnList}" varStatus="status">
+							<tr>
+							    <td>${domain.id}</td>
+							    <td>${domain.name}</td>
+							    <td>${domain.amount}</td>
+							    <td><c:choose>
+							    <c:when test="${domain.needLimit == '1'}">  
+							    是
+							    </c:when>
+							    <c:otherwise>否</c:otherwise>
+							    </c:choose></td>
+							    <td>${domain.limitNum}</td>
+							    <td>${domain.returnExpectedDays}</td>
+							    <td><c:choose>
+							    <c:when test="${domain.returnType == '1' || domain.returnType == '2'}">  
+							    实物
+							    </c:when>
+							    <c:otherwise>虚拟信息</c:otherwise>
+							    </c:choose></td>
+							     <!--<td>修改  &nbsp;删除</td> -->
+							</tr>
 						</c:forEach>
 					</table>
 				</li>

@@ -59,11 +59,17 @@ public class SysUserController extends BaseController {
             }
             String roleCode = roleList.get(0).getRoleCode();
             sessionProvider.setUserDetail(new SessionUser(loginName, roleCode));
-            view = new ModelAndView("/main");
-            view.addObject("userCode", loginName);
+            view = new ModelAndView("redirect:/sysUser/main");
         } else {
             view = new ModelAndView("/login");
         }
+        return view;
+    }
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public ModelAndView doMain() {
+        ModelAndView view = new ModelAndView("/main");
+        view.addObject("userCode", this.getSessionUser().getUserCode());
         return view;
     }
 

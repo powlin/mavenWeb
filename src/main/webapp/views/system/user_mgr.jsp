@@ -121,7 +121,7 @@ function doSuccessBackType(res){
 			if(data[i].key == $("#status_search").val()){
 				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
 			}else{
-				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}
 		}
 	}

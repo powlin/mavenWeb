@@ -11,6 +11,9 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
+		var data = {"pKey":"direction_type"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		
 		//提交
 		$('#subBtn').click(function() {
@@ -22,10 +25,27 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
+			checkNum($("#amount").val(),"金额");
 			var url = $("#base_path").val() + "/account/redBlueApply";
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
+	
+	function doSuccessBackType(res){
+		var data = res.data;
+		typeData = data;
+		var html = "<option value=''>请选择</option>";
+		if(typeof(data) != "undefined"){//判断undifined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == $("#direction").val()){
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
+				}else{
+					html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
+				}
+			}
+		}
+		$("#direction").html(html);
+	}
 	
 	function checkForm(){
 		var accountNumber = $("#accountNumber");
@@ -79,6 +99,11 @@
 	    <div class="formtitle"><span>红冲蓝补申请</span></div>
 		    <ul class="forminfo">
 			    <li><label><span class="inline_red">*</span>账户编号:</label><input type="text" id="accountNumber" name="accountNumber" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">账户编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>方向:</label>
+				    <select id="direction" name="direction" class="dfinput" onblur="toggleMess(this)">
+				    	<option value="">--请选择--</option>
+					</select><span class="inline_red hid">方向不能为空</span>
+				</li>
 			    <li><label><span class="inline_red">*</span>金额:</label><input type="text" id="amount" name="amount" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">金额不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>申请理由:</label><input type="text" id="applyNote" name="applyNote" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">申请理由不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>

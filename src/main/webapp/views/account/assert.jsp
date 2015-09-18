@@ -47,6 +47,18 @@ $(function() {
 			align : 'left',
 			valign : 'middle',
 			sortable : false
+		},{
+			field : 'userId',
+			title : '用户id',
+			align : 'left',
+			valign : 'middle',
+			sortable : false
+		}, {
+			field : 'realName',
+			title : '真实姓名',
+			align : 'left',
+			valign : 'middle',
+			sortable : false
 		}, {
 			field : 'amount',
 			title : '金额',
@@ -86,18 +98,6 @@ $(function() {
 			valign : 'middle',
 			sortable : false,
 			formatter : dateFormatter
-		}, {
-			field : 'userId',
-			title : '用户id',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
-			field : 'realName',
-			title : '真实姓名',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
 		}]
 	});
 
@@ -118,9 +118,9 @@ function doSuccessBackType(res){
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
 			if(data[i].key == $("#status_search").val()){
-				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}else{
-				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}
 		}
 	}

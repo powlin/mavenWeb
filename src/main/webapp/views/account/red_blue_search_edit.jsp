@@ -43,9 +43,9 @@ var statusData=null;
 		if(typeof(data) != "undefined"){//判断undifined
 			for(var i = 0;i < data.length;i++){
 				if(data[i].key == $("#checkResult").val()){
-					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 				}else{
-					html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+					html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 				}
 			}
 		}

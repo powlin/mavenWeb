@@ -83,12 +83,6 @@ $(function() {
 			valign : 'middle',
 			sortable : false
 		}, {
-			field : 'status',
-			title : '状态',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
 			field : 'remark',
 			title : '备注',
 			align : 'left',
@@ -132,9 +126,9 @@ function doSuccessBackType(res){
 	if(typeof(data) != "undefined"){//判断undifined
 		for(var i = 0;i < data.length;i++){
 			if(data[i].key == $("#biz_type_search").val()){
-				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}else{
-				html += "<option value='"+data[i].key+"'>"+data[i].key + "   " + data[i].value+"</option>";
+				html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
 			}
 		}
 	}

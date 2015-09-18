@@ -38,7 +38,6 @@ function dateFormatter(value){
 			    <li><label>发生金额:</label><label>${account.transAmount}</label></li>
 			    <li><label>发生前金额:</label><label>${account.preAmount}</label></li>
 			    <li><label>发生后金额:</label><label>${account.postAmount}</label></li>
-			    <li><label>状态:</label><label>${account.status}</label></li>
 			    <li><label>备注:</label><label>${account.remark}</label></li>
 			    <li><label>创建时间:</label><label id="createDatetimeLabel"></label></li>
 			    <li><label>用户编号:</label><label>${account.userId}</label></li>

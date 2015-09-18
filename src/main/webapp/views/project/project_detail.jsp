@@ -72,26 +72,19 @@
 				alert("首付金额不能为空");
 				return;
 			}
-			var reg = new RegExp("^[0-9]+(.[0-9]+)?$");
-			if(!reg.test(firstPayAmount)) { 
-				alert("首付金额只允许输入数字！"); 
-				return false; 
-			}
+			checkNum(firstPayAmount,"首付金额");
 			var firstPayFee = $("#firstPayFee").val();
 			if(firstPayFee == undefined || firstPayFee == null || firstPayFee == ''){
 				alert("手续费不能为空");
 				return;
 			}
-			if(!reg.test(firstPayFee)) { 
-				alert("手续费只允许输入数字！"); 
-				return false; 
-			}
+			checkNum(firstPayFee,"手续费");
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
 				return;
 			}
-			var data = {"proId":$("#proId").val(),"firstPayAmount":"firstPayAmount","firstPayFee":firstPayFee,"remark":remark};
+			var data = {"proId":$("#proId").val(),"firstPayAmount":firstPayAmount,"firstPayFee":firstPayFee,"remark":remark};
 			var url = $("#base_path").val() + "/project/payAmount";
 			doPostAjax(url,data,doSuccessBackPay);
 		});
