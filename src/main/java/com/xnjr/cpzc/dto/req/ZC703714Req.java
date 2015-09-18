@@ -1,0 +1,82 @@
+package com.xnjr.cpzc.dto.req;
+
+
+/**
+ * 修改系统参数
+ * @author: xieyj 
+ * @since: 2015年9月10日 下午10:32:21 
+ * @history:
+ */
+public class ZC703714Req {
+    /** 
+     * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+     */
+    private static final long serialVersionUID = 1L;
+
+    // 参数编号
+    private String code;
+
+    // 参数名
+    private String name;
+
+    // 参数类型
+    private String type;
+
+    // 参数值
+    private String value;
+
+    // 备注
+    private String remark;
+
+    // 更新者
+    private String updater;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+}
