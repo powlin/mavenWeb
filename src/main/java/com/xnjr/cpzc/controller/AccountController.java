@@ -214,10 +214,10 @@ public class AccountController extends BaseController {
     }
 
     @SuppressWarnings("rawtypes")
-    @RequestMapping(value = "/queryJour", method = RequestMethod.GET)
+    @RequestMapping(value = "/queryJourList", method = RequestMethod.GET)
     @ResponseBody
     public Page queryJourList(
-            @RequestParam(value = "ajNo", required = false) String ajNo,
+            @RequestParam(value = "sjNo", required = false) String sjNo,
             @RequestParam(value = "bizType", required = false) String bizType,
             @RequestParam(value = "createDatetimeStart", required = false) String createDatetimeStart,
             @RequestParam(value = "createDatetimeEnd", required = false) String createDatetimeEnd,
@@ -226,7 +226,7 @@ public class AccountController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return accountAO.queryJourList(ajNo, bizType, createDatetimeStart,
+        return accountAO.queryJourList(sjNo, bizType, createDatetimeStart,
             createDatetimeEnd, accountNumber, start, limit, orderColumn,
             orderDir);
     }

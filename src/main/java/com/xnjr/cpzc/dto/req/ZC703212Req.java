@@ -25,17 +25,6 @@ public class ZC703212Req extends ABaseDO {
     // 流水编号
     private String sjNo;
 
-    // 流水编号
-    private String ajNo;
-
-    public String getAjNo() {
-        return ajNo;
-    }
-
-    public void setAjNo(String ajNo) {
-        this.ajNo = ajNo;
-    }
-
     // 业务类型
     private String bizType;
 

@@ -213,12 +213,12 @@ public class AccountAOImpl implements IAccountAO {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Page queryJourList(String ajNo, String bizType,
+    public Page queryJourList(String sjNo, String bizType,
             String createDatetimeStart, String createDatetimeEnd,
             String accountNumber, String start, String limit,
             String orderColumn, String orderDir) {
         ZC703212Req zc703212Req = new ZC703212Req();
-        zc703212Req.setAjNo(ajNo);
+        zc703212Req.setSjNo(sjNo);
         zc703212Req.setBizType(bizType);
         zc703212Req.setCreateDatetimeStart(createDatetimeStart);
         zc703212Req.setCreateDatetimeEnd(createDatetimeEnd);

@@ -21,7 +21,7 @@ $(function() {
 		singleSelect : true,
 		queryParams : function(params) {
 			return {
-				ajNo : $("#aj_no_search").val(),
+				sjNo : $("#sj_no_search").val(),
 				bizType : $("#biz_type_search").val(),
 				createDatetimeStart : $("#create_datetime_start_search").val(),
 				createDatetimeEnd : $("#create_datetime_end_search").val(),
@@ -44,7 +44,7 @@ $(function() {
 		pageSize : 10,
 		pageList : [ 10, 20, 30, 40, 50 ],
 		columns : [{
-			field : 'ajNo',
+			field : 'sjNo',
 			title : '流水号',
 			align : 'left',
 			valign : 'middle',
@@ -159,8 +159,8 @@ function dateFormatter(value, row){
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
 						<div class="form-group mr40">
-							<label for="ajNo" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
-								class="form-control" id="aj_no_search" placeholder="请输入流水号">
+							<label for="sjNo" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
+								class="form-control" id="sj_no_search" placeholder="请输入流水号">
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="bizType" class="control-label">业务类型:</label> <select class="input-sm"

@@ -46,7 +46,7 @@ public interface IAccountAO {
     ZC703211Res getSysParam();
 
     @SuppressWarnings("rawtypes")
-    Page queryJourList(String ajNo, String bizType, String createDatetimeStart,
+    Page queryJourList(String sjNo, String bizType, String createDatetimeStart,
             String createDatetimeEnd, String accountNumber, String start,
             String limit, String orderColumn, String orderDir);
 
