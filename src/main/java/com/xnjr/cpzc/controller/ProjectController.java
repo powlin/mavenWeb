@@ -22,6 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xnjr.cpzc.ao.IProjectAO;
 import com.xnjr.cpzc.ao.IReturnAO;
 import com.xnjr.cpzc.dto.res.Page;
+import com.xnjr.cpzc.dto.res.ZC703305Res;
+import com.xnjr.cpzc.dto.res.ZC703306Res;
+import com.xnjr.cpzc.dto.res.ZC703307Res;
+import com.xnjr.cpzc.dto.res.ZC703308Res;
 import com.xnjr.cpzc.dto.res.ZC703309Res;
 
 /** 
@@ -64,17 +68,17 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editProject(
-            @RequestParam(value = "proId", required = true) String proId,
-            @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "type", required = true) String type,
-            @RequestParam(value = "province", required = true) String province,
-            @RequestParam(value = "city", required = true) String city,
-            @RequestParam(value = "picture", required = true) String picture,
-            @RequestParam(value = "video", required = true) String video,
-            @RequestParam(value = "summary", required = true) String summary,
-            @RequestParam(value = "detail", required = true) String detail,
-            @RequestParam(value = "targetAmount", required = true) Integer targetAmount,
-            @RequestParam(value = "raiseDays", required = true) Integer raiseDays) {
+            @RequestParam(value = "proId", required = false) String proId,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value = "province", required = false) String province,
+            @RequestParam(value = "city", required = false) String city,
+            @RequestParam(value = "picture", required = false) String picture,
+            @RequestParam(value = "video", required = false) String video,
+            @RequestParam(value = "summary", required = false) String summary,
+            @RequestParam(value = "detail", required = false) String detail,
+            @RequestParam(value = "targetAmount", required = false) String targetAmount,
+            @RequestParam(value = "raiseDays", required = false) String raiseDays) {
         boolean flag = projectAO.editProject(proId, name, type, province, city,
             picture, video, summary, detail, targetAmount, raiseDays);
         ModelAndView view = null;
@@ -86,13 +90,65 @@ public class ProjectController extends BaseController {
                     null, "0", "10");
                 if (page != null && page.getList() != null) {
                     List<ZC703309Res> returnList = returnAO
-                        .queryReturnList(proId);
+                        .getAllReturnByProId(proId);
                     view.addObject("project", page.getList().get(0));
                     view.addObject("returnList", returnList);
                 }
             }
         } else {
             view = new ModelAndView("/error/error");
+        }
+        return view;
+    }
+
+    @RequestMapping(value = "/return/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ZC703305Res doAddReturn(
+            @RequestParam(value = "proId", required = true) String proId,
+            @RequestParam(value = "amount", required = true) String amount,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "picture", required = true) String picture,
+            @RequestParam(value = "needLimit", required = true) String needLimit,
+            @RequestParam(value = "limitNum", required = false) Integer limitNum,
+            @RequestParam(value = "supportMaxCount", required = true) Integer supportMaxCount,
+            @RequestParam(value = "returnType", required = true) String returnType,
+            @RequestParam(value = "returnExpectedDays", required = true) Integer returnExpectedDays) {
+        return returnAO.addReturn(proId, amount, name, picture, needLimit,
+            limitNum, supportMaxCount, returnType, returnExpectedDays);
+
+    }
+
+    @RequestMapping(value = "/return/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public ZC703306Res doEditReturn(
+            @RequestParam(value = "id", required = true) String id,
+            @RequestParam(value = "amount", required = true) Integer amount,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "picture", required = true) String picture,
+            @RequestParam(value = "needLimit", required = true) String needLimit,
+            @RequestParam(value = "limitNum", required = false) Integer limitNum,
+            @RequestParam(value = "supportMaxCount", required = true) String supportMaxCount,
+            @RequestParam(value = "returnType", required = true) String returnType,
+            @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
+        return returnAO.editReturn(id, amount, name, picture, needLimit,
+            limitNum, supportMaxCount, returnType, returnExpectedDays);
+    }
+
+    @RequestMapping(value = "/return/del", method = RequestMethod.POST)
+    @ResponseBody
+    public ZC703307Res doDropReturn(
+            @RequestParam(value = "id", required = true) String id) {
+        return returnAO.dropReturn(id);
+    }
+
+    @RequestMapping(value = "/return/detail", method = RequestMethod.GET)
+    public ModelAndView doGetReturn(
+            @RequestParam(value = "id", required = false) String id,
+            @RequestParam(value = "operate", required = true) String operate) {
+        ModelAndView view = new ModelAndView("/project/support_edit");
+        if (operate.equals("edit")) {
+            ZC703308Res res = returnAO.getReturn(id);
+            view.addObject("returnDO", res);
         }
         return view;
     }
@@ -111,7 +167,8 @@ public class ProjectController extends BaseController {
             Page page = projectAO.queryProjectPage(proId, null, null, null,
                 null, "0", "10");
             if (page != null && page.getList() != null) {
-                List<ZC703309Res> returnList = returnAO.queryReturnList(proId);
+                List<ZC703309Res> returnList = returnAO
+                    .getAllReturnByProId(proId);
                 view.addObject("project", page.getList().get(0));
                 view.addObject("returnList", returnList);
                 view.addObject("operate", operate);

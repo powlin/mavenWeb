@@ -125,7 +125,7 @@ function operateFormatter(value, row) {
 
 window.operateEvents = {
     'click .edit': function (e, value, row, index) {
-    	window.location.href = $("#base_path").val() + "/menumgr/menu/detail?menuCode="+row.menuCode+"&parentCode="+row.parentCode+"&operate=edit";
+    	window.location.href = $("#base_path").val() + "/menumgr/menu/detail?operate=edit"+ "&menuCode="+row.menuCode+"&parentCode="+row.parentCode;
     },
     'click .del': function (e, value, row, index) {
     	if(!confirm("是否确认删除菜单"+row.menuCode+"?")){

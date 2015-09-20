@@ -94,9 +94,9 @@
 			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="role_name" value ="${role.roleName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色名称不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>角色等级:</label>
 				    <select id="roleLevel" name="role_level" class="dfinput">
-						<option value="1">1 财务级别</option>
-						<option value="2">2 运营推广级别</option>
-						<option value="3">3 风控级别</option>
+						<option value="1">财务级别</option>
+						<option value="2">运营推广级别</option>
+						<option value="3">风控级别</option>
 					</select>
 				</li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>

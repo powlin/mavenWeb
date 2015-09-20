@@ -56,8 +56,7 @@ public class ProjectAOImpl implements IProjectAO {
     @Override
     public boolean editProject(String proId, String name, String type,
             String province, String city, String picture, String video,
-            String summary, String detail, Integer targetAmount,
-            Integer raiseDays) {
+            String summary, String detail, String targetAmount, String raiseDays) {
         ZC703303Req req = new ZC703303Req();
         req.setProId(proId);
         req.setName(name);

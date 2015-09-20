@@ -250,8 +250,12 @@
 							    </c:choose></td>
 							    <td>${domain.limitNum}</td>
 							    <td>${domain.returnExpectedDays}</td>
-							    <td>
-							    </td>
+							    <td><c:choose>
+							    <c:when test="${domain.returnType == '1' || domain.returnType == '2'}">  
+							    实物
+							    </c:when>
+							    <c:otherwise>虚拟信息</c:otherwise>
+							    </c:choose></td>
 							     <!--<td>修改  &nbsp;删除</td> -->
 							</tr>
 						</c:forEach> 

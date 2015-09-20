@@ -32,6 +32,7 @@ var ue = UE.getEditor('editor');
 				return;
 			}
 			var path = $("#base_path").val() + "/project/edit";
+			alert(path);
 			$('#proForm').attr("method","post");
 		    $('#proForm').attr("action", path).submit();
 		});
@@ -61,11 +62,6 @@ var ue = UE.getEditor('editor');
 		});
 		
 		$("#createDatetime").val(dateFormat($("#createDatetime").val(),'yyyy-MM-dd HH:mm:ss'));
-		 //判断ueditor 编辑器是否创建成功
-        ue.addListener("ready", function () {
-        	// editor准备好之后才可以使用
-        	ue.setContent($("#detail").val());
-        });
 	});
 	
 	function doSuccessBackApp(res){
@@ -129,7 +125,7 @@ var ue = UE.getEditor('editor');
 	    <div class="formbody">
 	    <div class="formtitle"><span>申请信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目编号:</label><input type="text" id="proId" name="proId" value ="${project.proId}"  class="dfinput" readOnly="true"/></li>
+			    <li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目编号:</label><input type="text" id="proId" name="proId" value ="${project.proId}"  class="dfinput" disabled="true"/></li>
 			    <li><label><span class="inline_red">*</span>项目名称:</label><input type="text" id="name" name="name" value ="${project.name}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red">*</span>项目类型:</label>
 				    <select id="type" name="type" class="dfinput">
@@ -144,12 +140,13 @@ var ue = UE.getEditor('editor');
 				<li><label><span class="inline_red">*</span>筹集天数:</label><input type="text" id="raiseDays" name="raiseDays" value ="${project.raiseDays}" class="dfinput" /></li>
 				<li><label><span class="inline_red">*</span>项目概述:</label><textarea id="summary" name="summary" class="textinput" >${project.summary}</textarea></li>
 				<li class="cfl"><label><span class="inline_red">*</span>项目详情:</label>
-    				<script id="editor" name="detail" type="text/plain" style="width:900px;height:250px;float:left"></script>
-    				<input type="hidden" id="detail" value="${project.detail}"/>
+    				<script id="editor" name="detail" type="text/plain" style="width:900px;height:250px;float:left">${project.detail}</script>
 				</li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;发起人编号:</label><input type="text" id="userId" name="userId" value ="${project.userId}"  class="dfinput" readOnly="true"/></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;申请时间:</label><input type="text" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput" readOnly="true"/></li>
-				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label><table class="tablelist" style="width:87%; clear:none; float:left">
+				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label>
+				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add">新增回报</a>
+				<table class="tablelist" style="width:87%; clear:none; float:left">
 					    <tr>
 						    <th>编号</th>
 						    <th>回报名称</th>
@@ -158,7 +155,7 @@ var ue = UE.getEditor('editor');
 						    <th>限制人数</th>
 						    <th>回报天数</th>
 						    <th>回报类型</th>
-						    <!-- <th>操作</th> -->
+						    <th>操作</th>
 						</tr>
 						<tr>
 						    <td>-1</td>
@@ -168,7 +165,7 @@ var ue = UE.getEditor('editor');
 						    <td>0</td>
 						    <td></td>
 						    <td>其他</td>
-						    <!-- <td></td> -->
+						    <td></td>
 						</tr>
 						<c:forEach var="domain" items="${returnList}" varStatus="status">
 							<tr>
@@ -189,7 +186,7 @@ var ue = UE.getEditor('editor');
 							    </c:when>
 							    <c:otherwise>虚拟信息</c:otherwise>
 							    </c:choose></td>
-							     <!--<td>修改  &nbsp;删除</td> -->
+							    <td>修改  &nbsp;删除</td>
 							</tr>
 						</c:forEach>
 					</table>
