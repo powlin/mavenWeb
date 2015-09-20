@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xnjr.cpzc.ao.IAccountAO;
 import com.xnjr.cpzc.base.session.SessionUser;
 import com.xnjr.cpzc.dto.res.Page;
+import com.xnjr.cpzc.dto.res.ZC703211Res;
 
 /** 
  * 账户模块
@@ -83,8 +84,8 @@ public class AccountController extends BaseController {
         ModelAndView view = new ModelAndView("/account/fund_jour_detail");
         if (StringUtils.isNotBlank(ajNo)) {
             Page page = accountAO.queryAccountMoneyList(ajNo, bizType,
-                createDatetimeStart, createDatetimeEnd, realName,
-                accountNumber, "0", "10", orderColumn, orderDir);
+                createDatetimeStart, createDatetimeEnd, realName, accountNumber,
+                "0", "10", orderColumn, orderDir);
             if (page != null && page.getList() != null) {
                 view.addObject("account", page.getList().get(0));
             }
@@ -172,10 +173,10 @@ public class AccountController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return accountAO.querySysCheckPage(ubNo, refNo, bizType,
-            checkDateStart, checkDateEnd, checkResult, adjustUser,
-            adjustDatetimeStart, adjustDatetimeEnd, adjustResult,
-            accountNumber, start, limit, orderColumn, orderDir);
+        return accountAO.querySysCheckPage(ubNo, refNo, bizType, checkDateStart,
+            checkDateEnd, checkResult, adjustUser, adjustDatetimeStart,
+            adjustDatetimeEnd, adjustResult, accountNumber, start, limit,
+            orderColumn, orderDir);
     }
 
     @SuppressWarnings("rawtypes")
@@ -185,9 +186,9 @@ public class AccountController extends BaseController {
             @RequestParam(value = "ubNo", required = false) String ubNo) {
         ModelAndView view = new ModelAndView("/account/sys_check_edit");
         if (StringUtils.isNotBlank(ubNo)) {
-            Page page = accountAO
-                .querySysCheckPage(ubNo, null, null, null, null, null, null,
-                    null, null, null, null, "1", "10", null, null);
+            Page page = accountAO.querySysCheckPage(ubNo, null, null, null,
+                null, null, null, null, null, null, null, "1", "10", null,
+                null);
             if (page != null && page.getList() != null) {
                 view.addObject("sysCheck", page.getList().get(0));
             }
@@ -204,5 +205,29 @@ public class AccountController extends BaseController {
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return accountAO.sysCheckEdit(ubNo, sessionUser.getUserCode(),
             adjustResult, remark);
+    }
+
+    @RequestMapping(value = "/sysAccount", method = RequestMethod.GET)
+    @ResponseBody
+    public ZC703211Res getSysAccount() {
+        return accountAO.getSysParam();// 根据code查询记录
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/queryJour", method = RequestMethod.GET)
+    @ResponseBody
+    public Page queryJourList(
+            @RequestParam(value = "ajNo", required = false) String ajNo,
+            @RequestParam(value = "bizType", required = false) String bizType,
+            @RequestParam(value = "createDatetimeStart", required = false) String createDatetimeStart,
+            @RequestParam(value = "createDatetimeEnd", required = false) String createDatetimeEnd,
+            @RequestParam(value = "accountNumber", required = false) String accountNumber,
+            @RequestParam("start") String start,
+            @RequestParam("limit") String limit,
+            @RequestParam(value = "orderColumn", required = false) String orderColumn,
+            @RequestParam(value = "orderDir", required = false) String orderDir) {
+        return accountAO.queryJourList(ajNo, bizType, createDatetimeStart,
+            createDatetimeEnd, accountNumber, start, limit, orderColumn,
+            orderDir);
     }
 }

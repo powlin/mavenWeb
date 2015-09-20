@@ -16,11 +16,14 @@ import com.xnjr.cpzc.dto.req.ZC703204Req;
 import com.xnjr.cpzc.dto.req.ZC703205Req;
 import com.xnjr.cpzc.dto.req.ZC703208Req;
 import com.xnjr.cpzc.dto.req.ZC703209Req;
+import com.xnjr.cpzc.dto.req.ZC703211Req;
+import com.xnjr.cpzc.dto.req.ZC703212Req;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.SuccessRes;
 import com.xnjr.cpzc.dto.res.ZC703206Res;
 import com.xnjr.cpzc.dto.res.ZC703207Res;
 import com.xnjr.cpzc.dto.res.ZC703210Res;
+import com.xnjr.cpzc.dto.res.ZC703211Res;
 import com.xnjr.cpzc.exception.BizException;
 import com.xnjr.cpzc.http.BizConnecter;
 import com.xnjr.cpzc.util.JsonUtils;
@@ -130,10 +133,9 @@ public class AccountAOImpl implements IAccountAO {
     @SuppressWarnings("rawtypes")
     @Override
     public Page redBlueSearch(String rbNo, String accountNumber,
-            String direction, String status, String applyUser,
-            String checkUser, String applyDatetimeStart,
-            String applyDatetimeEnd, String start, String limit,
-            String orderColumn, String orderDir) {
+            String direction, String status, String applyUser, String checkUser,
+            String applyDatetimeStart, String applyDatetimeEnd, String start,
+            String limit, String orderColumn, String orderDir) {
         ZC703208Req zc703208Req = new ZC703208Req();
         zc703208Req.setRbNo(rbNo);
         zc703208Req.setAccountNumber(accountNumber);
@@ -157,9 +159,8 @@ public class AccountAOImpl implements IAccountAO {
     public Page querySysCheckPage(String ubNo, String refNo, String bizType,
             String checkDateStart, String checkDateEnd, String checkResult,
             String adjustUser, String adjustDatetimeStart,
-            String adjustDatetimeEnd, String adjustResult,
-            String accountNumber, String start, String limit,
-            String orderColumn, String orderDir) {
+            String adjustDatetimeEnd, String adjustResult, String accountNumber,
+            String start, String limit, String orderColumn, String orderDir) {
         ZC703209Req zc703209Req = new ZC703209Req();
         zc703209Req.setUbNo(ubNo);
         zc703209Req.setRefNo(refNo);
@@ -200,6 +201,35 @@ public class AccountAOImpl implements IAccountAO {
         zc703210Res.setRemark(remark);
         return BizConnecter.getBizData("703210",
             JsonUtils.object2Json(zc703210Res), SuccessRes.class).isSuccess();
+    }
+
+    @Override
+    public ZC703211Res getSysParam() {
+        ZC703211Req zc703211Req = new ZC703211Req();
+        String jsonStr = BizConnecter.getBizData("703211",
+            JsonUtils.object2Json(zc703211Req));
+        return JsonUtils.json2Bean(jsonStr, ZC703211Res.class);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public Page queryJourList(String ajNo, String bizType,
+            String createDatetimeStart, String createDatetimeEnd,
+            String accountNumber, String start, String limit,
+            String orderColumn, String orderDir) {
+        ZC703212Req zc703212Req = new ZC703212Req();
+        zc703212Req.setAjNo(ajNo);
+        zc703212Req.setBizType(bizType);
+        zc703212Req.setCreateDatetimeStart(createDatetimeStart);
+        zc703212Req.setCreateDatetimeEnd(createDatetimeEnd);
+        zc703212Req.setAccountNumber(accountNumber);
+        zc703212Req.setStart(start);
+        zc703212Req.setLimit(limit);
+        zc703212Req.setOrderColumn(orderColumn);
+        zc703212Req.setOrderDir(orderDir);
+        String jsonStr = BizConnecter.getBizData("703212",
+            JsonUtils.object2Json(zc703212Req));
+        return JsonUtils.json2Bean(jsonStr, Page.class);
     }
 
 }
