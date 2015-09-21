@@ -63,6 +63,7 @@
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
 			    <li><label><span class="inline_red">*</span>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label><span class="inline_red">*</span>用户姓名:</label><label>${user.userName}</label></li>
 			    <li><label><span class="inline_red">*</span>状态:</label><select type="text" id="statusSel" name="status" class="dfinput">
 			    	<option value="1">正常</option>
 			    	<option value="2">锁定</option>
