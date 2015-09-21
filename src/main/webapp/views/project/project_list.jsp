@@ -158,9 +158,9 @@ var op_status=null;
 			if("1" == op_status){
 				returnText = ['<button class="btn btn-link btn-xs approve">审核</button>'].join('');
 			}else if("2" == op_status){
-				returnText = ['<button class="btn btn-link btn-xs flow">流标</button>'].join('');
+				returnText = ['<button class="btn btn-link btn-xs support">查看投资</button><button class="btn btn-link btn-xs flow">流标</button>'].join('');
 			}else if("3" == op_status){
-				returnText = ['<button class="btn btn-link btn-xs recheck">复核</button>'].join('');
+				returnText = ['<button class="btn btn-link btn-xs support">查看投资</button><button class="btn btn-link btn-xs recheck">复核</button>'].join('');
 			}else if("5" == op_status){
 				returnText = ['<button class="btn btn-link btn-xs confirmRepay">确认偿还</button>'].join('');
 			}
@@ -200,6 +200,10 @@ var op_status=null;
         //等待复核
     	'click .recheck': function (e, value, row, index) {
             window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId+"&operate=recheck";
+        },
+        //查看投资
+    	'click .support': function (e, value, row, index) {
+            window.location.href = $("#base_path").val() + "/project/support/search?proId="+row.proId;
         },
         //平台确认偿还
     	'click .confirmRepay': function (e, value, row, index) {

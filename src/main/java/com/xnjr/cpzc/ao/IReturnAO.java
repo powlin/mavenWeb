@@ -40,9 +40,8 @@ public interface IReturnAO {
      * @history:
      */
     public ZC703305Res addReturn(String proId, String amount, String name,
-            String picture, String needLimit, Integer limitNum,
-            Integer supportMaxCount, String returnType,
-            Integer returnExpectedDays);
+            String picture, String summary, String needLimit, String limitNum,
+            String supportMaxCount, String returnType, String returnExpectedDays);
 
     /**
      * 修改项目回报
@@ -59,8 +58,8 @@ public interface IReturnAO {
      * @create: 2015年9月7日 下午4:40:16 haiqingzheng
      * @history:
      */
-    public ZC703306Res editReturn(String id, Integer amount, String name,
-            String picture, String needLimit, Integer limitNum,
+    public ZC703306Res editReturn(String id, String amount, String name,
+            String picture, String summary, String needLimit, String limitNum,
             String supportMaxCount, String returnType, String returnExpectedDays);
 
     /**

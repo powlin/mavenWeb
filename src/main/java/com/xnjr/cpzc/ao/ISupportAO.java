@@ -8,12 +8,19 @@
  */
 package com.xnjr.cpzc.ao;
 
-/** 
- * 发起项目
- * @author: xieyj 
- * @since: 2015年8月22日 上午8:15:57 
+import com.xnjr.cpzc.dto.res.Page;
+
+/**
+ * 支持记录
+ * 
+ * @author: xieyj
+ * @since: 2015年8月22日 上午8:15:57
  * @history:
  */
 public interface ISupportAO {
 
+    @SuppressWarnings("rawtypes")
+    public Page querySupport(String id, String proId, String userId,
+            String status, String createDatetimeStart,
+            String createDatetimeEnd, String start, String limit);
 }

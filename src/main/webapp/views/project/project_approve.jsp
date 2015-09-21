@@ -32,7 +32,6 @@ var ue = UE.getEditor('editor');
 				return;
 			}
 			var path = $("#base_path").val() + "/project/edit";
-			alert(path);
 			$('#proForm').attr("method","post");
 		    $('#proForm').attr("action", path).submit();
 		});
@@ -63,6 +62,20 @@ var ue = UE.getEditor('editor');
 		
 		$("#createDatetime").val(dateFormat($("#createDatetime").val(),'yyyy-MM-dd HH:mm:ss'));
 	});
+	
+	function delReturn(id){
+		var url = $("#base_path").val() + "/project/return/del";
+		alert(url);
+    	var data = {id:id};
+		doPostAjax(url, data, doSuccessDel);
+	}
+	
+	 function doSuccessDel(res) {
+		if (res.success == true) {
+			alert("删除成功");
+			window.location.href = $("#base_path").val() + "/project/check?proId="+$("#proId").val()+"&operate=approve";
+		}
+	}
 	
 	function doSuccessBackApp(res){
 		if (res.success == true) {
@@ -145,7 +158,7 @@ var ue = UE.getEditor('editor');
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;发起人编号:</label><input type="text" id="userId" name="userId" value ="${project.userId}"  class="dfinput" readOnly="true"/></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;申请时间:</label><input type="text" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput" readOnly="true"/></li>
 				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label>
-				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add">新增回报</a>
+				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add&proId=${project.proId}">新增回报</a>
 				<table class="tablelist" style="width:87%; clear:none; float:left">
 					    <tr>
 						    <th>编号</th>
@@ -186,7 +199,8 @@ var ue = UE.getEditor('editor');
 							    </c:when>
 							    <c:otherwise>虚拟信息</c:otherwise>
 							    </c:choose></td>
-							    <td>修改  &nbsp;删除</td>
+							    <td><a href="<%=request.getContextPath()%>/project/return/detail?operate=edit&id=${domain.id}">修改</a>&nbsp;
+							    <a href="javascript:void(0)" onclick="delReturn('${domain.id}')">删除</a></td>
 							</tr>
 						</c:forEach>
 					</table>

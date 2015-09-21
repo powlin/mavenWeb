@@ -40,13 +40,13 @@ public class ReturnAOImpl implements IReturnAO {
      */
     @Override
     public ZC703305Res addReturn(String proId, String amount, String name,
-            String picture, String needLimit, Integer limitNum,
-            Integer supportMaxCount, String returnType,
-            Integer returnExpectedDays) {
+            String picture, String summary, String needLimit, String limitNum,
+            String supportMaxCount, String returnType, String returnExpectedDays) {
         ZC703305Req req = new ZC703305Req();
         req.setProId(proId);
         req.setAmount(amount);
         req.setPicture(picture);
+        req.setSummary(summary);
         req.setName(name);
         req.setNeedLimit(needLimit);
         req.setLimitNum(limitNum);
@@ -65,14 +65,15 @@ public class ReturnAOImpl implements IReturnAO {
      * @see com.xnjr.cpzc.ao.IReturnAO#editReturn(java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
-    public ZC703306Res editReturn(String id, Integer amount, String name,
-            String picture, String needLimit, Integer limitNum,
+    public ZC703306Res editReturn(String id, String amount, String name,
+            String picture, String summary, String needLimit, String limitNum,
             String supportMaxCount, String returnType, String returnExpectedDays) {
         ZC703306Req req = new ZC703306Req();
         req.setId(id);
         req.setAmount(amount);
-        req.setName(name);
         req.setPicture(picture);
+        req.setSummary(summary);
+        req.setName(name);
         req.setNeedLimit(needLimit);
         req.setLimitNum(limitNum);
         req.setSupportMaxCount(supportMaxCount);
@@ -106,20 +107,8 @@ public class ReturnAOImpl implements IReturnAO {
     public ZC703308Res getReturn(String id) {
         ZC703308Req req = new ZC703308Req();
         req.setId(id);
-        ZC703308Res zc703308Res = BizConnecter.getBizData("703308",
+        return BizConnecter.getBizData("703308",
             com.xnjr.cpzc.util.JsonUtils.object2Json(req), ZC703308Res.class);
-        ZC703308Res res = new ZC703308Res();
-        res.setId(zc703308Res.getId());
-        res.setName(zc703308Res.getName());
-        res.setAmount(zc703308Res.getAmount());
-        res.setProId(zc703308Res.getProId());
-        res.setPicture(zc703308Res.getPicture());
-        res.setNeedLimit(zc703308Res.getNeedLimit());
-        res.setLimitNum(zc703308Res.getLimitNum());
-        res.setReturnType(zc703308Res.getReturnType());
-        res.setSupportMaxCount(zc703308Res.getSupportMaxCount());
-        res.setReturnExpectedDays(zc703308Res.getReturnExpectedDays());
-        return res;
     }
 
     /** 

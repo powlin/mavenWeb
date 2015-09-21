@@ -1,5 +1,5 @@
 /**
- * @Title ProgramController.java 
+ * @Title ProjectController.java 
  * @Package com.xnjr.cpzc.controller 
  * @Description 
  * @author xieyj  
@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IProjectAO;
 import com.xnjr.cpzc.ao.IReturnAO;
+import com.xnjr.cpzc.ao.ISupportAO;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703305Res;
 import com.xnjr.cpzc.dto.res.ZC703306Res;
@@ -38,6 +40,9 @@ import com.xnjr.cpzc.dto.res.ZC703309Res;
 public class ProjectController extends BaseController {
     @Autowired
     IProjectAO projectAO;
+
+    @Autowired
+    ISupportAO supportAO;
 
     @Autowired
     IReturnAO returnAO;
@@ -64,6 +69,30 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "limit", required = true) String limit) {
         return projectAO.queryProjectPage(proId, userId, name, type, status,
             start, limit);
+    }
+
+    @RequestMapping(value = "/support/search", method = RequestMethod.GET)
+    public ModelAndView doSupportSearch(
+            @RequestParam(value = "proId", required = true) String proId) {
+        ModelAndView view = new ModelAndView("/project/support_list");
+        view.addObject("proId", proId);
+        return view;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/support/page", method = RequestMethod.GET)
+    @ResponseBody
+    public Page querySopportPage(
+            @RequestParam(value = "id", required = false) String id,
+            @RequestParam(value = "proId", required = true) String proId,
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "createDatetimeStart", required = false) String createDatetimeStart,
+            @RequestParam(value = "createDatetimeEnd", required = false) String createDatetimeEnd,
+            @RequestParam(value = "start", required = true) String start,
+            @RequestParam(value = "limit", required = true) String limit) {
+        return supportAO.querySupport(id, proId, userId, status,
+            createDatetimeStart, createDatetimeEnd, start, limit);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -102,19 +131,21 @@ public class ProjectController extends BaseController {
     }
 
     @RequestMapping(value = "/return/add", method = RequestMethod.POST)
-    @ResponseBody
     public ZC703305Res doAddReturn(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "amount", required = true) String amount,
             @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "picture", required = true) String picture,
+            @RequestParam(value = "picture", required = true) MultipartFile picture,
+            @RequestParam(value = "summary", required = true) String summary,
             @RequestParam(value = "needLimit", required = true) String needLimit,
-            @RequestParam(value = "limitNum", required = false) Integer limitNum,
-            @RequestParam(value = "supportMaxCount", required = true) Integer supportMaxCount,
+            @RequestParam(value = "limitNum", required = false) String limitNum,
+            @RequestParam(value = "supportMaxCount", required = false) String supportMaxCount,
             @RequestParam(value = "returnType", required = true) String returnType,
-            @RequestParam(value = "returnExpectedDays", required = true) Integer returnExpectedDays) {
-        return returnAO.addReturn(proId, amount, name, picture, needLimit,
-            limitNum, supportMaxCount, returnType, returnExpectedDays);
+            @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
+        supportMaxCount = "-1";
+        return returnAO.addReturn(proId, amount, name,
+            picture.getOriginalFilename(), summary, needLimit, limitNum,
+            supportMaxCount, returnType, returnExpectedDays);
 
     }
 
@@ -122,16 +153,19 @@ public class ProjectController extends BaseController {
     @ResponseBody
     public ZC703306Res doEditReturn(
             @RequestParam(value = "id", required = true) String id,
-            @RequestParam(value = "amount", required = true) Integer amount,
+            @RequestParam(value = "amount", required = true) String amount,
             @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "picture", required = true) String picture,
+            @RequestParam(value = "picture", required = false) MultipartFile picture,
+            @RequestParam(value = "summary", required = true) String summary,
             @RequestParam(value = "needLimit", required = true) String needLimit,
-            @RequestParam(value = "limitNum", required = false) Integer limitNum,
-            @RequestParam(value = "supportMaxCount", required = true) String supportMaxCount,
+            @RequestParam(value = "limitNum", required = false) String limitNum,
+            @RequestParam(value = "supportMaxCount", required = false) String supportMaxCount,
             @RequestParam(value = "returnType", required = true) String returnType,
             @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
-        return returnAO.editReturn(id, amount, name, picture, needLimit,
-            limitNum, supportMaxCount, returnType, returnExpectedDays);
+        supportMaxCount = "-1";
+        return returnAO.editReturn(id, amount, name,
+            picture.getOriginalFilename(), summary, needLimit, limitNum,
+            supportMaxCount, returnType, returnExpectedDays);
     }
 
     @RequestMapping(value = "/return/del", method = RequestMethod.POST)
@@ -144,12 +178,14 @@ public class ProjectController extends BaseController {
     @RequestMapping(value = "/return/detail", method = RequestMethod.GET)
     public ModelAndView doGetReturn(
             @RequestParam(value = "id", required = false) String id,
+            @RequestParam(value = "proId", required = false) String proId,
             @RequestParam(value = "operate", required = true) String operate) {
-        ModelAndView view = new ModelAndView("/project/support_edit");
+        ModelAndView view = new ModelAndView("/project/return_edit");
         if (operate.equals("edit")) {
             ZC703308Res res = returnAO.getReturn(id);
             view.addObject("returnDO", res);
         }
+        view.addObject("proId", proId);
         return view;
     }
 
