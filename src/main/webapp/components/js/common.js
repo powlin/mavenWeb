@@ -29,6 +29,18 @@ function dateFormat (date, format) {
      return format;
 }
 
+/**
+ * 金额格式转化
+ * @param money
+ * @param format
+ */
+function moneyFormat(money, format){
+	if(isNaN(money)){
+		return '-';
+	}
+	return parseFloat(money/1000).toFixed(format);
+}
+
 function checkData(colNames,isNulls,colValues,colLengths){
 	for(var i=0;i < colValues.length;i++){
 	    if(isNulls[i] == 1){

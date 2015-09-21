@@ -24,8 +24,8 @@ public interface IAccountAO {
     boolean redBlueApply(String accountNumber, String direction, Long amount,
             String applyNote, String userCode);
 
-    boolean redBlueSearchEdit(String rbNo, String checkUser, String checkResult,
-            String remark);
+    boolean redBlueSearchEdit(String rbNo, String checkUser,
+            String checkResult);
 
     @SuppressWarnings("rawtypes")
     Page redBlueSearch(String rbNo, String accountNumber, String direction,
@@ -40,8 +40,7 @@ public interface IAccountAO {
             String adjustDatetimeEnd, String adjustResult, String accountNumber,
             String start, String limit, String orderColumn, String orderDir);
 
-    boolean sysCheckEdit(String ubNo, String adjustUser, String adjustResult,
-            String remark);
+    boolean sysCheckEdit(String ubNo, String adjustUser, String adjustResult);
 
     ZC703211Res getSysParam();
 

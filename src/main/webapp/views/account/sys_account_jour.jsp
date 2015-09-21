@@ -68,19 +68,22 @@ $(function() {
 			title : '发生金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'preAmount',
 			title : '发生前金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'postAmount',
 			title : '发生后金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'status',
 			title : '状态',
@@ -114,6 +117,10 @@ $(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
 });
+
+function moneyFormatter(value, row){
+	return moneyFormat(value, 2);
+}
 
 function bizTypeFormatter(value, row) {
 	for(var i = 0;i < typeData.length;i++){

@@ -12,14 +12,23 @@
 <script type="text/javascript">
 $(function(){
 	$("#createDatetimeLabel").text(dateFormatter($("#createDatetime").val()));
+	$("#transAmount").text(moneyFormatter($("#transAmountHid").val()));
+	$("#preAmount").text(moneyFormatter($("#preAmountHid").val()));
+	$("#postAmount").text(moneyFormatter($("#postAmountHid").val()));
 });
 function dateFormatter(value){
 	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
+function moneyFormatter(value){
+	return moneyFormat(value, 2);
 }
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
+	<input type="hidden" id="transAmountHid" value="${account.transAmount}"/>
+	<input type="hidden" id="preAmountHid" value="${account.preAmount}"/>
+	<input type="hidden" id="postAmountHid" value="${account.postAmount}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -35,9 +44,9 @@ function dateFormatter(value){
 			    <li><label>流水号:</label><label>${account.ajNo}</label></li>
 			    <li><label>业务类型:</label><label>${account.bizType}</label></li>
 			    <li><label>相关订单号:</label><label>${account.refNo}</label></li>
-			    <li><label>发生金额:</label><label>${account.transAmount}</label></li>
-			    <li><label>发生前金额:</label><label>${account.preAmount}</label></li>
-			    <li><label>发生后金额:</label><label>${account.postAmount}</label></li>
+			    <li><label>发生金额:</label><label id="transAmount"></label></li>
+			    <li><label>发生前金额:</label><label id="preAmount"></label></li>
+			    <li><label>发生后金额:</label><label id="postAmount"></label></li>
 			    <li><label>备注:</label><label>${account.remark}</label></li>
 			    <li><label>创建时间:</label><label id="createDatetimeLabel"></label></li>
 			    <li><label>用户编号:</label><label>${account.userId}</label></li>

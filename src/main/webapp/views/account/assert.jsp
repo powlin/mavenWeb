@@ -64,13 +64,15 @@ $(function() {
 			title : '金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'frozenAmount',
 			title : '冻结金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'currency',
 			title : '币种',
@@ -109,6 +111,10 @@ $(function() {
 
 function dateFormatter(value, row){
 	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+}
+
+function moneyFormatter(value, row){
+	return moneyFormat(value, 2);
 }
 
 function doSuccessBackType(res){

@@ -67,7 +67,8 @@ $(function() {
 			title : '金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'direction',
 			title : '方向',
@@ -147,6 +148,10 @@ function directionFormatter(value, row) {
 			return typeData[i].value;
 		}
 	}
+}
+
+function moneyFormatter(value, row){
+	return moneyFormat(value, 2);
 }
 
 function doSuccessBackType(res){
@@ -236,7 +241,9 @@ function statusFormatter(value, row) {
 							<label for="applyDatetimeEnd" class="control-label">申请时间止:</label> <input class="input-sm dfdate" type="text"
 								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="form-control" id="apply_datetime_end_search" placeholder="请输入申请时间止">
 						</div>&nbsp;
-						<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+						<div class="form-group mr40 mt10">
+							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+						</div>
 					</div>
 				</div>
 				<table id="tableList"></table>

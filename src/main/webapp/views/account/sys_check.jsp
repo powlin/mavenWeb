@@ -76,7 +76,8 @@ $(function() {
 			title : '不平金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'bizType',
 			title : '业务类型',
@@ -140,6 +141,10 @@ function bizTypeFormatter(value, row) {
 			return typeData[i].value;
 		}
 	}
+}
+
+function moneyFormatter(value, row){
+	return moneyFormat(value, 2);
 }
 
 function checkResultFormatter(value, row) {

@@ -126,11 +126,10 @@ public class AccountController extends BaseController {
     @RequestMapping(value = "/redBlueSearchEdit", method = RequestMethod.POST)
     @ResponseBody
     public boolean redBlueSearchEdit(@RequestParam("rbNo") String rbNo,
-            @RequestParam("checkResult") String checkResult,
-            @RequestParam("remark") String remark) {
+            @RequestParam("checkResult") String checkResult) {
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return accountAO.redBlueSearchEdit(rbNo, sessionUser.getUserCode(),
-            checkResult, remark);
+            checkResult);
     }
 
     @SuppressWarnings("rawtypes")
@@ -200,11 +199,10 @@ public class AccountController extends BaseController {
     @RequestMapping(value = "/sysCheckEdit", method = RequestMethod.POST)
     @ResponseBody
     public boolean sysCheckEdit(@RequestParam("ubNo") String ubNo,
-            @RequestParam("adjustResult") String adjustResult,
-            @RequestParam("remark") String remark) {
+            @RequestParam("adjustResult") String adjustResult) {
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return accountAO.sysCheckEdit(ubNo, sessionUser.getUserCode(),
-            adjustResult, remark);
+            adjustResult);
     }
 
     @RequestMapping(value = "/sysAccount", method = RequestMethod.GET)

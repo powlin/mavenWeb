@@ -26,11 +26,14 @@ $(function(){
 function doGetSysAccountSuccessBack(res){
 	$("#accountNumber").text(res.data.accountNumber);
 	$("#accountName").text(res.data.accountName);
-	$("#amount").text(res.data.amount);
+	$("#amount").text(moneyFormatter(res.data.amount));
 	$("#status").text(res.data.status);
 	$("#currency").text(res.data.currency);
 	$("#createDatetime").text(res.data.createDatetime);
 	$("#updateDatetime").text(res.data.updateDatetime);
+}
+function moneyFormatter(value){
+	return moneyFormat(value, 2);
 }
 
 function doSuccessBackAdjust(res){
@@ -62,13 +65,13 @@ function dateFormatter(value){
 	    <div class="formbody">
 	    <div class="formtitle"><span>系统账户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>账户编号:</label><label id="accountNumber"></label></li>
-			    <li><label><span class="inline_red">*</span>账户名称:</label><label id="accountName"></label></li>
-			    <li><label><span class="inline_red">*</span>账户金额:</label><label id="amount"></label></li>
-			    <li><label><span class="inline_red">*</span>账户状态:</label><label id="status"></label></li>
-			    <li><label><span class="inline_red">*</span>币种:</label><label id="currency"></label></li>
-			    <li><label><span class="inline_red">*</span>创建时间:</label><label id="createDatetime"></label></li>
-			    <li><label><span class="inline_red">*</span>更新时间:</label><label id="updateDatetime"></label></li>
+			    <li><label>账户编号:</label><label id="accountNumber"></label></li>
+			    <li><label>账户名称:</label><label id="accountName"></label></li>
+			    <li><label>币种:</label><label id="currency"></label></li>
+			    <li><label>账户金额:</label><label id="amount"></label></li>
+			    <li><label>账户状态:</label><label id="status"></label></li>
+			    <li><label>创建时间:</label><label id="createDatetime"></label></li>
+			    <li><label>更新时间:</label><label id="updateDatetime"></label></li>
 			</ul>
 	    </div>
     </form>

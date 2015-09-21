@@ -69,19 +69,22 @@ $(function() {
 			title : '发生金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'preAmount',
 			title : '发生前金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'postAmount',
 			title : '发生后金额',
 			align : 'right',
 			valign : 'middle',
-			sortable : false
+			sortable : false,
+			formatter : moneyFormatter
 		}, {
 			field : 'remark',
 			title : '备注',
@@ -117,6 +120,10 @@ function bizTypeFormatter(value, row) {
 			return typeData[i].value;
 		}
 	}
+}
+
+function moneyFormatter(value, row){
+	return moneyFormat(value, 2);
 }
 
 function doSuccessBackType(res){
