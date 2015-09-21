@@ -163,7 +163,11 @@ var statusData=null;
 	}
 	
 	function operateFormatter(value, row) {
-        return ['<button class="btn btn-link btn-xs detail">查看详情</button>'].join('');
+		if($("#tag").val() == undefined || $("#tag").val() == null || $("#tag").val() == ''){
+        	return ['<button class="btn btn-link btn-xs detail">查看详情</button>'].join('');
+		}else{
+			return ['<button class="btn btn-link btn-xs tag">设置</button>'].join('');
+		}
     }
 	
 	function typeFormatter(value, row) {
@@ -189,6 +193,9 @@ var statusData=null;
 	window.operateEvents = {
         'click .detail': function (e, value, row, index) {
         	window.location.href = $("#base_path").val() + "/project/check?proId="+row.proId;
+        },
+        'click .tag': function (e, value, row, index) {
+        	window.location.href = $("#base_path").val() + "/projectTag/detail?proId="+row.proId;
         }
 	};
 </script>
@@ -196,6 +203,8 @@ var statusData=null;
 <body>
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
+	<input type="hidden" id="tag"
+		value="${tag}" />
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">

@@ -31,9 +31,6 @@
 		    $('#returnForm').attr("action", path).submit();
 		});
 	});
-	
-	
-	
 </script>
 </head>
 <body>

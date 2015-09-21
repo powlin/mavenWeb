@@ -21,6 +21,8 @@ public interface IProjectAO {
     public Page queryProjectPage(String proId, String userId, String name,
             String type, String status, String start, String limit);
 
+    public Object getRichProject(String proId);
+
     public boolean editProject(String proId, String name, String type,
             String province, String city, String picture, String video,
             String summary, String detail, String targetAmount, String raiseDays);

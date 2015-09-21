@@ -252,4 +252,8 @@ public class ProjectController extends BaseController {
         return projectAO.confirmSendOut(proId, this.getSessionUser()
             .getUserCode(), checkResult, remark);
     }
+
+    /**
+     * 营销管理
+     */
 }

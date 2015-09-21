@@ -103,7 +103,7 @@
 		<property name="defaultErrorView" value="error/error" />
 		<property name="exceptionMappings">
 			<props>
-				<prop key="SessionTimeoutException">redirect:/user/login.htm</prop>				
+				<prop key="SessionTimeoutException">redirect:/views/login.jsp</prop>				
 			</props>
 		</property>
 		<property name="statusCodes">

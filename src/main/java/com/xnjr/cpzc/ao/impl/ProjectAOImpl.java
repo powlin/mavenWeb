@@ -51,6 +51,15 @@ public class ProjectAOImpl implements IProjectAO {
     }
 
     /** 
+     * @see com.xnjr.cpzc.ao.IProjectAO#getRichProject(java.lang.String)
+     */
+    @Override
+    public Object getRichProject(String proId) {
+        return BizConnecter.getBizData("703411",
+            JsonUtils.string2Json("proId", proId), Object.class);
+    }
+
+    /** 
      * @see com.xnjr.cpzc.ao.IProjectAO#editProject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -132,4 +141,5 @@ public class ProjectAOImpl implements IProjectAO {
         return BizConnecter.getBizData("703505",
             JsonUtils.object2Json(zc703505Req), SuccessRes.class).isSuccess();
     }
+
 }
