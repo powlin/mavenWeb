@@ -37,13 +37,16 @@ public class ProjectAOImpl implements IProjectAO {
     @SuppressWarnings("rawtypes")
     @Override
     public Page queryProjectPage(String proId, String userId, String name,
-            String type, String status, String start, String limit) {
+            String type, String status, String isHot, String isRecommend,
+            String start, String limit) {
         ZC703405Req zc703405Req = new ZC703405Req();
         zc703405Req.setProId(proId);
         zc703405Req.setUserId(userId);
         zc703405Req.setName(name);
         zc703405Req.setType(type);
         zc703405Req.setStatus(status);
+        zc703405Req.setIsHot(isHot);
+        zc703405Req.setIsRecommend(isRecommend);
         zc703405Req.setStart(start);
         zc703405Req.setLimit(limit);
         return BizConnecter.getBizData("703405",

@@ -65,10 +65,12 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "isHot", required = false) String isHot,
+            @RequestParam(value = "isRecommend", required = false) String isRecommend,
             @RequestParam(value = "start", required = true) String start,
             @RequestParam(value = "limit", required = true) String limit) {
         return projectAO.queryProjectPage(proId, userId, name, type, status,
-            start, limit);
+            isHot, isRecommend, start, limit);
     }
 
     @RequestMapping(value = "/support/search", method = RequestMethod.GET)
@@ -97,17 +99,17 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ModelAndView editProject(
-            @RequestParam(value = "proId", required = false) String proId,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "type", required = false) String type,
-            @RequestParam(value = "province", required = false) String province,
-            @RequestParam(value = "city", required = false) String city,
-            @RequestParam(value = "picture", required = false) String picture,
+            @RequestParam(value = "proId", required = true) String proId,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "type", required = true) String type,
+            @RequestParam(value = "province", required = true) String province,
+            @RequestParam(value = "city", required = true) String city,
+            @RequestParam(value = "picture", required = true) String picture,
             @RequestParam(value = "video", required = false) String video,
-            @RequestParam(value = "summary", required = false) String summary,
-            @RequestParam(value = "detail", required = false) String detail,
-            @RequestParam(value = "targetAmount", required = false) String targetAmount,
-            @RequestParam(value = "raiseDays", required = false) String raiseDays) {
+            @RequestParam(value = "summary", required = true) String summary,
+            @RequestParam(value = "detail", required = true) String detail,
+            @RequestParam(value = "targetAmount", required = true) String targetAmount,
+            @RequestParam(value = "raiseDays", required = true) String raiseDays) {
         boolean flag = projectAO.editProject(proId, name, type, province, city,
             picture, video, summary, detail, targetAmount, raiseDays);
         ModelAndView view = null;
@@ -116,7 +118,7 @@ public class ProjectController extends BaseController {
             if (StringUtils.isNotBlank(proId)) {
                 @SuppressWarnings("rawtypes")
                 Page page = projectAO.queryProjectPage(proId, null, null, null,
-                    null, "0", "10");
+                    null, null, null, "0", "10");
                 if (page != null && page.getList() != null) {
                     List<ZC703309Res> returnList = returnAO
                         .getAllReturnByProId(proId);
@@ -201,7 +203,7 @@ public class ProjectController extends BaseController {
         ModelAndView view = new ModelAndView(url);
         if (StringUtils.isNotBlank(proId)) {
             Page page = projectAO.queryProjectPage(proId, null, null, null,
-                null, "0", "10");
+                null, null, null, "0", "10");
             if (page != null && page.getList() != null) {
                 List<ZC703309Res> returnList = returnAO
                     .getAllReturnByProId(proId);
@@ -252,8 +254,4 @@ public class ProjectController extends BaseController {
         return projectAO.confirmSendOut(proId, this.getSessionUser()
             .getUserCode(), checkResult, remark);
     }
-
-    /**
-     * 营销管理
-     */
 }

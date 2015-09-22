@@ -36,6 +36,28 @@ public class ZC703405Req extends ABaseDO {
     // 项目状态
     private String status;
 
+    // 是否热门项目
+    private String isHot;
+
+    // 是否推荐项目
+    private String isRecommend;
+
+    public String getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(String isHot) {
+        this.isHot = isHot;
+    }
+
+    public String getIsRecommend() {
+        return isRecommend;
+    }
+
+    public void setIsRecommend(String isRecommend) {
+        this.isRecommend = isRecommend;
+    }
+
     public String getProId() {
         return proId;
     }

@@ -36,9 +36,21 @@ function dateFormat (date, format) {
  */
 function moneyFormat(money, format){
 	if(isNaN(money)){
-		return '-';
+		return '';
 	}
 	return parseFloat(money/1000).toFixed(format);
+}
+
+/**
+ * 金额放大，乘于1000，格式化
+ * @param money
+ * @param format
+ */
+function moneyFormatByEnLarge(money, format){
+	if(isNaN(money)){
+		return '';
+	}
+	return parseFloat(money*1000).toFixed(format);
 }
 
 function checkData(colNames,isNulls,colValues,colLengths){

@@ -21,7 +21,6 @@
 	<div class="place">
     <span>位置：</span>
     <ul class="placeul">
-    <li><a href="#">首页</a></li>
     <li><a href="#">错误提示</a></li>
     </ul>
     </div>
@@ -30,7 +29,7 @@
 
     <h1>系统错误</h1>
     <h2>不好意思，系统出错，请联系管理员处理！</h2>
-    <div class="reindex"><a href="default.jsp" target="_parent">返回首页</a></div>
+    <div class="reindex"><a href="<%=request.getContextPath()%>/views/login.jsp" target="_parent">返回首页</a></div>
     </div>
 </body>
 </html>

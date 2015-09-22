@@ -22,6 +22,8 @@ var ue = UE.getEditor('editor');
 		var data = {"pKey":"p_type"};
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+		$("#targetAmount").val(moneyFormat($("#targetAmount").val(), 2));
+		
 		// 保存
 		$('#saveBtn').click(function() {
 			var colNames=['项目编号','项目名称','项目类型','省份','城市','图片','视频','概述','具体描述','目标金额','筹集天数'];
@@ -31,6 +33,7 @@ var ue = UE.getEditor('editor');
 			if(!checkData(colNames,isNulls,colValues,colLengths)){
 				return;
 			}
+			$("#targetAmount").val(moneyFormatByEnLarge($("#targetAmount").val(), 0));
 			var path = $("#base_path").val() + "/project/edit";
 			$('#proForm').attr("method","post");
 		    $('#proForm').attr("action", path).submit();
@@ -138,7 +141,7 @@ var ue = UE.getEditor('editor');
 	    <div class="formbody">
 	    <div class="formtitle"><span>申请信息</span></div>
 		    <ul class="forminfo">
-			    <li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目编号:</label><input type="text" id="proId" name="proId" value ="${project.proId}"  class="dfinput" disabled="true"/></li>
+			    <li><input type="hidden" id="proId" name="proId" value ="${project.proId}"/></li>
 			    <li><label><span class="inline_red">*</span>项目名称:</label><input type="text" id="name" name="name" value ="${project.name}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red">*</span>项目类型:</label>
 				    <select id="type" name="type" class="dfinput">
@@ -155,8 +158,8 @@ var ue = UE.getEditor('editor');
 				<li class="cfl"><label><span class="inline_red">*</span>项目详情:</label>
     				<script id="editor" name="detail" type="text/plain" style="width:900px;height:250px;float:left">${project.detail}</script>
 				</li>
-				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;发起人编号:</label><input type="text" id="userId" name="userId" value ="${project.userId}"  class="dfinput" readOnly="true"/></li>
-				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;申请时间:</label><input type="text" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput" readOnly="true"/></li>
+				<li><input type="hidden" id="userId" name="userId" value ="${project.userId}"  class="dfinput" readOnly="true"/></li>
+				<li><input type="hidden" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput" readOnly="true"/></li>
 				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label>
 				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add&proId=${project.proId}">新增回报</a>
 				<table class="tablelist" style="width:87%; clear:none; float:left">

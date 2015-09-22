@@ -12,29 +12,52 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
+		var data = {"pKey":"p_type"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+		$("#createDatetime").text(dateFormat($("#createDatetime").text(),'yyyy-MM-dd HH:mm:ss'));
+		
 		//初始化赋值
 		var isHot = $("#isHot").val();
 		if(isHot == '1'){
-			$("input[name='isHot']").eq(0).attr("checked","checked");
+			$("input[name='isHotCheck']").eq(0).attr("checked","checked");
 		}
 		var isRecommend = $("#isRecommend").val();
 		if(isRecommend == '1'){
-			$("input[name='isRecommend']").eq(0).attr("checked","checked");
+			$("input[name='isRecommendCheck']").eq(0).attr("checked","checked");
 		}
 		
 		$('#subBtn').click(function() {
 			$("#isHot").val("0");
-			if($('#isHotCheck').attr('checked')) {
+			if($('#isHotCheck').is(':checked')) {
 				$("#isHot").val("1");
 			}
+			
 			$("#isRecommend").val("0");
-			if($('#isRecommend').attr('checked')) {
+			if($('#isRecommendCheck').is(':checked')) {
 				$("#isRecommend").val("1");
 			}
 			var path = $("#base_path").val() + "/projectTag/edit";
 		    $('#tagForm').attr("action", path).submit();
 		});
+		
+		$('#backBtn').click(function() {
+			window.location.href = $("#base_path").val() + "/views/project/project_tag.htm";
+		});
 	});
+	
+	function doSuccessBackType(res){
+		var data = res.data;
+		var proType = $("#proType").text();
+		if(typeof(data) != "undefined"){//判断undefined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == proType){
+					$("#proType").text(data[i].value);
+					return;
+				}
+			}
+		}
+	}
 </script>
 </head>
 <body>
@@ -51,8 +74,8 @@
     </div>
     <form id="tagForm" method="post">
     <input type="hidden" id="proId" name="proId" value = "${project.proId}"/>
-    <input type="hidden" id="isHot" name="isHot" value = "${project.isHot}"/>
-	<input type="hidden" id="isRecommend" name="isRecommend" value = "${project.isRecommend}"/>
+    <input type="hidden" id="isHot" name="isHot" value = "${projectTag.isHot}"/>
+	<input type="hidden" id="isRecommend" name="isRecommend" value = "${projectTag.isRecommend}"/>
 	    <div class="formbody">
 	    <div class="formtitle"><span>项目信息</span></div>
 	        <table class="filetable">
@@ -83,8 +106,8 @@
 	        	<tr>
 	        		<th>标签:</th>
 	        		<td colspan="3">
-	        		<input type="checkbox" name="isHotCheck">是否热门 &nbsp;
-			    	<input type="checkbox" name="isRecommendCheck">是否推荐 &nbsp;</td>
+	        		<input type="checkbox" id="isHotCheck" name="isHotCheck">是否热门 &nbsp;
+			    	<input type="checkbox" id="isRecommendCheck" name="isRecommendCheck">是否推荐 &nbsp;</td>
 	        </table>
 	        <br/>
 			<input id="subBtn" type="button" class="btn mr20" value="提交"/>&nbsp;

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IProjectAO;
 import com.xnjr.cpzc.ao.IProjectTagAO;
+import com.xnjr.cpzc.dto.res.Page;
 
 /** 
  * @author: xieyj 
@@ -32,18 +33,17 @@ public class ProjectTagController extends BaseController {
     @Autowired
     IProjectTagAO projectTagAO;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView doListView() {
-        ModelAndView view = new ModelAndView("/project/project_all");
-        view.addObject("tag", "1");
-        return view;
-    }
-
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public ModelAndView doDetailView(
             @RequestParam(value = "proId", required = true) String proId) {
         ModelAndView view = new ModelAndView("/project/tag_edit");
-        view.addObject("project", projectAO.getRichProject(proId));
+        @SuppressWarnings("rawtypes")
+        Page page = projectAO.queryProjectPage(proId, null, null, null, null,
+            null, null, "0", "10");
+        if (page != null && page.getList() != null) {
+            view.addObject("project", page.getList().get(0));
+        }
+        view.addObject("projectTag", projectTagAO.getDetail(proId));
         return view;
     }
 
@@ -55,7 +55,7 @@ public class ProjectTagController extends BaseController {
         boolean flag = projectTagAO.editProjectTag(proId, isHot, isRecommend);
         ModelAndView view = null;
         if (flag == true) {
-            view = new ModelAndView("/project/project_all");
+            view = new ModelAndView("/project/project_tag");
             view.addObject("tag", "1");
         } else {
             view = new ModelAndView("/error/error");
