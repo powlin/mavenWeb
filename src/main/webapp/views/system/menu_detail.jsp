@@ -54,7 +54,7 @@
 			return false;
 		}
 		var orderNo = $("#orderNo");
-		if(orderNo.val() == ""){
+		if(orderNo.val() == "" || parseInt(orderNo.val()) > 99999999){
 			orderNo.next().removeClass("hid");
 			return false;
 		}
@@ -114,7 +114,7 @@
 			    <li><label><span class="inline_red">*</span>菜单名称:</label><input type="text" id="menuName" name="menuName" value ="${menu.menuName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单名称不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>菜单地址:</label><input type="text" id="menuUrl" name="menuUrl" value ="${menu.menuUrl}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单地址不能为空</span></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>父菜单编号:</label><select id="parentCodeSel" name="parentCode" value ="${menu.parentCode}" class="dfinput"></select></li>
-			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单顺序号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单顺序号不能为空，且必须不多于8位</span></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${menu.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>

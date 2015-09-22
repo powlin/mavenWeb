@@ -42,6 +42,14 @@ function moneyFormat(money, format){
 }
 
 /**
+ * 申请编号去除特殊字符('-'与' ')
+ * @param rbNo
+ */
+function rbNoFormat(rbNo){
+	return rbNo.replace(/-| /g, "")
+}
+
+/**
  * 金额放大，乘于1000，格式化
  * @param money
  * @param format

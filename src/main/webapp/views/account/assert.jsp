@@ -55,7 +55,7 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'realName',
-			title : '真实姓名',
+			title : '用户姓名',
 			align : 'left',
 			valign : 'middle',
 			sortable : false

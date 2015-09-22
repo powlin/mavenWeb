@@ -11,11 +11,27 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 $(function(){
+	var data = {"pKey":"biz_type"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+	
 	$("#createDatetimeLabel").text(dateFormatter($("#createDatetime").val()));
 	$("#transAmount").text(moneyFormatter($("#transAmountHid").val()));
 	$("#preAmount").text(moneyFormatter($("#preAmountHid").val()));
 	$("#postAmount").text(moneyFormatter($("#postAmountHid").val()));
 });
+
+function doSuccessBackType(res){
+	var data = res.data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#bizTypeHid").val()){
+				$("#bizType").text(data[i].value);
+			}
+		}
+	}
+}
 function dateFormatter(value){
 	return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
 }
@@ -26,9 +42,11 @@ function moneyFormatter(value){
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
+	<input type="hidden" id="bizTypeHid" value="${account.bizType}"/>
 	<input type="hidden" id="transAmountHid" value="${account.transAmount}"/>
 	<input type="hidden" id="preAmountHid" value="${account.preAmount}"/>
 	<input type="hidden" id="postAmountHid" value="${account.postAmount}"/>
+	<input type="hidden" id="createDatetime" value="${account.createDatetime}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -42,7 +60,7 @@ function moneyFormatter(value){
 	    <div class="formtitle"><span>账户信息</span></div>
 		    <ul class="forminfo">
 			    <li><label>流水号:</label><label>${account.ajNo}</label></li>
-			    <li><label>业务类型:</label><label>${account.bizType}</label></li>
+			    <li><label>业务类型:</label><label id="bizType"></label></li>
 			    <li><label>相关订单号:</label><label>${account.refNo}</label></li>
 			    <li><label>发生金额:</label><label id="transAmount"></label></li>
 			    <li><label>发生前金额:</label><label id="preAmount"></label></li>

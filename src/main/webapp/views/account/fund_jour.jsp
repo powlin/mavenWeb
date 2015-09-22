@@ -25,7 +25,6 @@ $(function() {
 				bizType : $("#biz_type_search").val(),
 				createDatetimeStart : $("#create_datetime_start_search").val(),
 				createDatetimeEnd : $("#create_datetime_end_search").val(),
-				realName : $("#real_name_search").val(),
 				accountNumber : $("#account_number_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit
@@ -186,10 +185,6 @@ window.operateEvents = {
 						<div class="form-group mr40 mt10">
 							<label for="createDatetimeEnd" class="control-label-first">产生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
 								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间止"/>
-						</div>
-						<div class="form-group mr40 mt10">
-							<label for="realName" class="control-label-first">真实姓名:</label> <input class="input-sm" type="text"
-								class="form-control" id="real_name_search" placeholder="请输入真实姓名">
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="accountNumber" class="control-label-first">账户编号:</label> <input class="input-sm" type="text"
