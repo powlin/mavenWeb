@@ -86,7 +86,7 @@ $(function() {
 			formatter : statusFormatter
 		}, {
 			field : 'applyUser',
-			title : '申请人ID',
+			title : '申请人编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -216,27 +216,27 @@ function statusFormatter(value, row) {
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="rbNo" class="control-label-first">申请编号:</label> <input class="input-sm" type="text"
-								class="form-control" id="rb_no_search" placeholder="请输入红冲蓝补申请">
+								class="form-control" id="rb_no_search" placeholder="请输入申请编号">
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="account_number_search" placeholder="请输入账户编号">
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="direction" class="control-label">方向:</label> <select class="input-sm"
 								class="form-control" id="direction_search">
 								</select>
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="status" class="control-label">状态:</label> <select class="input-sm"
 								class="form-control" id="status_search">
 								</select>
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="applyUser" class="control-label">申请人ID:</label> <input class="input-sm" type="text"
-								class="form-control" id="apply_user_search" placeholder="请输入申请人ID">
+						<div class="form-group mr40">
+							<label for="applyUser" class="control-label">申请人编号:</label> <input class="input-sm" type="text"
+								class="form-control" id="apply_user_search" placeholder="请输入申请人编号">
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="applyDatetimeStart" class="control-label">申请时间起:</label> <input class="input-sm dfdate" type="text"
@@ -253,7 +253,6 @@ function statusFormatter(value, row) {
 				</div>
 				<table id="tableList"></table>
 			</div>
-		</div>
 		</div>
     </div>
     

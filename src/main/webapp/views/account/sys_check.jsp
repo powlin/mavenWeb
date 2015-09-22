@@ -73,7 +73,7 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'amount',
-			title : '不平金额',
+			title : '金额',
 			align : 'right',
 			valign : 'middle',
 			sortable : false,
@@ -115,7 +115,7 @@ $(function() {
 			formatter : adjustResultFormatter
 		}, {
 			field : 'adjustUser',
-			title : '调账人ID',
+			title : '调账人编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -239,21 +239,21 @@ window.operateEvents = {
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="refNo" class="control-label-first">支付编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="ref_no_search" placeholder="请输入支付编号">
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="bizType" class="control-label">业务类型:</label> <select class="input-sm"
 								class="form-control" id="biz_type_search"></select>
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="checkDateStart" class="control-label-first">对账日期起:</label> <input type="text" class="input-sm dfdate" id="check_date_start_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入对账日期起"/>
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" placeholder="请输入对账日期起"/>
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="checkDateEnd" class="control-label-first">对账日期止:</label> <input type="text" class="input-sm dfdate" id="check_date_end_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入对账日期止"/>
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" placeholder="请输入对账日期止"/>
 						</div>
 						<div class="form-group mr40 mt10">
 							<label for="checkResult" class="control-label-first">对账结果:</label> <select class="input-sm"
@@ -275,10 +275,7 @@ window.operateEvents = {
 							<label for="adjustResult" class="control-label-first">调账结果:</label> <select class="input-sm"
 								class="form-control" id="adjust_result_search"></select>
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="accountNumber" class="control-label-first">账户ID:</label> <input class="input-sm" type="text"
-								class="form-control" id="account_number_search" placeholder="请输入账户ID">
-						</div>&nbsp;
+						&nbsp;
 						<div class="form-group mt10">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>

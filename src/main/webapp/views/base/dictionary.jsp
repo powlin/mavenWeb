@@ -46,13 +46,13 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'key',
-			title : '数据字典键',
+			title : '字典键',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
 		}, {
 			field : 'value',
-			title : '数据字典值',
+			title : '字典值',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -95,7 +95,7 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'updateDatetime',
-			title : '更改时间',
+			title : '修改时间',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
@@ -173,23 +173,23 @@ function dateFormatter(value, row){
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
-						<div class="form-group mr40 mt10">
-							<label for="key" class="control-label-first">数据字典键:</label> <input class="input-sm" type="text"
-								class="form-control" id="key_search" placeholder="请输入数据字典键">
+						<div class="form-group mr40">
+							<label for="key" class="control-label-first">字典键:</label> <input class="input-sm" type="text"
+								class="form-control" id="key_search" placeholder="请输入字典键">
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="value" class="control-label">数据字典值:</label> <input class="input-sm" type="text"
-								class="form-control" id="value_search" placeholder="请输入数据字典值">
+						<div class="form-group mr40">
+							<label for="value" class="control-label">字典值:</label> <input class="input-sm" type="text"
+								class="form-control" id="value_search" placeholder="请输入字典值">
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="pKey" class="control-label">数据字典父级键:</label> <input class="input-sm" type="text"
-								class="form-control" id="pKey_search" placeholder="请输入数据字典父级键">
+						<div class="form-group mr40">
+							<label for="pKey" class="control-label">父级键:</label> <input class="input-sm" type="text"
+								class="form-control" id="pKey_search" placeholder="请输入父级键">
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="pValue" class="control-label">数据字典父级值:</label> <input class="input-sm" type="text"
-								class="form-control" id="pValue_search" placeholder="请输入数据字典父级值">
+						<div class="form-group mr40">
+							<label for="pValue" class="control-label">父级值:</label> <input class="input-sm" type="text"
+								class="form-control" id="pValue_search" placeholder="请输入父级值">
 						</div>&nbsp;
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>
 					</div>

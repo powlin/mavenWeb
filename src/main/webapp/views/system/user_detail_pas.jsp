@@ -86,7 +86,7 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label><span class="inline_red">*</span>用户名:</label><label>${user.userCode}</label></li>
 			    <li><label><span class="inline_red">*</span>用户姓名:</label><label>${user.userName}</label></li>
 			    <li><label><span class="inline_red">*</span>旧密码:</label><input type="password" id="oldPwd" name="oldPwd" value ="${user.oldPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="newPwd" name="newPwd" value ="${user.newPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>

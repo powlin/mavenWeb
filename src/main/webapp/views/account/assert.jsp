@@ -49,7 +49,7 @@ $(function() {
 			sortable : false
 		},{
 			field : 'userId',
-			title : '用户id',
+			title : '用户编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -95,7 +95,7 @@ $(function() {
 			formatter : dateFormatter
 		}, {
 			field : 'updateDatetime',
-			title : '更改时间',
+			title : '修改时间',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
@@ -158,12 +158,12 @@ function accountStatusFormatter(value, row) {
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
 						<div class="form-group mr40">
-							<label for="realName" class="control-label-first">用户姓名:</label> <input class="input-sm" type="text"
-								class="form-control" id="real_name_search" placeholder="请输入用户姓名">
-						</div>
-						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="account_number_search" placeholder="请输入账户编号">
+						</div>
+						<div class="form-group mr40">
+							<label for="realName" class="control-label-first">用户姓名:</label> <input class="input-sm" type="text"
+								class="form-control" id="real_name_search" placeholder="请输入用户姓名">
 						</div>
 						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label">账户状态:</label> <select class="input-sm"

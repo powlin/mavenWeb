@@ -96,7 +96,7 @@ var statusData=null;
 				formatter : statusFormatter
 			 },{
 				field : 'userId',
-				title : '发起人',
+				title : '发起人编号',
 				align : 'left',
 				valign : 'middle',
 				width : 200,
@@ -216,15 +216,15 @@ var statusData=null;
 		<div id="custom-toolbar" style="margin-bottom: 8px">
 			<div class="form-inline" role="form">
 					<div class="form-group">
-						<label for="proIdSearch" class="control-label-first">项目编号:</label> <input class="input-sm" type="text"
-							class="form-control" id="proIdSearch" placeholder="请输入项目编号">
+						<label for="proIdSearch" class="control-label-first">编号:</label> <input class="input-sm" type="text"
+							class="form-control" id="proIdSearch" placeholder="请输入编号">
 					</div>
 					<div class="form-group">
-						<label for="nameSearch" class="control-label">项目名称:</label> <input class="input-sm" type="text"
-							class="form-control" id="nameSearch" placeholder="请输入项目名称">
+						<label for="nameSearch" class="control-label">名称:</label> <input class="input-sm" type="text"
+							class="form-control" id="nameSearch" placeholder="请输入名称">
 					</div>
 					<div class="form-group">
-						<label for="typeSearch" class="control-label">项目类型:</label>
+						<label for="typeSearch" class="control-label">类型:</label>
 							<select id="typeSearch" name="typeSearch" class="form-control"></select>
 					</div>
 					<div class="form-group">

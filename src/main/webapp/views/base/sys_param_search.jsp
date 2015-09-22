@@ -88,7 +88,7 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'updateDatetime',
-			title : '更改时间',
+			title : '修改时间',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
@@ -186,19 +186,19 @@ function dateFormatter(value, row){
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="code" class="control-label-first">参数编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="code_search" placeholder="请输入参数编号">
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="name" class="control-label">参数名称:</label> <input class="input-sm" type="text"
 								class="form-control" id="name_search" placeholder="请输入参数名称">
 						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<label for="type" class="control-label">类型:</label> <select class="input-sm"
 								class="form-control" id="type_search"></select>
 						</div>&nbsp;
-						<div class="form-group mr40 mt10">
+						<div class="form-group mr40">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>
 					</div>

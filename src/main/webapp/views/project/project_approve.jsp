@@ -149,8 +149,8 @@ var ue = UE.getEditor('editor');
 					</select>
 				</li>
 				<li><label><span class="inline_red">*</span>发起省份:</label><input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
-				<li><label><span class="inline_red">*</span>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput" readOnly="true"/></li>
-				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput"/></li>
+				<li><label><span class="inline_red">*</span>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput" /></li>
+				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput"/><a href="javascript:void(0)" onclick=""></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目视频:</label><input type="text" id="video" name="video" value ="${project.video}"  class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>目标金额(元):</label><input type="text" id="targetAmount" name="targetAmount" value ="${project.targetAmount}" class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>筹集天数:</label><input type="text" id="raiseDays" name="raiseDays" value ="${project.raiseDays}" class="dfinput" /></li>

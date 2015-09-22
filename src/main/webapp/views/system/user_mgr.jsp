@@ -52,7 +52,7 @@ $(function() {
 		pageList : [ 10, 20, 30, 40, 50 ],
 		columns : [{
 			field : 'userCode',
-			title : '用户编号',
+			title : '用户名',
 			align : 'left',
 			valign : 'middle',
 			sortable : false
@@ -186,8 +186,8 @@ function doSuccessDel(res) {
 							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
 						</div>
 						<div class="form-group mr40">
-							<label for="userCode" class="control-label-first">用户编号:</label> <input class="input-sm" type="text"
-								class="form-control" id="user_code_search" placeholder="请输入用户编号">
+							<label for="userCode" class="control-label-first">用户名:</label> <input class="input-sm" type="text"
+								class="form-control" id="user_code_search" placeholder="请输入用户名">
 						</div>
 						<div class="form-group mr40">
 							<label for="userName" class="control-label">用户姓名:</label> <input class="input-sm" type="text"

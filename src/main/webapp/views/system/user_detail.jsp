@@ -94,7 +94,7 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>用户编号:</label><input type="text" id="userCode" name="userCode" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>用户名:</label><input type="text" id="userCode" name="userCode" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户编号不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户姓名不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="password" name="password" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
 			    <!-- <li><label>用户角色:</label><label class="roleList">正在加载...</label></li> -->

@@ -51,6 +51,12 @@ $(function() {
 			sortable : false,
 			width: 100
 		}, {
+			field : 'accountNumber',
+			title : '账户编号',
+			align : 'left',
+			valign : 'middle',
+			sortable : false
+		}, {
 			field : 'bizType',
 			title : '业务类型',
 			align : 'left',
@@ -85,12 +91,6 @@ $(function() {
 			sortable : false,
 			formatter : moneyFormatter
 		}, {
-			field : 'status',
-			title : '状态',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
-		}, {
 			field : 'remark',
 			title : '备注',
 			align : 'left',
@@ -98,17 +98,11 @@ $(function() {
 			sortable : false
 		}, {
 			field : 'createDatetime',
-			title : '创建时间',
+			title : '发生时间',
 			align : 'left',
 			valign : 'middle',
 			sortable : false,
 			formatter : dateFormatter
-		}, {
-			field : 'accountNumber',
-			title : '账户编号',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
 		}]
 	});
 
@@ -169,23 +163,24 @@ function dateFormatter(value, row){
 							<label for="sjNo" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
 								class="form-control" id="sj_no_search" placeholder="请输入流水号">
 						</div>
+						<div class="form-group mr40">
+							<label for="accountNumber" class="control-label-first">账户编号:</label> <input class="input-sm" type="text"
+								class="form-control" id="account_number_search" placeholder="请输入账户编号">
+						</div>
+						<div class="form-group mr40">
+							<label for="createDatetimeStart" class="control-label-first">发生时间起:</label> <input type="text" class="input-sm dfdate" id="create_datetime_start_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间起"/>
+						</div>
+						<div class="form-group mr40">
+							<label for="createDatetimeEnd" class="control-label-first">发生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间止"/>
+						</div>
 						<div class="form-group mr40 mt10">
 							<label for="bizType" class="control-label">业务类型:</label> <select class="input-sm"
 								class="form-control" id="biz_type_search">
 								</select>
 						</div>
-						<div class="form-group mr40 mt10">
-							<label for="createDatetimeStart" class="control-label-first">产生时间起:</label> <input type="text" class="input-sm dfdate" id="create_datetime_start_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间起"/>
-						</div>
-						<div class="form-group mr40 mt10">
-							<label for="createDatetimeEnd" class="control-label-first">产生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入产生时间止"/>
-						</div>
-						<div class="form-group mr40 mt10">
-							<label for="accountNumber" class="control-label-first">账户编号:</label> <input class="input-sm" type="text"
-								class="form-control" id="account_number_search" placeholder="请输入账户编号">
-						</div>&nbsp;
+						&nbsp;
 						<div class="form-group mt10">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>

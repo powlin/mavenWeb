@@ -42,8 +42,7 @@ function locationReload(){
      
     <div class="user">
     <span>${userCode}</span>
-    <i>消息</i>
-    <b>5</b>
+    <i>在线&nbsp;&nbsp;</i>
     </div>    
     
     </div>
