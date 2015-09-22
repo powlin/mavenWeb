@@ -111,17 +111,21 @@ public class AccountAOImpl implements IAccountAO {
 
     @Override
     public boolean redBlueSearchEdit(String rbNo, String checkUser,
-            String checkResult) {
+            String checkResult, String remark) {
         if (StringUtils.isBlank(rbNo)) {
             throw new BizException("ZC703207", "申请编号不能为空");
         }
         if (StringUtils.isBlank(checkResult)) {
             throw new BizException("ZC703207", "审核结果不能为空");
         }
+        if (StringUtils.isBlank(remark)) {
+            throw new BizException("ZC703207", "备注不能为空");
+        }
         ZC703207Res zc703207Res = new ZC703207Res();
         zc703207Res.setRbNo(rbNo);
         zc703207Res.setCheckUser(checkUser);
         zc703207Res.setCheckResult(checkResult);
+        zc703207Res.setRemark(remark);
         return BizConnecter.getBizData("703207",
             JsonUtils.object2Json(zc703207Res), SuccessRes.class).isSuccess();
     }
@@ -180,17 +184,21 @@ public class AccountAOImpl implements IAccountAO {
 
     @Override
     public boolean sysCheckEdit(String ubNo, String adjustUser,
-            String adjustResult) {
+            String adjustResult, String remark) {
         if (StringUtils.isBlank(ubNo)) {
             throw new BizException("ZC703210", "编号不能为空");
         }
         if (StringUtils.isBlank(adjustResult)) {
             throw new BizException("ZC703210", "调账结果不能为空");
         }
+        if (StringUtils.isBlank(remark)) {
+            throw new BizException("ZC703210", "备注不能为空");
+        }
         ZC703210Res zc703210Res = new ZC703210Res();
         zc703210Res.setUbNo(ubNo);
         zc703210Res.setAdjustUser(adjustUser);
         zc703210Res.setAdjustResult(adjustResult);
+        zc703210Res.setRemark(remark);
         return BizConnecter.getBizData("703210",
             JsonUtils.object2Json(zc703210Res), SuccessRes.class).isSuccess();
     }

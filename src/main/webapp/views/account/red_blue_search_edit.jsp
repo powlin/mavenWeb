@@ -29,11 +29,28 @@
 	});
 	
 	function submitForm(e, val){
+		if(!checkForm()){
+			return false;
+		}
 		var data = {};
 		data['rbNo'] = $("#rbNo").val();
 		data['checkResult'] = val;
+		data['remark'] = $("#remark").val();
 		var url = $("#base_path").val() + "/account/redBlueSearchEdit";
 		doPostAjax(url, data, doSuccessBack);
+	}
+	function checkForm(){
+		var rbNo = $("#rbNo");
+		if(rbNo.val() == ""){
+			rbNo.next().removeClass("hid");
+			return false;
+		}
+		var remark = $("#remark");
+		if(remark.val() == ""){
+			remark.next().removeClass("hid");
+			return false;
+		}
+		return true;
 	}
 	
 	function doSuccessBack(res) {
@@ -95,7 +112,7 @@
 			    <li><label>方向:</label><label id="directionLabel"></label></li>
 			    <li><label>申请人ID:</label><label>${account.applyUser}</label></li>
 			    <li><label>申请说明:</label><label>${account.applyNote}</label></li>
-			    <!-- <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li> -->
+			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li>
 			    	<input id="subBtnY" type="button" class="btn mr40" value="通过"/>
 				    <input id="subBtnN" type="button" class="btn mr40" value="不通过"/>

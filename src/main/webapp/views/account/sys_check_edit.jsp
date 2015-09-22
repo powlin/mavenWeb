@@ -29,9 +29,13 @@ $(function(){
 	});
 });
 function submitForm(e, val){
+	if(!checkForm()){
+		return false;
+	}
 	var data = {};
 	data['ubNo'] = $("#ubNo").val();
 	data['adjustResult'] = val;
+	data['remark'] = $("#remark").val();
 	var url = $("#base_path").val() + "/account/sysCheckEdit";
 	doPostAjax(url, data, doSuccessBack);
 }
@@ -102,13 +106,14 @@ function clickBack(){
 	    <div class="formbody">
 	    <div class="formtitle"><span>不平账信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>不平帐编号:</label><label>${sysCheck.ubNo}</label></li>
-			    <li><label><span class="inline_red">*</span>支付编号:</label><label>${sysCheck.refNo}</label></li>
-			    <li><label><span class="inline_red">*</span>不平金额:</label><label id="amount"></label></li>
-			    <li><label><span class="inline_red">*</span>业务类型:</label><label id="bizType"></label></li>
-			    <li><label><span class="inline_red">*</span>对账日期:</label><label id="checkDate"></label></li>
-			    <li><label><span class="inline_red">*</span>对账结果:</label><label>${sysCheck.checkResult}</label></li>
-			    <li><label><span class="inline_red">*</span>调账时间:</label><label>${sysCheck.adjustDatetime}</label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>不平帐编号:</label><label>${sysCheck.ubNo}</label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>支付编号:</label><label>${sysCheck.refNo}</label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>不平金额:</label><label id="amount"></label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>业务类型:</label><label id="bizType"></label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>对账日期:</label><label id="checkDate"></label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>对账结果:</label><label>${sysCheck.checkResult}</label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>调账时间:</label><label>${sysCheck.adjustDatetime}</label></li>
+			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li>
 			    	<input id="subBtnY" type="button" class="btn mr40" value="手工调账"/>
 			    	<input id="subBtnN" type="button" class="btn mr40" value="不调账"/>
