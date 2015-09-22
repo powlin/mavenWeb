@@ -27,6 +27,7 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
+			data['userCode'] = $("#userCodeHid").val();
 			var url = $("#base_path").val() + "/sysUser/user/editPas";
 			doPostAjax(url, data, doSuccessBack);
 		});
@@ -72,6 +73,7 @@
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
 	<input type="hidden" id="operate" value = "${operate}"/>
+	<input type="hidden" id="userCodeHid" value = "${user.userCode}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -84,7 +86,8 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>用户编号:</label><input type="text" id="userCode" name="userCode" value ="${user.userCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>用户编号:</label><label>${user.userCode}</label></li>
+			    <li><label><span class="inline_red">*</span>用户姓名:</label><label>${user.userName}</label></li>
 			    <li><label><span class="inline_red">*</span>旧密码:</label><input type="password" id="oldPwd" name="oldPwd" value ="${user.oldPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="newPwd" name="newPwd" value ="${user.newPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
