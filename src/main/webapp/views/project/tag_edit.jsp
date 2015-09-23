@@ -16,6 +16,8 @@
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		$("#createDatetime").text(dateFormat($("#createDatetime").text(),'yyyy-MM-dd HH:mm:ss'));
+		$("#targetAmount").text(moneyFormat($("#targetAmount").text(), 2));
+		$("#raiseDays").text(parseInt($("#raiseDays").text()));
 		
 		//初始化赋值
 		var isHot = $("#isHot").val();
@@ -93,9 +95,9 @@
 	        	</tr>
 	        	<tr>
 	        		<th>目标金额:</th>
-	        		<td>${project.targetAmount}</td>
+	        		<td id="targetAmount">${project.targetAmount}</td>
 	        		<th>筹集天数:</th>
-	        		<td>${project.raiseDays}</td>
+	        		<td id="raiseDays">${project.raiseDays}</td>
 	        	</tr>
 	        	<tr>
 	        		<th>发起人编号:</th>
