@@ -76,10 +76,11 @@ var statusData=null;
 			},{
 				field : 'targetAmount',
 				title : '目标金额',
-				align : 'left',
+				align : 'right',
 				valign : 'middle',
 				width : 200,
-				sortable : false
+				sortable : false,
+				formatter : moneyFormatter
 			},{
 				field : 'raiseDays',
 				title : '筹集天数',
@@ -139,6 +140,10 @@ var statusData=null;
 			$('#tableList').bootstrapTable('refresh');
 		});
 	});
+	
+	function moneyFormatter(value, row){
+		return moneyFormat(value, 2);
+	}
 	
 	function doSuccessBackType(res){
 		var data = res.data;

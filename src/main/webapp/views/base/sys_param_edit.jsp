@@ -89,7 +89,7 @@
 	    <ul class="placeul">
 	    	<li><a href="#">基础数据</a></li>
 	    	<li><a href="#">系统参数</a></li>
-	    	<li id="operContent">参数查询</li>
+	    	<li id="operContent">参数设置</li>
    		</ul>
     </div>
     <form>

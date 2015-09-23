@@ -114,6 +114,11 @@ $(function() {
 	$('#searchBtn').click(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
+	
+	//添加参数
+	$('#addBtn').click(function() {
+		window.location.href = $("#base_path").val() + "/views/base/sys_param_edit.htm";
+	});
 });
 
 function doSuccessBackType(res){
@@ -186,6 +191,9 @@ function dateFormatter(value, row){
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
+						<div class="form-group mr40">
+							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
+						</div>
 						<div class="form-group mr40">
 							<label for="code" class="control-label-first">参数编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="code_search" placeholder="请输入参数编号">

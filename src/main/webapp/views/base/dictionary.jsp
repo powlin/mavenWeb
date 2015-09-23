@@ -121,6 +121,11 @@ $(function() {
 	$('#searchBtn').click(function() {
 		$('#tableList').bootstrapTable('refresh');
 	});
+	
+	//添加字典
+	$('#addBtn').click(function() {
+		window.location.href = $("#base_path").val() + "/views/base/dictionary_add.htm";
+	});
 });
 
 function operateFormatter(value, row) {
@@ -173,6 +178,9 @@ function dateFormatter(value, row){
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
+					    <div class="form-group mr40">
+							<button id="addBtn" class="btn btn-primary btn-sm">新增</button>
+						</div>
 						<div class="form-group mr40">
 							<label for="key" class="control-label-first">字典键:</label> <input class="input-sm" type="text"
 								class="form-control" id="key_search" placeholder="请输入字典键">
@@ -185,11 +193,11 @@ function dateFormatter(value, row){
 							<label for="pKey" class="control-label">父级键:</label> <input class="input-sm" type="text"
 								class="form-control" id="pKey_search" placeholder="请输入父级键">
 						</div>
-						<div class="form-group mr40">
+						<div class="form-group">
 							<label for="pValue" class="control-label">父级值:</label> <input class="input-sm" type="text"
 								class="form-control" id="pValue_search" placeholder="请输入父级值">
 						</div>&nbsp;
-						<div class="form-group mr40">
+						<div class="form-group">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>
 					</div>

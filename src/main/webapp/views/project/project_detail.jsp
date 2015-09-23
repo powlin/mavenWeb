@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -16,6 +17,10 @@
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		$("#createDatetime").text(dateFormat($("#createDatetime").text(),'yyyy-MM-dd HH:mm:ss'));
+		$("#targetAmount").text(moneyFormat($("#targetAmount").text(), 2));
+		$("#raiseDays").text(parseInt($("#raiseDays").text()));
+		$("#actualAmount").text(moneyFormat($("#actualAmount").text(), 2));
+		$("#exceedTargetAmount").text(moneyFormat($("#exceedTargetAmount").text(), 2));
 		
 		$('#backBtn').click(function() {
 			if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
@@ -199,9 +204,9 @@
 	        	</tr>
 	        	<tr>
 	        		<th>目标金额:</th>
-	        		<td>${project.targetAmount}</td>
+	        		<td id="targetAmount">${project.targetAmount}</td>
 	        		<th>筹集天数:</th>
-	        		<td>${project.raiseDays}</td>
+	        		<td id="raiseDays">${project.raiseDays}</td>
 	        	</tr>
 	        	<tr>
 	        		<th>项目概述</th>
@@ -230,7 +235,7 @@
 						<tr>
 						    <td>-1</td>
 						    <td>无私支持</td>
-						    <td>0.0</td>
+						    <td>0.00</td>
 						    <td>不限</td>
 						    <td>0</td>
 						    <td></td>
@@ -241,7 +246,7 @@
 							<tr>
 							    <td>${domain.id}</td>
 							    <td>${domain.name}</td>
-							    <td>${domain.amount}</td>
+							    <td><fmt:formatNumber value="${domain.amount / 1000}" type="currency" pattern="########0.00"/></td>
 							    <td><c:choose>
 							    <c:when test="${domain.needLimit == '1'}">  
 							    是
@@ -264,13 +269,13 @@
 	        	</tr>
 	        	<tr>
 	        		<th>实际筹集金额:</th>
-	        		<td>${project.actualAmount}</td>
+	        		<td id="actualAmount">${project.actualAmount}</td>
 	        		<th>超过目标金额:</th>
-	        		<td>${project.actualAmount - project.targetAmount}</td>
+	        		<td id="exceedTargetAmount">${project.actualAmount - project.targetAmount}</td>
 	        	</tr>
 	        	<tr id="amountTr">
 	        		<th>首付金额:</th>
-	        		<td colspan="3">
+	        		<td colspan="3" id="">
 	        			<input type="text" id="firstPayAmount" name="firstPayAmount" class="dfinput"/>
 	        		</td>
 	        	</tr>

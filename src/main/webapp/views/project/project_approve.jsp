@@ -23,7 +23,7 @@ var ue = UE.getEditor('editor');
 		var url = $("#base_path").val() + "/dict/list";
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		$("#targetAmount").val(moneyFormat($("#targetAmount").val(), 2));
-		
+		$("#raiseDays").val(parseInt($("#raiseDays").val()));
 		// 保存
 		$('#saveBtn').click(function() {
 			var colNames=['项目编号','项目名称','项目类型','省份','城市','图片','视频','概述','具体描述','目标金额','筹集天数'];
@@ -68,7 +68,6 @@ var ue = UE.getEditor('editor');
 	
 	function delReturn(id){
 		var url = $("#base_path").val() + "/project/return/del";
-		alert(url);
     	var data = {id:id};
 		doPostAjax(url, data, doSuccessDel);
 	}
@@ -125,6 +124,15 @@ var ue = UE.getEditor('editor');
 		}
 	}
 </script>
+<style type="text/css">
+.filetable{}
+.filetable tr{line-height:30px; padding:3px 0;}
+.filetable tbody tr td{line-height:30px;}
+.filetable th{font-size:14px;}
+.filetable td{font-size:13px; color:#555}
+.imgtable{width:95%; margin:7px 0;}
+.filetable .dfinput{height:24px;}
+</style>
 </head>
 <body>
 	<input type="hidden" id="base_path"
@@ -176,7 +184,7 @@ var ue = UE.getEditor('editor');
 						<tr>
 						    <td>-1</td>
 						    <td>无私支持</td>
-						    <td>0.0</td>
+						    <td>0.00</td>
 						    <td>不限</td>
 						    <td>0</td>
 						    <td></td>

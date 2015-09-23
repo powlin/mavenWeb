@@ -234,7 +234,7 @@ function statusFormatter(value, row) {
 								class="form-control" id="status_search">
 								</select>
 						</div>
-						<div class="form-group mr40">
+						<div class="form-group mr40 mt10">
 							<label for="applyUser" class="control-label">申请人编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="apply_user_search" placeholder="请输入申请人编号">
 						</div>
