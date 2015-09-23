@@ -17,6 +17,10 @@ $(function(){
 	var data = {"pKey":"biz_type"};
 	var url = $("#base_path").val() + "/dict/list";
 	doGetAjaxIsAsync(url, data,false, doSuccessBackType);
+
+	var data = {"pKey":"check_result"};
+	var url = $("#base_path").val() + "/dict/list";
+	doGetAjaxIsAsync(url, data,false, doSuccessBackCheck);
 	
 	//提交
 	$('#subBtnY').click(function(){
@@ -60,6 +64,18 @@ function doSuccessBackType(res){
 	}
 }
 
+function doSuccessBackCheck(res){
+	var data = res.data;
+	var html = "<option value=''>请选择</option>";
+	if(typeof(data) != "undefined"){//判断undifined
+		for(var i = 0;i < data.length;i++){
+			if(data[i].key == $("#checkResultHid").val()){
+				$("#checkResult").text(data[i].value);
+			}
+		}
+	}
+}
+
 function dateFormatter(value){
 	return dateFormat(value,'yyyy-MM-dd');
 }
@@ -94,6 +110,7 @@ function clickBack(){
 	<input type="hidden" id="checkDateHid" value="${sysCheck.checkDate}">
 	<input type="hidden" id="amountHid" value="${sysCheck.amount}">
 	<input type="hidden" id="bizTypeHid" value="${sysCheck.bizType}">
+	<input type="hidden" id="checkResultHid" value="${sysCheck.checkResult}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -111,8 +128,7 @@ function clickBack(){
 			    <li><label><span class="inline_red visibility_hid">*</span>不平金额:</label><label id="amount"></label></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>业务类型:</label><label id="bizType"></label></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>对账日期:</label><label id="checkDate"></label></li>
-			    <li><label><span class="inline_red visibility_hid">*</span>对账结果:</label><label>${sysCheck.checkResult}</label></li>
-			    <li><label><span class="inline_red visibility_hid">*</span>调账时间:</label><label>${sysCheck.adjustDatetime}</label></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>对账结果:</label><label id="checkResult"></label></li>
 			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li>
 			    	<input id="subBtnY" type="button" class="btn mr40" value="手工调账"/>

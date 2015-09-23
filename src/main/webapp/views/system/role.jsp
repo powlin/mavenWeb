@@ -195,8 +195,8 @@ var typeData=null;
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">系统管理</a></li>
-		    <li><a href="#">角色设置</a></li>
+		    <li>系统管理</li>
+		    <li>角色设置</li>
 	    </ul>
     </div>
 	<div class="panel-body">

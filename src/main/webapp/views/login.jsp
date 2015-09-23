@@ -25,6 +25,11 @@
 			var url = $("#base_path").val() + "/sysUser/login";
 			$('#loginForm').attr("action", url).submit();
 		});
+		
+		var em = $("#errMes").val();
+		if(em != '' && typeof(em) != 'undefined'){
+			alert(em);
+		}
 	});
 	
 	
@@ -32,6 +37,7 @@
 </head>
 <body style="background-color:#1c77ac; background-image:url(<%=request.getContextPath()%>/components/images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
     <input type="hidden" id="base_path" value="<%=request.getContextPath()%>"/>
+    <input type="hidden" id="errMes" value="${errMes}"/>
     <div id="mainBody">
       <div id="cloud1" class="cloud"></div>
       <div id="cloud2" class="cloud"></div>

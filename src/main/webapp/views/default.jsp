@@ -14,7 +14,7 @@
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">系统首页</a></li>
+	    	<li>系统首页</li>
 	    </ul>
     </div>
 </body>

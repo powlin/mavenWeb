@@ -62,6 +62,7 @@ public class SysUserController extends BaseController {
             view = new ModelAndView("redirect:/sysUser/main");
         } else {
             view = new ModelAndView("/login");
+            view.addObject("errMes", "用户名或密码错误");
         }
         return view;
     }
@@ -76,8 +77,8 @@ public class SysUserController extends BaseController {
     // ******** 顶级菜单 *****
     @RequestMapping(value = "/top_menu", method = RequestMethod.GET)
     public ModelAndView doTopMenu() {
-        List<ZC703661Res> bannerList = roleMenuAO.queryMenuList(
-            getSessionUser().getRoleCode(), "10000", false);
+        List<ZC703661Res> bannerList = roleMenuAO
+            .queryMenuList(getSessionUser().getRoleCode(), "10000", false);
         ModelAndView view = new ModelAndView("/top");
         view.addObject("bannerList", bannerList);
         view.addObject("userCode", getSessionUser().getUserCode());
@@ -98,8 +99,8 @@ public class SysUserController extends BaseController {
     public List<ZC703661Res> queryRoleMenu(
             @RequestParam(value = "pmenuCode", required = false) String pMenuCode,
             @RequestParam(value = "isGetChild", required = false) boolean isGetChild) {
-        List<ZC703661Res> menuList = roleMenuAO.queryMenuList(getSessionUser()
-            .getRoleCode(), pMenuCode, true);
+        List<ZC703661Res> menuList = roleMenuAO
+            .queryMenuList(getSessionUser().getRoleCode(), pMenuCode, true);
         return menuList;
     }
 
@@ -114,13 +115,14 @@ public class SysUserController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return sysUserAO.queryMenuPage(userCode, userName, status, start,
-            limit, orderColumn, orderDir);
+        return sysUserAO.queryMenuPage(userCode, userName, status, start, limit,
+            orderColumn, orderDir);
     }
 
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView queryDetailUser(@RequestParam("operate") String operate) {
+    public ModelAndView queryDetailUser(
+            @RequestParam("operate") String operate) {
         ModelAndView view = new ModelAndView("/system/user_detail");
         return view;
     }
@@ -221,6 +223,11 @@ public class SysUserController extends BaseController {
             @RequestParam("status") String status) {
         // 修改状态验证
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
+        if ("1".equals(status)) {
+            status = "2";
+        } else if ("2".equals(status)) {
+            status = "1";
+        }
         return sysUserAO.editUserSta(userCode, status,
             sessionUser.getUserCode());
     }

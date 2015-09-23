@@ -143,7 +143,13 @@ function dateFormatter(value, row){
 //<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
-    return ['<button class="btn btn-link btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editSta">注销</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editRole">设置角色</button>'].join('');
+	var zx = '';
+	if(row.status == '1'){
+		zx = '锁定';
+	}else if(row.status == '2'){
+		zx = '恢复';
+	}
+    return ['<button class="btn btn-link btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editSta">'+zx+'</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editRole">设置角色</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 
@@ -153,9 +159,21 @@ window.operateEvents = {
     },'click .editRole': function (e, value, row, index) {
     	window.location.href = $("#base_path").val() + "/sysUser/user/detailRole?userCode="+row.userCode+"&operate=edit";
     },'click .editSta': function (e, value, row, index) {
-    	window.location.href = $("#base_path").val() + "/sysUser/user/detailSta?userCode="+row.userCode+"&operate=edit";
+    	var data = {'userCode':row.userCode, 'status':row.status, 'operate':'edit'};
+		var url = $("#base_path").val() + "/sysUser/user/editSta";
+		doPostAjax(url, data, doSuccessBack);
+    	/* window.location.href = $("#base_path").val() + "/sysUser/user/editSta?userCode="+row.userCode+"&status="+row.status+"&operate=edit"; */
     }
 };
+
+function doSuccessBack(res){
+	if(res.success == true){
+		alert("更改成功");
+		$('#tableList').bootstrapTable('refresh');
+	}else{
+		alert("更改失败");
+	}
+}
 
 function doSuccessDel(res) {
 	if (res.success == true) {
