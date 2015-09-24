@@ -112,15 +112,22 @@ var ue = UE.getEditor('editor');
 		$("#type").html(html);
 	}
 	
-	/**
-	 * 提示信息显示隐藏
-	 * @param e
-	 */
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
+	function doPreview(){
+		var imagePath = $("#picture").val();
+		if(imagePath == undefined || imagePath == null || imagePath == ''){
+			return;
+		}
+		var data = {"imagePath":imagePath};
+		var url = $("#base_path").val() + "/project/image/preview";
+		doPostAjax(url,data,doSuccessBackImage);
+	}
+	
+	function doSuccessBackImage(res){
+		if (res.success == true) {
+			var suffix =/\.[^\.]+/.exec($("#picture").val());
+			$("#imageId").attr("src","data:image/"+suffix+";base64," + res.data);
 		}else{
-			$(e).next().removeClass("hid");
+			alert(res.msg);
 		}
 	}
 </script>
@@ -158,7 +165,7 @@ var ue = UE.getEditor('editor');
 				</li>
 				<li><label><span class="inline_red">*</span>发起省份:</label><input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput" /></li>
-				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput"/><a href="javascript:void(0)" onclick=""></li>
+				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput mr40"/><a href="javascript:void(0)" onclick="doPreview()">预览</a><img id="imageId" src=""/></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目视频:</label><input type="text" id="video" name="video" value ="${project.video}"  class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>目标金额(元):</label><input type="text" id="targetAmount" name="targetAmount" value ="${project.targetAmount}" class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>筹集天数:</label><input type="text" id="raiseDays" name="raiseDays" value ="${project.raiseDays}" class="dfinput" /></li>
@@ -166,8 +173,8 @@ var ue = UE.getEditor('editor');
 				<li class="cfl"><label><span class="inline_red">*</span>项目详情:</label>
     				<script id="editor" name="detail" type="text/plain" style="width:900px;height:250px;float:left">${project.detail}</script>
 				</li>
-				<li><input type="hidden" id="userId" name="userId" value ="${project.userId}"  class="dfinput" readOnly="true"/></li>
-				<li><input type="hidden" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput" readOnly="true"/></li>
+				<li><input type="hidden" id="userId" name="userId" value ="${project.userId}"  class="dfinput"/></li>
+				<li><input type="hidden" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput"/></li>
 				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label>
 				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add&proId=${project.proId}">新增回报</a>
 				<table class="tablelist" style="width:87%; clear:none; float:left">
@@ -210,7 +217,7 @@ var ue = UE.getEditor('editor');
 							    </c:when>
 							    <c:otherwise>虚拟信息</c:otherwise>
 							    </c:choose></td>
-							    <td><a href="<%=request.getContextPath()%>/project/return/detail?operate=edit&id=${domain.id}">修改</a>&nbsp;
+							    <td><a href="<%=request.getContextPath()%>/project/return/detail?operate=edit&id=${domain.id}&proId=${project.proId}">修改</a>&nbsp;
 							    <a href="javascript:void(0)" onclick="delReturn('${domain.id}')">删除</a></td>
 							</tr>
 						</c:forEach>

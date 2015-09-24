@@ -38,6 +38,17 @@ public class ApplicationProperties implements ServletContextAware {
     @Value("${web.resRelease}")
     private String resRelease;
 
+    @Value("${web.picUrl}")
+    private String picUrl;
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
     public String getResRelease() {
         return resRelease;
     }
@@ -97,6 +108,8 @@ public class ApplicationProperties implements ServletContextAware {
 
         context.setAttribute("resRelease", resRelease);
         context.setAttribute("jsVersion", jsVersion);
+
+        context.setAttribute("picUrl", picUrl);
     }
 
 }

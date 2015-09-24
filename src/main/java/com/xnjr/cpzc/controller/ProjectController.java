@@ -8,7 +8,13 @@
  */
 package com.xnjr.cpzc.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xnjr.cpzc.ao.IImageAO;
 import com.xnjr.cpzc.ao.IProjectAO;
 import com.xnjr.cpzc.ao.IReturnAO;
 import com.xnjr.cpzc.ao.ISupportAO;
 import com.xnjr.cpzc.dto.res.Page;
-import com.xnjr.cpzc.dto.res.ZC703305Res;
-import com.xnjr.cpzc.dto.res.ZC703306Res;
 import com.xnjr.cpzc.dto.res.ZC703307Res;
 import com.xnjr.cpzc.dto.res.ZC703308Res;
 import com.xnjr.cpzc.dto.res.ZC703309Res;
@@ -46,6 +51,12 @@ public class ProjectController extends BaseController {
 
     @Autowired
     IReturnAO returnAO;
+
+    @Autowired
+    IImageAO imageAO;
+
+    @Autowired
+    private ServletContext servletContext;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
@@ -132,29 +143,59 @@ public class ProjectController extends BaseController {
         return view;
     }
 
+    /**
+     * 图片预览
+     * @param imagePath
+     * @return 
+     * @create: 2015年9月24日 上午10:21:49 xieyj
+     * @history:
+     */
+    @RequestMapping(value = "/image/preview", method = RequestMethod.POST)
+    @ResponseBody
+    public String doPreview(
+            @RequestParam(value = "imagePath", required = true) String imagePath) {
+        imagePath = "/aab.jpg";
+        return imageAO.getImageStr(imagePath);
+    }
+
     @RequestMapping(value = "/return/add", method = RequestMethod.POST)
-    public ZC703305Res doAddReturn(
+    public ModelAndView doAddReturn(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "amount", required = true) String amount,
             @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "picture", required = true) MultipartFile picture,
+            @RequestParam(value = "picture", required = true) MultipartFile picFile,
             @RequestParam(value = "summary", required = true) String summary,
             @RequestParam(value = "needLimit", required = true) String needLimit,
             @RequestParam(value = "limitNum", required = false) String limitNum,
             @RequestParam(value = "supportMaxCount", required = false) String supportMaxCount,
             @RequestParam(value = "returnType", required = true) String returnType,
-            @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
+            @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays)
+            throws IllegalStateException, IOException {
         supportMaxCount = "-1";
-        return returnAO.addReturn(proId, amount, name,
-            picture.getOriginalFilename(), summary, needLimit, limitNum,
-            supportMaxCount, returnType, returnExpectedDays);
+        // 图片保存
+        if (picFile != null) {
+            String path = servletContext.getAttribute("picUrl").toString()
+                    + "/" + picFile.getOriginalFilename();
+            File localFile = new File(path);
+            // 写文件到本地
+            picFile.transferTo(localFile);
+        }
 
+        // 数据保存
+        returnAO.addReturn(proId, amount, name, picFile.getOriginalFilename(),
+            summary, needLimit, limitNum, supportMaxCount, returnType,
+            returnExpectedDays);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("proId", proId);
+        map.put("operate", "approve");
+        ModelAndView view = new ModelAndView("redirect:/project/check", map);
+        return view;
     }
 
     @RequestMapping(value = "/return/edit", method = RequestMethod.POST)
-    @ResponseBody
-    public ZC703306Res doEditReturn(
+    public ModelAndView doEditReturn(
             @RequestParam(value = "id", required = true) String id,
+            @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "amount", required = true) String amount,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "picture", required = false) MultipartFile picture,
@@ -164,10 +205,17 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "supportMaxCount", required = false) String supportMaxCount,
             @RequestParam(value = "returnType", required = true) String returnType,
             @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
+
         supportMaxCount = "-1";
-        return returnAO.editReturn(id, amount, name,
-            picture.getOriginalFilename(), summary, needLimit, limitNum,
-            supportMaxCount, returnType, returnExpectedDays);
+        returnAO.editReturn(id, amount, name, picture.getOriginalFilename(),
+            summary, needLimit, limitNum, supportMaxCount, returnType,
+            returnExpectedDays);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("proId", proId);
+        map.put("operate", "approve");
+        ModelAndView view = new ModelAndView("redirect:/project/check", map);
+        return view;
     }
 
     @RequestMapping(value = "/return/del", method = RequestMethod.POST)
@@ -193,7 +241,7 @@ public class ProjectController extends BaseController {
 
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public ModelAndView getProject(
+    public ModelAndView doGetProject(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "operate", required = false) String operate) {
         String url = "/project/project_detail";
@@ -217,7 +265,7 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST)
     @ResponseBody
-    public boolean firstApproveProject(
+    public boolean doFirstApproveProject(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "checkResult", required = true) String checkResult,
             @RequestParam(value = "remark", required = true) String remark) {
@@ -227,7 +275,7 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/flow", method = RequestMethod.POST)
     @ResponseBody
-    public boolean flowProject(
+    public boolean doFlowProject(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "remark", required = true) String remark) {
         return projectAO.flowProject(proId,
@@ -236,7 +284,7 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/payAmount", method = RequestMethod.POST)
     @ResponseBody
-    public boolean payAmountProject(
+    public boolean doPayAmountProject(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "firstPayAmount", required = true) String firstPayAmount,
             @RequestParam(value = "firstPayFee", required = true) String firstPayFee,
@@ -247,7 +295,7 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/repay", method = RequestMethod.POST)
     @ResponseBody
-    public boolean confirmSendProject(
+    public boolean doConfirmSendProject(
             @RequestParam(value = "proId", required = true) String proId,
             @RequestParam(value = "checkResult", required = true) String checkResult,
             @RequestParam(value = "remark", required = true) String remark) {
