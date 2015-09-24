@@ -32,8 +32,8 @@ var statusData=null;
 					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
 					status : $("#statusSearch").val(),
-					isHot : $('#isHotCheck').is(':checked')==true?"1":"0",
-					isRecommend : $('#isRecommendCheck').is(':checked')==true?"1":"0",
+					isHot : $('#isHotCheck').val(),
+					isRecommend : $('#isRecommendCheck').val(),
 					start : params.offset / params.limit + 1,
 					limit : params.limit
 					};
@@ -250,8 +250,20 @@ var statusData=null;
 							<select id="statusSearch" name="statusSearch" class="form-control"></select>
 					</div>
 					<div class="form-group">
-						<input type="checkbox" id="isHotCheck" name="isHotCheck">是否热门 &nbsp;
-			    		<input type="checkbox" id="isRecommendCheck" name="isRecommendCheck">是否推荐 &nbsp;
+						<label for="isHotSearch" class="control-label">是否热门:</label>
+							<select id="isHotSearch" name="isHotSearch" class="form-control">
+								<option value="" selected=”selected“>请选择</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+					</div>
+					<div class="form-group">
+						<label for="isRecommendCheck" class="control-label">是否推荐:</label>
+							<select id="isRecommendCheck" name="isRecommendCheck" class="form-control">
+								<option value="" selected=”selected“>请选择</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
 					</div>
 					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 				</div>
