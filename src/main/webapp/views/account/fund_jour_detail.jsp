@@ -50,8 +50,8 @@ function moneyFormatter(value){
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">账户管理</a></li>
-	    	<li><a href="#">资金流水查询</a></li>
+	    	<li><a href="#">账户查询</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/account/fund_jour.htm">资金流水</a></li>
 	    	<li id="operContent">资金流水详情</li>
    		</ul>
     </div>

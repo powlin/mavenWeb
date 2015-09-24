@@ -169,7 +169,7 @@ var typeData=null;
 			doPostAjax(url, data, doSuccessDel);
         },
         'click .choice': function (e, value, row, index) {
-        	window.location.href = $("#base_path").val()+"/views/system/role_menu.jsp?role_code="+row.roleCode+"&role_name="+row.roleName;
+        	window.location.href = $("#base_path").val()+"/sysAuth/system/roleMenu?role_code="+row.roleCode;
         }
     };
     

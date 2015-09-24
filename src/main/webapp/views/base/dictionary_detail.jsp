@@ -94,8 +94,8 @@
     	<span>位置：</span>
 	    <ul class="placeul">
 	    	<li><a href="#">基础数据</a></li>
-	    	<li><a href="#">数据字典</a></li>
-	    	<li id="operContent">新增数据字典</li>
+	    	<li><a href="<%=request.getContextPath()%>/views/base/dictionary.htm">数据字典</a></li>
+	    	<li id="operContent">修改数据字典</li>
    		</ul>
     </div>
     <form>

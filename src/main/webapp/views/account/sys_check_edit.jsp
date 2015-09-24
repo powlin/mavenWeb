@@ -115,8 +115,8 @@ function clickBack(){
     	<span>位置：</span>
 	    <ul class="placeul">
 	    	<li><a href="#">日终清算</a></li>
-	    	<li><a href="#">系统对账</a></li>
-	    	<li id="operContent">系统对账处理详情</li>
+	    	<li><a href="<%=request.getContextPath()%>/views/account/sys_check.htm">系统对账</a></li>
+	    	<li id="operContent">系统对账处理</li>
    		</ul>
     </div>
     <form>

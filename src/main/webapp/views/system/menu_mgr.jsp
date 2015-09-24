@@ -12,21 +12,6 @@ $(document).ready(function(){
 	var url = $("#base_path").val() + "/menumgr/menu/detailjson";
 	doGetAjax(url, data, fillSelSuccessBack);
 	
-	$(".deletemenu").click(function(){
-		/* var cmi = checkMenuItem(); */
-		/* if(cmi != ''){
-			if(!confirm("是否确认删除选中记录？")){
-				return false;
-			}
-			var data = {};
-			data['menuCodes'] = cmi;
-			var url = $("#base_path").val() + "/menumgr/deletemenu";
-			doPostAjax(url, data, doSuccessBack);
-		}else{
-			alert("请至少选择一条记录");
-		} */
-	});
-	
 	//添加菜单
 	$('#addBtn').click(function() {
 		window.location.href = $("#base_path").val() + "/menumgr/menu/detail?operate=add";
@@ -175,20 +160,6 @@ function fillSelSuccessBack(res){
 	}
 	$("#parent_code_search").html(html);
 }
-
-/* function checkMenuItem(){
-	var check_val = "";
-	var mi = "input.menuitem[type=checkbox]";
-	for(var i = 0;i < $(mi).length;i++){
-		if($(mi).eq(i).is(":checked")){
-			check_val = check_val + $(mi).eq(i).val() + ",";
-		}
-	}
-	if(check_val.length > 0){
-		check_val = check_val.substring(0, check_val.length-1);
-	}
-	return check_val;
-} */
 </script>
 </head>
 <body>
@@ -197,8 +168,8 @@ function fillSelSuccessBack(res){
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li>系统管理</li>
-		    <li>菜单设置</li>
+		    <li>权限管理</li>
+		    <li>菜单管理</li>
 	    </ul>
     </div>
     <div class="leftinfo">

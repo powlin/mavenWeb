@@ -96,7 +96,7 @@
     	<span>位置：</span>
 	    <ul class="placeul">
 	    	<li><a href="#">基础数据</a></li>
-	    	<li><a href="#">系统参数</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/base/sys_param_search.htm">系统参数</a></li>
 	    	<li id="operContent">修改系统参数</li>
    		</ul>
     </div>

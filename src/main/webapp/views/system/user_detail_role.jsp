@@ -83,8 +83,8 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">用户管理</a></li>
-	    	<li><a href="#">用户设置</a></li>
+	    	<li><a href="#">系统管理</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/system/user_mgr.htm">用户设置</a></li>
 	    	<li id="operContent">设置角色</li>
    		</ul>
     </div>

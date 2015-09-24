@@ -82,7 +82,7 @@
     	<span>位置：</span>
 	    <ul class="placeul">
 	    	<li><a href="#">用户管理</a></li>
-	    	<li><a href="#">角色设置</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/system/role.htm">角色设置</a></li>
 	    	<li id="operContent">新增角色</li>
    		</ul>
     </div>

@@ -101,8 +101,8 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">系统管理</a></li>
-	    	<li><a href="#">菜单设置</a></li>
+	    	<li><a href="#">权限管理</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/system/menu_mgr.htm">菜单管理</a></li>
 	    	<li id="operContent">新增菜单</li>
    		</ul>
     </div>

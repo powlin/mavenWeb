@@ -182,8 +182,8 @@ function dateFormatter(value, row){
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">系统参数</a></li>
-		    <li><a href="#">查询系统参数</a></li>
+		    <li>系统参数</li>
+		    <li>查询系统参数</li>
 	    </ul>
     </div>
     <div class="leftinfo">

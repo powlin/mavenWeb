@@ -58,8 +58,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("role_name") String roleName,
             @RequestParam("role_level") String roleLevel,
             @RequestParam(value = "remark", required = false) String remark) {
-        return roleAO.addRole(roleCode, roleName, roleLevel, this
-            .getSessionUser().getUserCode(), remark);
+        return roleAO.addRole(roleCode, roleName, roleLevel,
+            this.getSessionUser().getUserCode(), remark);
     }
 
     @RequestMapping(value = "/role/edit", method = RequestMethod.POST)
@@ -68,8 +68,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("role_name") String roleName,
             @RequestParam("role_level") String roleLevel,
             @RequestParam("remark") String remark) {
-        return roleAO.editRole(roleCode, roleName, roleLevel, this
-            .getSessionUser().getUserCode(), remark);
+        return roleAO.editRole(roleCode, roleName, roleLevel,
+            this.getSessionUser().getUserCode(), remark);
     }
 
     @RequestMapping(value = "/role/drop", method = RequestMethod.POST)
@@ -89,6 +89,20 @@ public class AuthorityController extends BaseController {
             if (list != null && list.size() > 0) {
                 view.addObject("role", list.get(0));
                 view.addObject("operate", operate);
+            }
+        }
+        return view;
+    }
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/system/roleMenu", method = RequestMethod.GET)
+    public ModelAndView getRoleMenu(
+            @RequestParam(value = "role_code", required = false) String roleCode) {
+        ModelAndView view = new ModelAndView("/system/role_menu");
+        if (StringUtils.isNotBlank(roleCode)) {
+            List list = roleAO.queryRoleList(roleCode, null, null, null);
+            if (list != null && list.size() > 0) {
+                view.addObject("role", list.get(0));
             }
         }
         return view;
@@ -125,8 +139,7 @@ public class AuthorityController extends BaseController {
     // ******************** 菜单模块 ***************************
     @RequestMapping(value = "/menu/add", method = RequestMethod.POST)
     @ResponseBody
-    public ZC703633Res addMenu(
-            @RequestParam("menu_code") String menuCode,
+    public ZC703633Res addMenu(@RequestParam("menu_code") String menuCode,
             @RequestParam("menu_name") String menuName,
             @RequestParam("menu_url") String menuUrl,
             @RequestParam(value = "parent_code", required = false) String parentCode,
@@ -150,8 +163,8 @@ public class AuthorityController extends BaseController {
             @RequestParam("parent_code") String parentCode,
             @RequestParam("order_no") String orderNo,
             @RequestParam("remark") String remark) {
-        return menuAO.editMenu(menuCode, menuName, menuUrl, parentCode,
-            orderNo, remark);
+        return menuAO.editMenu(menuCode, menuName, menuUrl, parentCode, orderNo,
+            remark);
     }
 
     @SuppressWarnings("rawtypes")

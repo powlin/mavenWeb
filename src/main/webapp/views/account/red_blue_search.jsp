@@ -207,8 +207,8 @@ function statusFormatter(value, row) {
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">财务管理</a></li>
-		    <li><a href="#">红冲蓝补查询</a></li>
+		    <li>红冲蓝补</li>
+		    <li>调账申请</li>
 	    </ul>
     </div>
     <div class="leftinfo">

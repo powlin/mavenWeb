@@ -97,9 +97,9 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">财务管理</a></li>
 	    	<li><a href="#">红冲蓝补</a></li>
-	    	<li id="operContent">红冲蓝补审核</li>
+	    	<li><a href="<%=request.getContextPath()%>/views/account/red_blue_search.htm">调账申请</a></li>
+	    	<li id="operContent">调账申请审核</li>
    		</ul>
     </div>
     <form>

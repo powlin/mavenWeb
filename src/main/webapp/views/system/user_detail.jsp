@@ -12,14 +12,6 @@
 <script type="text/javascript">
 	$(function() {
 		
-		/* var data = {};
-		data['role_code'] = "";
-		data['role_level'] = "";
-		data['create_datetime_start'] = "";
-		data['create_datetime_end'] = "";
-		var url = $("#base_path").val() + "/sysAuth/role/list";
-		doGetAjax(url, data, doQueryRoleListSuccessBack); */
-		
 		var operate = $("#operate").val();
 		if(operate == "edit"){
 			$("#operContent").text("新增用户");
@@ -85,9 +77,9 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">用户管理</a></li>
-	    	<li><a href="#">用户设置</a></li>
-	    	<li id="operContent">新增菜单</li>
+	    	<li><a href="#">权限管理</a></li>
+	    	<li><a href="<%=request.getContextPath()%>/views/system/user_mgr.htm">用户设置</a></li>
+	    	<li id="operContent">新增用户</li>
    		</ul>
     </div>
     <form>

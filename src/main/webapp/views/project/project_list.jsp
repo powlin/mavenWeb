@@ -224,8 +224,8 @@ var op_status=null;
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">项目管理</a></li>
-		    <li><a href="#">众筹审批</a></li>
+		    <li>项目管理</li>
+		    <li>众筹审批</li>
 	    </ul>
     </div>
     <div class="panel-body">

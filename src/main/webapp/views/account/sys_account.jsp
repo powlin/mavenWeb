@@ -57,8 +57,8 @@ function dateFormatter(value){
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">账户查询</a></li>
-	    	<li><a href="#">系统账户</a></li>
+	    	<li>账户查询</li>
+	    	<li>系统账户</li>
    		</ul>
     </div>
     <form>

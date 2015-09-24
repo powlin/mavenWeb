@@ -191,8 +191,8 @@ function doSuccessDel(res) {
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">用户管理</a></li>
-		    <li><a href="#">用户设置</a></li>
+		    <li>权限管理</li>
+		    <li>用户设置</li>
 	    </ul>
     </div>
     <div class="leftinfo">

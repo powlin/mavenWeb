@@ -150,8 +150,8 @@ function dateFormatter(value, row){
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">账户查询</a></li>
-		    <li><a href="#">系统资金流水</a></li>
+		    <li>账户查询</li>
+		    <li>系统资金流水</li>
 	    </ul>
     </div>
     <div class="leftinfo">

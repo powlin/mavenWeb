@@ -59,16 +59,17 @@ function doMenuNode(nodes){
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">系统管理</a></li>
-		    <li><a href="#">权限设置</a></li>
+		    <li><a href="#">权限管理</a></li>
+		    <li><a href="<%=request.getContextPath()%>/views/system/role.htm">角色设置</a></li>
+	    	<li id="operContent">分配菜单</li>
 	    </ul>
     </div>
     <form>
 	    <div class="formbody">
 	    <div class="formtitle"><span>分配菜单</span></div>
 		     <ul class="forminfo">
-		       <li><label>角色编号:</label><input type="text" name="role_code" value ="<%=request.getParameter("role_code") %>" readonly="readonly" class="dfinput"/></li>
-			   <li><label>角色名称:</label><input type="text" name="role_name" value ="<%=request.getParameter("role_name") %>" readonly="readonly" class="dfinput"/></li>
+		       <li><label>角色编号:</label><input type="text" name="role_code" value ="${role.roleCode }" readonly="readonly" class="dfinput"/></li>
+			   <li><label>角色名称:</label><input type="text" name="role_name" value ="${role.roleName }" readonly="readonly" class="dfinput"/></li>
 			   <li><label>菜单权限:</label>
 			   <div id="treeMenu"></div></li>
 			   <li><input id="subBtn" type="button" class="btn mr40" value="保存"/>

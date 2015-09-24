@@ -230,8 +230,8 @@ window.operateEvents = {
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">日终清算</a></li>
-		    <li><a href="#">账户对账</a></li>
+		    <li>日终清算</li>
+		    <li>系统对账</li>
 	    </ul>
     </div>
     <div class="leftinfo">
