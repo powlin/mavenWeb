@@ -22,16 +22,21 @@
 		$("#actualAmount").text(moneyFormat($("#actualAmount").text(), 2));
 		$("#exceedTargetAmount").text(moneyFormat($("#exceedTargetAmount").text(), 2));
 		proLink = "";
+		var proName = "项目查询";
 		if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
 			proLink = $("#base_path").val() + "/views/project/project_all.htm";
 		}else if($("#operate").val() == "flow"){
 			proLink = $("#base_path").val() + "/project/list?op_status=2";
+			proName="筹款中项目";
 		}else if($("#operate").val() == "recheck"){
 			proLink = $("#base_path").val() + "/project/list?op_status=3";
+			proName="待复核项目";
 		}else if($("#operate").val() == "confirmRepay"){
 			proLink = $("#base_path").val() + "/project/list?op_status=5";
+			proName="待确认项目";
 		}
 		$("#proLink").attr("href",proLink);
+		$("#proLink").text(proName);
 		$('#backBtn').click(function() {
 			window.location.href = proLink;
 		});
