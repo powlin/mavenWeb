@@ -137,7 +137,7 @@ var statusData=null;
 		});
 		// 查询
 		$('#searchBtn').click(function() {
-			$('#tableList').bootstrapTable('refresh');
+			$('#tableList').bootstrapTable('refresh',{url: $("#base_path").val() + "/project/page"});
 		});
 	});
 	

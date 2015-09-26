@@ -97,6 +97,7 @@
 		// 查询
 		$('#searchBtn').click(function() {
 			$('#tableList').bootstrapTable('refresh');
+			
 		});
 		
 		$("#myModel").on("show.bs.modal", function() {

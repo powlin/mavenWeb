@@ -94,7 +94,7 @@ var typeData=null;
 
 		// 查询
 		$('#searchBtn').click(function() {
-			$('#tableList').bootstrapTable('refresh');
+			$('#tableList').bootstrapTable('refresh',{url: $("#base_path").val() + "/sysAuth/role/page"});
 		});
 		
 		// 新增
@@ -102,10 +102,6 @@ var typeData=null;
 			window.location.href = $("#base_path").val() + "/sysAuth/role/detail?operate=add";
 		});
 		
-		$("#myModel").on("show.bs.modal", function() {
-	         $(this).removeData("bs.modal");
-		});
-
 		//新增提交
 		$('#subBtn').click(function() {
 			var data = {};

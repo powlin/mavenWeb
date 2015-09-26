@@ -109,7 +109,7 @@ $(function() {
 
 	// 查询
 	$('#searchBtn').click(function() {
-		$('#tableList').bootstrapTable('refresh');
+		$('#tableList').bootstrapTable('refresh',{url: $("#base_path").val() + "/account/moneyList"});
 	});
 });
 

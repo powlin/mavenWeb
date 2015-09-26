@@ -109,7 +109,7 @@
 			    <li><label><span class="inline_red">*</span>类型:</label><select id="type" name="type" class="dfinput">
 			    </select></li>
 			    <li><label><span class="inline_red">*</span>参数值:</label><input type="text" id="value" name="value" value="${sysParam.value}" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">参数值不能为空</span></li>
-			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" id="remark" name="remark" value="${sysParam.remark}" class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" value="${sysParam.remark}" class="dfinput"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>
