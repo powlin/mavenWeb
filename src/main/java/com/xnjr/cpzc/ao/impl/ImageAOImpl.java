@@ -1,5 +1,5 @@
 /**
- * @Title FileOperateAOImpl.java 
+ * @Title ImageAOImpl.java 
  * @Package com.xnjr.cpzc.ao.impl 
  * @Description 
  * @author xieyj  

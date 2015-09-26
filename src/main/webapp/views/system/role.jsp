@@ -204,7 +204,7 @@ var typeData=null;
 						</div>
 					<div class="form-group mr40">
 						<label for="menu_code" class="control-label-first">角色编号:</label> <input class="input-sm" type="text"
-							class="form-control" id="role_code_search">
+							class="form-control" placeholder="请输入角色编号" id="role_code_search">
 					</div>
 					<div class="form-group mr40">
 						<label for="parent_code" class="control-label">角色等级:</label>

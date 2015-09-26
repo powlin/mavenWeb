@@ -33,6 +33,16 @@ var ue = UE.getEditor('editor');
 			if(!checkData(colNames,isNulls,colValues,colLengths)){
 				return;
 			}
+			//金额数字判断
+			if(isNaN($("#targetAmount").val())){
+				alert("目标金额请输入数字");
+				return;
+			}
+			
+			if(isNaN($("#raiseDays").val())){
+				alert("筹集天数请输入数字");
+				return;
+			}
 			$("#targetAmount").val(moneyFormatByEnLarge($("#targetAmount").val(), 0));
 			var path = $("#base_path").val() + "/project/edit";
 			$('#proForm').attr("method","post");

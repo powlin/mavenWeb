@@ -156,7 +156,6 @@ public class ProjectController extends BaseController {
     @ResponseBody
     public String doPreview(
             @RequestParam(value = "imagePath", required = true) String imagePath) {
-        imagePath = "/aab.jpg";
         return imageAO.getImageStr(imagePath);
     }
 
@@ -207,7 +206,6 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "supportMaxCount", required = false) String supportMaxCount,
             @RequestParam(value = "returnType", required = true) String returnType,
             @RequestParam(value = "returnExpectedDays", required = true) String returnExpectedDays) {
-
         supportMaxCount = "-1";
         returnAO.editReturn(id, amount, name, picture.getOriginalFilename(),
             summary, needLimit, limitNum, supportMaxCount, returnType,
