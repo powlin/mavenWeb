@@ -114,11 +114,11 @@
 			    <li><label><span class="inline_red">*</span>概述:</label><textarea id="summary" name="summary" class="textinput" >${returnDO.summary}</textarea></li>
 			    <li><label><span class="inline_red">*</span>回报数量:</label><input type="radio" name="needLimit" value="0" checked>不限 &nbsp;<input type="radio" name="needLimit" value="1">限制
 			    <input type="text" id="limitNum" name="limitNum" value ="${returnDO.limitNum}"  class="dfinput hid" onblur="toggleMess(this)"/><span id="limitNumTip" class="inline_red hid">限制数量不能为空</span></li>
-			    <li><div id="preview">
+			    <li><div id="preview" class="preview">
     					<img id="imghead" class="imghead" width=100 height=100 border=0 src=''/>
 					</div>
 			    <label><span class="inline_red">*</span>图片:</label>
-			    <input type="file" id="picture" name="picture" class="preview" onchange="previewImage(this)" onblur="toggleMess(this)"/><span class="inline_red hid">请上传图片</span></li>
+			    <input type="file" id="picture" name="picture" onchange="previewImage(this)" onblur="toggleMess(this)"/><span class="inline_red hid">请上传图片</span></li>
 			    <li><label><span class="inline_red">*</span>发放方式:</label>
 			    <input type="radio" name="returnType" value="0" checked>短信 &nbsp;
 			    <input type="radio" name="returnType" value="1">全国包邮（含港澳台） &nbsp;
