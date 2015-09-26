@@ -226,8 +226,8 @@ var statusData=null;
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">营销管理</a></li>
-		    <li><a href="#">项目查询</a></li>
+		    <li>营销管理</li>
+		    <li>项目查询</li>
 	    </ul>
     </div>
     <div class="panel-body">

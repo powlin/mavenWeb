@@ -96,9 +96,9 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">项目管理</a></li>
-	    	<li><a href="#">众筹审批</a></li>
-	    	<li id="operContent">设置支持</li>
+	    	<li>众筹管理</li>
+	    	<li>项目查询</li>
+	    	<li>设置支持</li>
    		</ul>
     </div>
     <form id="returnForm" method="post" enctype="multipart/form-data">

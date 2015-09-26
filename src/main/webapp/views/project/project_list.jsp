@@ -208,7 +208,7 @@ var op_status=null;
         },
         //查看投资
     	'click .support': function (e, value, row, index) {
-            window.location.href = $("#base_path").val() + "/project/support/search?proId="+row.proId;
+            window.location.href = $("#base_path").val() + "/project/support/search?proId="+row.proId+"&status="+row.status;
         },
         //平台确认偿还
     	'click .confirmRepay': function (e, value, row, index) {
@@ -224,8 +224,8 @@ var op_status=null;
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li>项目管理</li>
-		    <li>众筹审批</li>
+		    <li>众筹管理</li>
+		    <li>项目查询</li>
 	    </ul>
     </div>
     <div class="panel-body">

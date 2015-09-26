@@ -69,8 +69,8 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">营销管理</a></li>
-	    	<li><a href="#">项目位置</a></li>
+	    	<li>营销管理</li>
+	    	<li><a href="<%=request.getContextPath()%>/views/project/project_tag.htm">项目位置</a></li>
 	    	<li>标签设置</li>
    		</ul>
     </div>

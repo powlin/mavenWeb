@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>基础数据</title>
+<title>系统参数新增</title>
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
@@ -61,6 +61,11 @@
 			value.next().removeClass("hid");
 			return false;
 		}
+		var remark = $("#remark");
+		if(remark.val() == ""){
+			remark.next().removeClass("hid");
+			return false;
+		}
 		return true;
 	}
 	
@@ -89,7 +94,7 @@
 	    <ul class="placeul">
 	    	<li><a href="#">基础数据</a></li>
 	    	<li><a href="#">系统参数</a></li>
-	    	<li id="operContent">参数设置</li>
+	    	<li>参数新增</li>
    		</ul>
     </div>
     <form>
@@ -101,7 +106,7 @@
 			    <li><label><span class="inline_red">*</span>参数类型:</label><select id="type" name="type" class="dfinput" onblur="toggleMess(this)">
 			    </select><span class="inline_red hid">参数类型不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>参数值:</label><input type="text" id="value" name="value" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">参数值不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput"/><span class="inline_red hid">备注不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

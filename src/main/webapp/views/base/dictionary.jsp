@@ -4,7 +4,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>系统设置</title>
+<title>数据字典设置</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
 $(function() {
@@ -170,7 +170,7 @@ function dateFormatter(value, row){
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li>数据字典</li>
-		    <li>查询数据字典</li>
+		    <li>字典查询</li>
 	    </ul>
     </div>
     <div class="leftinfo">

@@ -4,7 +4,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>账户管理</title>
+<title>红冲蓝补查询</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
 var typeData=null;
@@ -208,7 +208,7 @@ function statusFormatter(value, row) {
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li>红冲蓝补</li>
-		    <li>调账申请</li>
+		    <li>调账查询</li>
 	    </ul>
     </div>
     <div class="leftinfo">

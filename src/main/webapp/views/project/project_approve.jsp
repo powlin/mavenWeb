@@ -147,9 +147,9 @@ var ue = UE.getEditor('editor');
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">项目管理</a></li>
-		    <li><a href="#">众筹审批</a></li>
-		    <li><a href="#">申请审批</a></li>
+		    <li>众筹管理</li>
+		    <li><a href="<%=request.getContextPath()%>/project/list?op_status=1">待审核项目</a></li>
+		    <li><a href="#">申请审核</a></li>
 	    </ul>
     </div>
     <form id="proForm" >

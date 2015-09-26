@@ -11,9 +11,7 @@
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
 	$(function() {
-		//var data = {"pKey":"p_status"};
-		//var url = $("#base_path").val() + "/dict/list";
-		//doGetAjaxIsAsync(url, data, false, doSuccessBackStatus);
+		$("#proLink").attr("href",$("#base_path").val() + "/project/list?op_status="+$("#status").val());
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
@@ -124,12 +122,13 @@
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
 	<input type="hidden" id="proId" value="${proId}"/>
+	<input type="hidden" id="status" value = "${status}"/>
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="#">项目管理</a></li>
-		    <li><a href="#">众筹审批</a></li>
-		    <li><a href="#">支持记录</a></li>
+		    <li>众筹管理</li>
+		    <li><a id="proLink">项目查询</a></li>
+		    <li>支持查询</li>
 	    </ul>
     </div>
     <div class="panel-body">

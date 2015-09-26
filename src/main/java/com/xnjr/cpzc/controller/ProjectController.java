@@ -86,9 +86,11 @@ public class ProjectController extends BaseController {
 
     @RequestMapping(value = "/support/search", method = RequestMethod.GET)
     public ModelAndView doSupportSearch(
-            @RequestParam(value = "proId", required = true) String proId) {
+            @RequestParam(value = "proId", required = true) String proId,
+            @RequestParam(value = "status", required = true) String status) {
         ModelAndView view = new ModelAndView("/project/support_list");
         view.addObject("proId", proId);
+        view.addObject("status", status);
         return view;
     }
 

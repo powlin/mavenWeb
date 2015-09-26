@@ -21,17 +21,19 @@
 		$("#raiseDays").text(parseInt($("#raiseDays").text()));
 		$("#actualAmount").text(moneyFormat($("#actualAmount").text(), 2));
 		$("#exceedTargetAmount").text(moneyFormat($("#exceedTargetAmount").text(), 2));
-		
+		proLink = "";
+		if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
+			proLink = $("#base_path").val() + "/views/project/project_all.htm";
+		}else if($("#operate").val() == "flow"){
+			proLink = $("#base_path").val() + "/project/list?op_status=2";
+		}else if($("#operate").val() == "recheck"){
+			proLink = $("#base_path").val() + "/project/list?op_status=3";
+		}else if($("#operate").val() == "confirmRepay"){
+			proLink = $("#base_path").val() + "/project/list?op_status=5";
+		}
+		$("#proLink").attr("href",proLink);
 		$('#backBtn').click(function() {
-			if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
-				window.location.href = $("#base_path").val() + "/views/project/project_all.htm";
-			}else if($("#operate").val() == "flow"){
-				window.location.href = $("#base_path").val() + "/project/list?op_status=2";
-			}else if($("#operate").val() == "recheck"){
-				window.location.href = $("#base_path").val() + "/project/list?op_status=3";
-			}else if($("#operate").val() == "confirmRepay"){
-				window.location.href = $("#base_path").val() + "/project/list?op_status=5";
-			}
+			window.location.href = proLink;
 		});
 		
 		if($("#operate").val() == null || $("#operate").val() == undefined || $("#operate").val() ==''){
@@ -181,8 +183,8 @@
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">项目管理</a></li>
-	    	<li><a href="#">众筹审批</a></li>
+	    	<li>众筹管理</li>
+	    	<li><a id="proLink">项目查询</a></li>
 	    	<li id="operContent">查看详情</li>
    		</ul>
     </div>

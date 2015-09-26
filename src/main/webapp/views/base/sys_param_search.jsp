@@ -4,7 +4,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>基础数据</title>
+<title>系统参数</title>
 <jsp:include page="../../components/jsp/include.jsp" />
 <script type="text/javascript">
 var typeData=null;
@@ -183,7 +183,7 @@ function dateFormatter(value, row){
 	    <span>位置：</span>
 	    <ul class="placeul">
 		    <li>系统参数</li>
-		    <li>查询系统参数</li>
+		    <li>参数查询</li>
 	    </ul>
     </div>
     <div class="leftinfo">
