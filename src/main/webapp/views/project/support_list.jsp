@@ -88,10 +88,11 @@
 				},{
 				field : 'amount',
 				title : '金额',
-				align : 'left',
+				align : 'right',
 				valign : 'middle',
 				width : 200,
-				sortable : false
+				sortable : false,
+				formatter : moneyFormatter
 				},{
 				field : 'createDatetime',
 				title : '创建时间',
@@ -115,6 +116,10 @@
 	
 	function dateFormatter(value, row){
 		return dateFormat(value,'yyyy-MM-dd HH:mm:ss');
+	}
+	
+	function moneyFormatter(value, row){
+		return moneyFormat(value, 2);
 	}
 </script>
 </head>
