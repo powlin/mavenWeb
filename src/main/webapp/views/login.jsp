@@ -9,6 +9,9 @@
 <script src="<%=request.getContextPath()%>/components/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/components/js/cloud.js"></script>
 <script type="text/javascript">
+	if (top.location != self.location){     
+		top.location=self.location;     
+	}
 	$(function(){
 	    $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
 		$(window).resize(function(){
