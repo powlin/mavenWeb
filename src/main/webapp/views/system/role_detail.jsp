@@ -11,6 +11,9 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
+		var data = {"pKey":"r_level"};
+		var url = $("#base_path").val() + "/dict/list";
+		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		var operate = $("#operate").val();
 		if(operate == "edit"){
 			$("#operContent").text("修改角色");
@@ -35,6 +38,22 @@
 			doPostAjax(url, data, doSuccessBack);
 		});
 	});
+	
+	function doSuccessBackType(res){
+		var data = res.data;
+		typeData = data;
+		var html = "<option value=''>请选择</option>";
+		if(typeof(data) != "undefined"){//判断undifined
+			for(var i = 0;i < data.length;i++){
+				if(data[i].key == $("#roleLevel").val()){
+					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
+				}else{
+					html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
+				}
+			}
+		}
+		$("#roleLevel").html(html);
+	}
 	
 	function checkForm(){
 		var roleCode = $("#roleCode");
@@ -93,11 +112,8 @@
 			    <li><label><span class="inline_red">*</span>角色编号:</label><input type="text" id="roleCode" name="role_code" value ="${role.roleCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色编号不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="role_name" value ="${role.roleName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色名称不能为空</span></li>
 			    <li><label><span class="inline_red">*</span>角色等级:</label>
-				    <select id="roleLevel" name="role_level" class="dfinput">
-						<option value="1">财务级别</option>
-						<option value="2">运营推广级别</option>
-						<option value="3">风控级别</option>
-					</select>
+				    <select id="roleLevel" name="role_level" class="dfinput" onblur="toggleMess(this)"/>
+					</select><span class="inline_red hid">角色等级不能为空</span>
 				</li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
