@@ -42,6 +42,12 @@ public class ZC703405Req extends ABaseDO {
     // 是否推荐项目
     private String isRecommend;
 
+    // 创建起始时间
+    private String createDatetimeStart;
+
+    // 创建终止时间
+    private String createDatetimeEnd;
+
     public String getIsHot() {
         return isHot;
     }
@@ -97,4 +103,21 @@ public class ZC703405Req extends ABaseDO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getCreateDatetimeStart() {
+        return createDatetimeStart;
+    }
+
+    public void setCreateDatetimeStart(String createDatetimeStart) {
+        this.createDatetimeStart = createDatetimeStart;
+    }
+
+    public String getCreateDatetimeEnd() {
+        return createDatetimeEnd;
+    }
+
+    public void setCreateDatetimeEnd(String createDatetimeEnd) {
+        this.createDatetimeEnd = createDatetimeEnd;
+    }
+
 }

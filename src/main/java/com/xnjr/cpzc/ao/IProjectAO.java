@@ -20,7 +20,8 @@ public interface IProjectAO {
     @SuppressWarnings("rawtypes")
     public Page queryProjectPage(String proId, String userId, String name,
             String type, String status, String isHot, String isRecommend,
-            String start, String limit);
+            String createDatetimeStart, String createDatetimeEnd, String start,
+            String limit);
 
     public Object getRichProject(String proId);
 

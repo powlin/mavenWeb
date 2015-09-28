@@ -208,7 +208,7 @@ var ue = UE.getEditor('editor');
 						    <td>其他</td>
 						    <td></td>
 						</tr>
-						<c:forEach var="domain" items="${returnList}" varStatus="status">
+						<c:forEach var="domain" items="${project.returnList}" varStatus="status">
 							<tr>
 							    <td>${domain.id}</td>
 							    <td>${domain.name}</td>

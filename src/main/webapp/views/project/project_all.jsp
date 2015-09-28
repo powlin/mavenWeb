@@ -33,6 +33,8 @@ var statusData=null;
 					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
 					status : $("#statusSearch").val(),
+					createDatetimeStart : $("#createDatetimeStart").val(),
+					createDatetimeEnd : $("#createDatetimeEnd").val(),
 					start : params.offset / params.limit + 1,
 					limit : params.limit
 					};
@@ -240,7 +242,15 @@ var statusData=null;
 						<label for="statusSearch" class="control-label">项目状态:</label>
 							<select id="statusSearch" name="statusSearch" class="form-control"></select>
 					</div>
-					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+					<div class="form-group mt10">
+							<label for="createDatetimeStart" class="control-label">创建时间起:</label> <input class="input-sm dfdate" type="text"
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" class="form-control" id="createDatetimeStart" name="createDatetimeStart" placeholder="请输入创建时间起">
+					</div>
+					<div class="form-group mt10">
+						<label for="createDatetimeEnd" class="control-label">创建时间止:</label> <input class="input-sm dfdate" type="text"
+							onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" class="form-control" id="createDatetimeEnd" name="createDatetimeEnd" placeholder="请输入创建时间止">
+					</div>&nbsp;
+					<button id="searchBtn" class="btn btn-default btn-sm mt10">搜索</button>
 				</div>
 			</div>
 			<table id="tableList"></table>

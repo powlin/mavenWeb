@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xnjr.cpzc.ao.IProjectAO;
 import com.xnjr.cpzc.ao.IProjectTagAO;
-import com.xnjr.cpzc.dto.res.Page;
 
 /** 
  * @author: xieyj 
@@ -37,12 +36,8 @@ public class ProjectTagController extends BaseController {
     public ModelAndView doDetailView(
             @RequestParam(value = "proId", required = true) String proId) {
         ModelAndView view = new ModelAndView("/project/tag_edit");
-        @SuppressWarnings("rawtypes")
-        Page page = projectAO.queryProjectPage(proId, null, null, null, null,
-            null, null, "0", "10");
-        if (page != null && page.getList() != null) {
-            view.addObject("project", page.getList().get(0));
-        }
+        Object project = projectAO.getRichProject(proId);
+        view.addObject("project", project);
         view.addObject("projectTag", projectTagAO.getDetail(proId));
         return view;
     }

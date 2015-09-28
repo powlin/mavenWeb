@@ -32,8 +32,10 @@ var statusData=null;
 					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
 					status : $("#statusSearch").val(),
-					isHot : $('#isHotCheck').val(),
-					isRecommend : $('#isRecommendCheck').val(),
+					isHot : $('#isHotSearch').val(),
+					isRecommend : $('#isRecommendSearch').val(),
+					createDatetimeStart : $("#createDatetimeStartSearch").val(),
+					createDatetimeEnd : $("#createDatetimeEndSearch").val(),
 					start : params.offset / params.limit + 1,
 					limit : params.limit
 					};
@@ -252,20 +254,28 @@ var statusData=null;
 					<div class="form-group">
 						<label for="isHotSearch" class="control-label">是否热门:</label>
 							<select id="isHotSearch" name="isHotSearch" class="form-control">
-								<option value="" selected=”selected“>请选择</option>
+								<option value="" selected="selected">请选择</option>
 								<option value="1">是</option>
 								<option value="0">否</option>
 							</select>
 					</div>
 					<div class="form-group">
-						<label for="isRecommendCheck" class="control-label">是否推荐:</label>
-							<select id="isRecommendCheck" name="isRecommendCheck" class="form-control">
-								<option value="" selected=”selected“>请选择</option>
+						<label for="isRecommendSearch" class="control-label">是否推荐:</label>
+							<select id="isRecommendSearch" name="isRecommendSearch" class="form-control">
+								<option value="" selected="selected">请选择</option>
 								<option value="1">是</option>
 								<option value="0">否</option>
 							</select>
 					</div>
-					<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
+					<div class="form-group mt10">
+							<label for="createDatetimeStartSearch" class="control-label">创建时间起:</label> <input class="input-sm dfdate" type="text"
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" class="form-control" id="createDatetimeStartSearch" name="createDatetimeStartSearch" placeholder="请输入创建时间起">
+					</div>
+					<div class="form-group mt10">
+						<label for="createDatetimeEndSearch" class="control-label">创建时间止:</label> <input class="input-sm dfdate" type="text"
+							onClick="laydate({istime: true, format: 'YYYY-MM-DD'})" class="form-control" id="createDatetimeEndSearch" name="createDatetimeEndSearch" placeholder="请输入创建时间止">
+					</div>&nbsp;
+					<button id="searchBtn" class="btn btn-default btn-sm mt10">搜索</button>
 				</div>
 			</div>
 			<table id="tableList"></table>

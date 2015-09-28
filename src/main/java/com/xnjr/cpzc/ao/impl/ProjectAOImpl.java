@@ -38,7 +38,8 @@ public class ProjectAOImpl implements IProjectAO {
     @Override
     public Page queryProjectPage(String proId, String userId, String name,
             String type, String status, String isHot, String isRecommend,
-            String start, String limit) {
+            String createDatetimeStart, String createDatetimeEnd, String start,
+            String limit) {
         ZC703405Req zc703405Req = new ZC703405Req();
         zc703405Req.setProId(proId);
         zc703405Req.setUserId(userId);
@@ -47,6 +48,8 @@ public class ProjectAOImpl implements IProjectAO {
         zc703405Req.setStatus(status);
         zc703405Req.setIsHot(isHot);
         zc703405Req.setIsRecommend(isRecommend);
+        zc703405Req.setCreateDatetimeStart(createDatetimeStart);
+        zc703405Req.setCreateDatetimeEnd(createDatetimeEnd);
         zc703405Req.setStart(start);
         zc703405Req.setLimit(limit);
         return BizConnecter.getBizData("703405",

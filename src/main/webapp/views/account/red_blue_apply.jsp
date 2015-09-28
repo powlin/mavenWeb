@@ -20,12 +20,7 @@
 			if(!checkForm()){
 				return false;
 			}
-			var data = {};
-			var t = $('form').serializeArray();
-			$.each(t, function() {
-				data[this.name] = this.value;
-			});
-			checkNum($("#amount").val(),"金额");
+			var data = {"accountNumber":$("#accountNumber").val(),"direction":$("#direction").val(),"amount":moneyFormatByEnLarge($("#amount").val()),"applyNote":$("#applyNote").val()};
 			var url = $("#base_path").val() + "/account/redBlueApply";
 			doPostAjax(url, data, doSuccessBack);
 		});
@@ -58,6 +53,11 @@
 			amount.next().removeClass("hid");
 			return false;
 		}
+		if(isNaN(amount.val()) || amount.val() <= 0){
+			alert("金额请输入正数");
+			return false;
+		}
+		//判断金额位数
 		var applyNote = $("#applyNote");
 		if(applyNote.val() == ""){
 			applyNote.next().removeClass("hid");

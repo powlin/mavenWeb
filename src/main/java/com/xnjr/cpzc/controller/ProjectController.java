@@ -11,7 +11,6 @@ package com.xnjr.cpzc.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -33,7 +32,6 @@ import com.xnjr.cpzc.ao.ISupportAO;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.ZC703307Res;
 import com.xnjr.cpzc.dto.res.ZC703308Res;
-import com.xnjr.cpzc.dto.res.ZC703309Res;
 
 /** 
  * @author: xieyj 
@@ -78,10 +76,13 @@ public class ProjectController extends BaseController {
             @RequestParam(value = "status", required = false) String status,
             @RequestParam(value = "isHot", required = false) String isHot,
             @RequestParam(value = "isRecommend", required = false) String isRecommend,
+            @RequestParam(value = "createDatetimeStart", required = false) String createDatetimeStart,
+            @RequestParam(value = "createDatetimeEnd", required = false) String createDatetimeEnd,
             @RequestParam(value = "start", required = true) String start,
             @RequestParam(value = "limit", required = true) String limit) {
         return projectAO.queryProjectPage(proId, userId, name, type, status,
-            isHot, isRecommend, start, limit);
+            isHot, isRecommend, createDatetimeStart, createDatetimeEnd, start,
+            limit);
     }
 
     @RequestMapping(value = "/support/search", method = RequestMethod.GET)
@@ -129,15 +130,8 @@ public class ProjectController extends BaseController {
         if (flag == true) {
             view = new ModelAndView("/project/project_approve");
             if (StringUtils.isNotBlank(proId)) {
-                @SuppressWarnings("rawtypes")
-                Page page = projectAO.queryProjectPage(proId, null, null, null,
-                    null, null, null, "0", "10");
-                if (page != null && page.getList() != null) {
-                    List<ZC703309Res> returnList = returnAO
-                        .getAllReturnByProId(proId);
-                    view.addObject("project", page.getList().get(0));
-                    view.addObject("returnList", returnList);
-                }
+                Object project = projectAO.getRichProject(proId);
+                view.addObject("project", project);
             }
         } else {
             view = new ModelAndView("/error/error");
@@ -239,7 +233,6 @@ public class ProjectController extends BaseController {
         return view;
     }
 
-    @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/check", method = RequestMethod.GET)
     public ModelAndView doGetProject(
             @RequestParam(value = "proId", required = true) String proId,
@@ -250,15 +243,9 @@ public class ProjectController extends BaseController {
         }
         ModelAndView view = new ModelAndView(url);
         if (StringUtils.isNotBlank(proId)) {
-            Page page = projectAO.queryProjectPage(proId, null, null, null,
-                null, null, null, "0", "10");
-            if (page != null && page.getList() != null) {
-                List<ZC703309Res> returnList = returnAO
-                    .getAllReturnByProId(proId);
-                view.addObject("project", page.getList().get(0));
-                view.addObject("returnList", returnList);
-                view.addObject("operate", operate);
-            }
+            Object project = projectAO.getRichProject(proId);
+            view.addObject("operate", operate);
+            view.addObject("project", project);
         }
         return view;
     }

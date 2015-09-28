@@ -84,19 +84,25 @@
 				alert("首付金额不能为空");
 				return;
 			}
-			checkNum(firstPayAmount,"首付金额");
+			if(isNaN(firstPayAmount)){
+				alert("首付金额请输入数字");
+				return;
+			}
 			var firstPayFee = $("#firstPayFee").val();
 			if(firstPayFee == undefined || firstPayFee == null || firstPayFee == ''){
 				alert("手续费不能为空");
 				return;
 			}
-			checkNum(firstPayFee,"手续费");
+			if(isNaN(firstPayFee)){
+				alert("手续费请输入数字");
+				return;
+			}
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
 				return;
 			}
-			var data = {"proId":$("#proId").val(),"firstPayAmount":firstPayAmount,"firstPayFee":firstPayFee,"remark":remark};
+			var data = {"proId":$("#proId").val(),"firstPayAmount":moneyFormatByEnLarge(firstPayAmount),"firstPayFee":moneyFormatByEnLarge(firstPayFee),"remark":remark};
 			var url = $("#base_path").val() + "/project/payAmount";
 			doPostAjax(url,data,doSuccessBackPay);
 		});
@@ -249,7 +255,7 @@
 						    <td>其他</td>
 						    <!-- <td></td> -->
 						</tr>
-						<c:forEach var="domain" items="${returnList}" varStatus="status">     
+						<c:forEach var="domain" items="${project.returnList}" varStatus="status">     
 							<tr>
 							    <td>${domain.id}</td>
 							    <td>${domain.name}</td>

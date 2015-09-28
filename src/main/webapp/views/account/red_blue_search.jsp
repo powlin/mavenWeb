@@ -55,8 +55,7 @@ $(function() {
 			title : '申请编号',
 			align : 'left',
 			valign : 'middle',
-			sortable : false,
-			formatter : rbNoFormatter
+			sortable : false
 		},{
 			field : 'accountNumber',
 			title : '账户编号',
@@ -149,10 +148,6 @@ function directionFormatter(value, row) {
 			return typeData[i].value;
 		}
 	}
-}
-
-function rbNoFormatter(value, row){
-	return rbNoFormat(value);
 }
 
 function moneyFormatter(value, row){
