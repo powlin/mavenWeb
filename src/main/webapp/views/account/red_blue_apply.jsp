@@ -29,11 +29,11 @@
 			rules: {
 				accountNumber: {
 					required: true,
-					maxlength: 32
+					maxlength: 45
 				},
 				direction: {
 					required: true,
-					maxlength: 32
+					maxlength: 1
 				},
 				amount: {
 					required: true,
