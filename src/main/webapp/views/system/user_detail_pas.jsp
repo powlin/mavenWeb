@@ -19,7 +19,7 @@
 		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+		    if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {};
@@ -31,26 +31,30 @@
 			var url = $("#base_path").val() + "/sysUser/user/editPas";
 			doPostAjax(url, data, doSuccessBack);
 		});
+		
+		$("#jsForm").validate({
+			rules: {
+				oldPwd: {
+					required: true,
+					maxlength: 128
+				},
+				newPwd: {
+					required: true,
+					maxlength: 128
+				}
+			},
+			messages: {
+				oldPwd: {
+					required: "请输入旧密码",
+					maxlength: jQuery.format("旧密码不能大于{0}个字符")
+				},
+				newPwd: {
+					required: "请输入新密码",
+					maxlength: jQuery.format("新密码不能大于{0}个字符")
+				}
+			}
+		});
 	});
-	
-	function checkForm(){
-		var userCode = $("#userCode");
-		if(userCode.val() == ""){
-			userCode.next().removeClass("hid");
-			return false;
-		}
-		var oldPwd = $("#oldPwd");
-		if(oldPwd.val() == ""){
-			oldPwd.next().removeClass("hid");
-			return false;
-		}
-		var newPwd = $("#newPwd");
-		if(newPwd.val() == ""){
-			newPwd.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
 	
 	function doSuccessBack(res) {
 		if (res.success == true) {
@@ -82,14 +86,14 @@
 	    	<li id="operContent">修改用户密码</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
 			    <li><label><span class="inline_red">*</span>用户名:</label><label>${user.userCode}</label></li>
 			    <li><label><span class="inline_red">*</span>用户姓名:</label><label>${user.userName}</label></li>
-			    <li><label><span class="inline_red">*</span>旧密码:</label><input type="password" id="oldPwd" name="oldPwd" value ="${user.oldPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="newPwd" name="newPwd" value ="${user.newPwd}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>旧密码:</label><input type="password" id="oldPwd" name="oldPwd" value ="${user.oldPwd}"  class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="newPwd" name="newPwd" value ="${user.newPwd}"  class="dfinput" onblur="toggleMess(this)"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

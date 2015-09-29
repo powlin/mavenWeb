@@ -23,7 +23,7 @@
 		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+		    if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {};
@@ -35,31 +35,46 @@
 			var url = $("#base_path").val() + "/menumgr/menu/" + operator;
 			doPostAjax(url, data, doSuccessBack);
 		});
+		
+		$("#jsForm").validate({
+			rules: {
+				menuCode: {
+					required: true,
+					maxlength: 32
+				},
+				menuName: {
+					required: true,
+					maxlength: 32
+				},
+				menuUrl: {
+					required: true,
+					maxlength: 64
+				},
+				orderNo: {
+					required: true,
+					maxlength: 8
+				}
+			},
+			messages: {
+				menuCode: {
+					required: "请输入菜单编号",
+					maxlength: jQuery.format("菜单编号不能大于{0}个字符")
+				},
+				menuName: {
+					required: "请输入菜单名称",
+					maxlength: jQuery.format("菜单名称不能大于{0}个字符")
+				},
+				menuUrl: {
+					required: "请输入菜单地址",
+					maxlength: jQuery.format("菜单地址不能大于{0}个字符")
+				},
+				orderNo: {
+					required: "请输入菜单名称",
+					maxlength: jQuery.format("角色名称不能大于{0}个字符")
+				}
+			}
+		});
 	});
-	
-	function checkForm(){
-		var menuCode = $("#menuCode");
-		if(menuCode.val() == ""){
-			menuCode.next().removeClass("hid");
-			return false;
-		}
-		var menuName = $("#menuName");
-		if(menuName.val() == ""){
-			menuName.next().removeClass("hid");
-			return false;
-		}
-		var menuUrl = $("#menuUrl");
-		if(menuUrl.val() == ""){
-			menuUrl.next().removeClass("hid");
-			return false;
-		}
-		var orderNo = $("#orderNo");
-		if(orderNo.val() == "" || parseInt(orderNo.val()) > 99999999){
-			orderNo.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
 	
 	function doSuccessBack(res) {
 		if (res.success == true) {
@@ -106,15 +121,15 @@
 	    	<li id="operContent">新增菜单</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>菜单信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>菜单编号:</label><input type="text" id="menuCode" name="menuCode" value ="${menu.menuCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单编号不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>菜单名称:</label><input type="text" id="menuName" name="menuName" value ="${menu.menuName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单名称不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>菜单地址:</label><input type="text" id="menuUrl" name="menuUrl" value ="${menu.menuUrl}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单地址不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>菜单编号:</label><input type="text" id="menuCode" name="menuCode" value ="${menu.menuCode}"  class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>菜单名称:</label><input type="text" id="menuName" name="menuName" value ="${menu.menuName}"  class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>菜单地址:</label><input type="text" id="menuUrl" name="menuUrl" value ="${menu.menuUrl}"  class="dfinput" onblur="toggleMess(this)"/></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>父菜单编号:</label><select id="parentCodeSel" name="parentCode" value ="${menu.parentCode}" class="dfinput"></select></li>
-			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">菜单顺序号不能为空，且必须不多于8位</span></li>
+			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput" onblur="toggleMess(this)"/></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${menu.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>

@@ -17,12 +17,51 @@
 		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+		    if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {"accountNumber":$("#accountNumber").val(),"direction":$("#direction").val(),"amount":moneyFormatByEnLarge($("#amount").val()),"applyNote":$("#applyNote").val()};
 			var url = $("#base_path").val() + "/account/redBlueApply";
 			doPostAjax(url, data, doSuccessBack);
+		});
+		
+		$("#jsForm").validate({
+			rules: {
+				accountNumber: {
+					required: true,
+					maxlength: 32
+				},
+				direction: {
+					required: true,
+					maxlength: 32
+				},
+				amount: {
+					required: true,
+					maxlength: 20
+				},
+				applyNote: {
+					required: true,
+					maxlength: 8
+				}
+			},
+			messages: {
+				accountNumber: {
+					required: "请输入账户编号",
+					maxlength: jQuery.format("账户编号不能大于{0}个字符")
+				},
+				direction: {
+					required: "请输入方向",
+					maxlength: jQuery.format("方向不能大于{0}个字符")
+				},
+				amount: {
+					required: "请输入金额",
+					maxlength: jQuery.format("金额不能大于{0}个字符")
+				},
+				applyNote: {
+					required: "请输入申请理由",
+					maxlength: jQuery.format("申请理由不能大于{0}个字符")
+				}
+			}
 		});
 	});
 	
@@ -40,30 +79,6 @@
 			}
 		}
 		$("#direction").html(html);
-	}
-	
-	function checkForm(){
-		var accountNumber = $("#accountNumber");
-		if(accountNumber.val() == ""){
-			accountNumber.next().removeClass("hid");
-			return false;
-		}
-		var amount = $("#amount");
-		if(amount.val() == ""){
-			amount.next().removeClass("hid");
-			return false;
-		}
-		if(isNaN(amount.val()) || amount.val() <= 0){
-			alert("金额请输入正数");
-			return false;
-		}
-		//判断金额位数
-		var applyNote = $("#applyNote");
-		if(applyNote.val() == ""){
-			applyNote.next().removeClass("hid");
-			return false;
-		}
-		return true;
 	}
 	
 	function doSuccessBack(res) {
@@ -93,18 +108,18 @@
 	    	<li id="operContent">调账申请</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>红冲蓝补申请</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>账户编号:</label><input type="text" id="accountNumber" name="accountNumber" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">账户编号不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>账户编号:</label><input type="text" id="accountNumber" name="accountNumber" class="dfinput" onblur="toggleMess(this)"/></li>
 			    <li><label><span class="inline_red">*</span>方向:</label>
 				    <select id="direction" name="direction" class="dfinput" onblur="toggleMess(this)">
 				    	<option value="">--请选择--</option>
-					</select><span class="inline_red hid">方向不能为空</span>
+					</select>
 				</li>
-			    <li><label><span class="inline_red">*</span>金额:</label><input type="text" id="amount" name="amount" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">金额不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>申请理由:</label><input type="text" id="applyNote" name="applyNote" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">申请理由不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>金额:</label><input type="text" id="amount" name="amount" class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>申请理由:</label><input type="text" id="applyNote" name="applyNote" class="dfinput" onblur="toggleMess(this)"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

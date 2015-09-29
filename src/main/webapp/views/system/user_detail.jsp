@@ -19,7 +19,7 @@
 		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+		    if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {};
@@ -31,26 +31,38 @@
 			var url = $("#base_path").val() + "/sysUser/user/add";
 			doPostAjax(url, data, doSuccessBack);
 		});
+		
+		$("#jsForm").validate({
+			rules: {
+				userCode: {
+					required: true,
+					maxlength: 32
+				},
+				userName: {
+					required: true,
+					maxlength: 32
+				},
+				password: {
+					required: true,
+					maxlength: 128
+				}
+			},
+			messages: {
+				userCode: {
+					required: "请输入用户名",
+					maxlength: jQuery.format("用户名不能大于{0}个字符")
+				},
+				userName: {
+					required: "请输入用户姓名",
+					maxlength: jQuery.format("用户姓名不能大于{0}个字符")
+				},
+				password: {
+					required: "请输入密码",
+					maxlength: jQuery.format("密码不能大于{0}个字符")
+				}
+			}
+		});
 	});
-	
-	function checkForm(){
-		var userCode = $("#userCode");
-		if(userCode.val() == ""){
-			userCode.next().removeClass("hid");
-			return false;
-		}
-		var userName = $("#userName");
-		if(userName.val() == ""){
-			userName.next().removeClass("hid");
-			return false;
-		}
-		var password = $("#password");
-		if(password.val() == ""){
-			password.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
 	
 	function doSuccessBack(res) {
 		if (res.success == true) {
@@ -82,13 +94,13 @@
 	    	<li id="operContent">新增用户</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>用户名:</label><input type="text" id="userCode" name="userCode" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户编号不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">用户姓名不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="password" name="password" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">密码不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>用户名:</label><input type="text" id="userCode" name="userCode" class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="password" name="password" class="dfinput" onblur="toggleMess(this)"/></li>
 			    <!-- <li><label>用户角色:</label><label class="roleList">正在加载...</label></li> -->
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
