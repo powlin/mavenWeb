@@ -23,11 +23,44 @@
 			}
 		}
 		
+		$("#jsForm").validate({
+			rules: {
+				roleCode: {
+					required: true,
+					maxlength: 32
+				},
+				roleName: {
+					required: true,
+					maxlength: 32
+				},
+				roleLevel: "required",
+				remark: {
+					required: true,
+					maxlength: 100
+				}
+			},
+			messages: {
+				roleCode: {
+					required: "请输入角色编号",
+					maxlength: jQuery.format("角色编号不能大于{0}个字符")
+				},
+				roleName: {
+					required: "请输入角色名称",
+					maxlength: jQuery.format("角色名称不能大于{0}个字符")
+				},
+				roleLevel: "请选择角色等级",
+				remark: {
+					required: "请输入备注",
+					maxlength: jQuery.format("备注不能大于{0}个字符")
+				}
+			}
+		});
+		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
-				return false;
-			}
+		    if(!$("#jsForm").valid()){
+		    	return;
+		    }
 			var data = {};
 			var t = $('form').serializeArray();
 			$.each(t, function() {
@@ -55,39 +88,12 @@
 		$("#roleLevel").html(html);
 	}
 	
-	function checkForm(){
-		var roleCode = $("#roleCode");
-		if(roleCode.val() == ""){
-			roleCode.next().removeClass("hid");
-			return false;
-		}
-		var roleName = $("#roleName");
-		if(roleName.val() == ""){
-			roleName.next().removeClass("hid");
-			return false;
-		}
-		var roleLevel = $("#roleLevel");
-		if(roleLevel.val() == ""){
-			roleLevel.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
-	
 	function doSuccessBack(res) {
 		if (res.success == true) {
 			alert("操作成功");
 			window.location.href = $("#base_path").val() + "/views/system/role.htm";
 		}else{
 			alert(res.msg);
-		}
-	}
-	
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
-		}else{
-			$(e).next().removeClass("hid");
 		}
 	}
 </script>
@@ -105,17 +111,17 @@
 	    	<li id="operContent">新增角色</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>角色信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>角色编号:</label><input type="text" id="roleCode" name="role_code" value ="${role.roleCode}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色编号不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="role_name" value ="${role.roleName}"  class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">角色名称不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>角色编号:</label><input type="text" id="roleCode" name="roleCode" value ="${role.roleCode}"  class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="roleName" value ="${role.roleName}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red">*</span>角色等级:</label>
-				    <select id="roleLevel" name="role_level" class="dfinput" onblur="toggleMess(this)"/>
-					</select><span class="inline_red hid">角色等级不能为空</span>
+				    <select id="roleLevel" name="roleLevel" class="dfinput">
+					</select>
 				</li>
-			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
+			    <li><label><span class="inline_red ">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

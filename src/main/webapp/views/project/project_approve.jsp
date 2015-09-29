@@ -15,6 +15,7 @@
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
 <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
 <script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/components/js/morecity.js"></script>
 <script type="text/javascript">
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('editor');
@@ -173,7 +174,10 @@ var ue = UE.getEditor('editor');
 				    	<option value="${project.type}"></option>
 					</select>
 				</li>
-				<li><label><span class="inline_red">*</span>发起省份:</label><input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
+				<li><label><span class="inline_red">*</span>发起城市:</label>
+				<select  name="province" id="province" onchange="selectMoreCity(this)"></select>
+ 				<select name="ddlCity" id="ddlCity"><option selected value="">城市</option></select>
+				<input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput" /></li>
 				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput mr40"/><a href="javascript:void(0)" onclick="doPreview()">预览</a><img id="imageId" src=""/></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目视频:</label><input type="text" id="video" name="video" value ="${project.video}"  class="dfinput"/></li>

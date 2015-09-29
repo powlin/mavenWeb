@@ -204,7 +204,7 @@
 	    <div class="formtitle"><span>项目信息</span></div>
 	        <table class="filetable">
 	        	<tr>
-	        		<th>项目编号</th>
+	        		<th>项目编号:</th>
 	        		<td>${project.proId}</td>
 	        		<th>项目名称:</th>
 	        		<td>${project.name}</td>
