@@ -37,11 +37,12 @@
 				},
 				amount: {
 					required: true,
+					number:true,
 					maxlength: 20
 				},
 				applyNote: {
 					required: true,
-					maxlength: 8
+					maxlength: 100
 				}
 			},
 			messages: {

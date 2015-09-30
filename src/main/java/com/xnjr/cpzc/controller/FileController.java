@@ -12,13 +12,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import Decoder.BASE64Decoder;
 
 /** 
  * @author: miyb 
@@ -59,10 +58,10 @@ public class FileController {
     public static boolean GenerateImage(String imgStr) {// 对字节数组字符串进行Base64解码并生成图片
         if (imgStr == null) // 图像数据为空
             return false;
-        BASE64Decoder decoder = new BASE64Decoder();
+        Base64 base64 = new Base64();
         try {
             // Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);
+            byte[] b = base64.decode(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 if (b[i] < 0) {// 调整异常数据
                     b[i] += 256;
@@ -89,11 +88,11 @@ public class FileController {
      */
     public static void decodeBase64ToImage(String base64, String path,
             String imgName) {
-        BASE64Decoder decoder = new BASE64Decoder();
+        Base64 decoder = new Base64();
         try {
             FileOutputStream write = new FileOutputStream(new File(path
                     + imgName));
-            byte[] decoderBytes = decoder.decodeBuffer(base64);
+            byte[] decoderBytes = decoder.decode(base64);
             write.write(decoderBytes);
             write.close();
         } catch (IOException e) {

@@ -15,7 +15,7 @@
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
 <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
 <script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/components/js/morecity.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=request.getContextPath()%>/components/js/jquery.cityselect.js"></script>
 <script type="text/javascript">
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('editor');
@@ -25,6 +25,15 @@ var ue = UE.getEditor('editor');
 		doGetAjaxIsAsync(url, data,false, doSuccessBackType);
 		$("#targetAmount").val(moneyFormat($("#targetAmount").val(), 2));
 		$("#raiseDays").val(parseInt($("#raiseDays").val()));
+		
+		// 加载省市列表
+		$("#selectCity").citySelect({
+			nodata:"none",
+			prov:$("#provinceH").val() != ''?$("#provinceH").val():"北京",
+			city:$("#cityH").val() != ''?$("#cityH").val():"朝阳区",
+			required:false
+		});
+ 	
 		// 保存
 		$('#saveBtn').click(function() {
 			var colNames=['项目编号','项目名称','项目类型','省份','城市','图片','视频','概述','具体描述','目标金额','筹集天数'];
@@ -155,6 +164,9 @@ var ue = UE.getEditor('editor');
 <body>
 	<input type="hidden" id="base_path"
 		value="<%=request.getContextPath()%>" />
+	<input type="hidden" id="provinceH" value ="${project.province}"/>
+	<input type="hidden" id="cityH" value ="${project.city}"/>
+	<!-- input type="hidden" id="detail" value ="${project.detail}"/-->
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
@@ -175,11 +187,12 @@ var ue = UE.getEditor('editor');
 					</select>
 				</li>
 				<li><label><span class="inline_red">*</span>发起城市:</label>
-				<select  name="province" id="province" onchange="selectMoreCity(this)"></select>
- 				<select name="ddlCity" id="ddlCity"><option selected value="">城市</option></select>
-				<input type="text" id="province" name="province" value ="${project.province}"  class="dfinput"/></li>
-				<li><label><span class="inline_red">*</span>发起城市:</label><input type="text" id="city" name="city" value ="${project.city}"  class="dfinput" /></li>
-				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput mr40"/><a href="javascript:void(0)" onclick="doPreview()">预览</a><img id="imageId" src=""/></li>
+	 				<div id="selectCity">
+	 					<select id="province" name="province" class="prov"></select> 
+	    				<select id="city" name="city" class="city" disabled="disabled"></select>
+	 				</div>
+ 				</li>
+				<li><label><span class="inline_red">*</span>项目图片:</label><input type="text" id="picture" name="picture" value ="${project.picture}"  class="dfinput mr40" readonly/><a href="javascript:void(0)" onclick="doPreview()">预览</a><img id="imageId" src=""/></li>
 				<li><label>&nbsp;&nbsp;&nbsp;&nbsp;项目视频:</label><input type="text" id="video" name="video" value ="${project.video}"  class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>目标金额(元):</label><input type="text" id="targetAmount" name="targetAmount" value ="${project.targetAmount}" class="dfinput"/></li>
 				<li><label><span class="inline_red">*</span>筹集天数:</label><input type="text" id="raiseDays" name="raiseDays" value ="${project.raiseDays}" class="dfinput" /></li>
@@ -190,7 +203,7 @@ var ue = UE.getEditor('editor');
 				<li><input type="hidden" id="userId" name="userId" value ="${project.userId}"  class="dfinput"/></li>
 				<li><input type="hidden" id="createDatetime" name="createDatetime" value ="${project.createDatetime}"  class="dfinput"/></li>
 				<li class="cfl"><label>&nbsp;&nbsp;&nbsp;&nbsp;回报列表:</label>
-				<a href="<%=request.getContextPath()%>/project/return/detail?operate=add&proId=${project.proId}">新增回报</a>
+				<!-- <a href="<%=request.getContextPath()%>/project/return/detail?operate=add&proId=${project.proId}">新增回报</a>  -->
 				<table class="tablelist" style="width:87%; clear:none; float:left">
 					    <tr>
 						    <th>编号</th>
@@ -200,7 +213,7 @@ var ue = UE.getEditor('editor');
 						    <th>限制人数</th>
 						    <th>回报天数</th>
 						    <th>回报类型</th>
-						    <th>操作</th>
+						    <!--<th>操作</th>-->
 						</tr>
 						<tr>
 						    <td>-1</td>
@@ -210,7 +223,7 @@ var ue = UE.getEditor('editor');
 						    <td>0</td>
 						    <td></td>
 						    <td>其他</td>
-						    <td></td>
+						    <!--<td></td>-->
 						</tr>
 						<c:forEach var="domain" items="${project.returnList}" varStatus="status">
 							<tr>
@@ -231,8 +244,8 @@ var ue = UE.getEditor('editor');
 							    </c:when>
 							    <c:otherwise>虚拟信息</c:otherwise>
 							    </c:choose></td>
-							    <td><a href="<%=request.getContextPath()%>/project/return/detail?operate=edit&id=${domain.id}&proId=${project.proId}">修改</a>&nbsp;
-							    <a href="javascript:void(0)" onclick="delReturn('${domain.id}')">删除</a></td>
+							    <!--<td><a href="<%=request.getContextPath()%>/project/return/detail?operate=edit&id=${domain.id}&proId=${project.proId}">修改</a>&nbsp;
+							    <a href="javascript:void(0)" onclick="delReturn('${domain.id}')">删除</a></td>-->
 							</tr>
 						</c:forEach>
 					</table>

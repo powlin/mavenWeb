@@ -36,11 +36,11 @@
 			rules: {
 				oldPwd: {
 					required: true,
-					maxlength: 128
+					maxlength: 12
 				},
 				newPwd: {
 					required: true,
-					maxlength: 128
+					maxlength: 12
 				}
 			},
 			messages: {

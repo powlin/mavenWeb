@@ -61,7 +61,7 @@ $(function() {
 		pageList : [ 10, 20, 30, 40, 50 ],
 		columns : [{
 			field : 'ubNo',
-			title : '不平帐编号',
+			title : '不平账编号',
 			align : 'left',
 			valign : 'middle',
 			sortable : false

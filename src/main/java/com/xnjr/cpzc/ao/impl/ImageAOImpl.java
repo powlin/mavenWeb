@@ -17,10 +17,9 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import Decoder.BASE64Encoder;
 
 import com.xnjr.cpzc.ao.IImageAO;
 
@@ -51,8 +50,8 @@ public class ImageAOImpl implements IImageAO {
         try {
             input = new FileInputStream(imgPath);
             data = getByte(input);
-            BASE64Encoder encoder = new BASE64Encoder();
-            imageString = encoder.encode(data);
+            Base64 base64 = new Base64();
+            imageString = base64.encodeToString(data);
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
