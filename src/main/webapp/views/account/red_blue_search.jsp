@@ -174,7 +174,7 @@ function operateFormatter(value, row) {
 	if(row.status == 1){
 		return ['<button class="btn btn-link btn-xs examine">审核</button>'].join('');
 	}else{
-		return [''].join('');
+		return ['-'].join('');
 	}
 }
 

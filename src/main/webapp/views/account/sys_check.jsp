@@ -215,7 +215,11 @@ function dateFormatter(value, row){
 	return dateFormat(value,'yyyy-MM-dd');
 }
 function operateFormatter(value, row) {
-	return ['<button class="btn btn-link btn-xs detail">处理</button>'].join('');
+	if(row.adjustResult == '0'){
+		return ['<button class="btn btn-link btn-xs detail">处理</button>'].join('');
+	}else{
+		return ['-'].join('');
+	}
 }
 
 window.operateEvents = {
