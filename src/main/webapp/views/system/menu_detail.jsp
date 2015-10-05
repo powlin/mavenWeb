@@ -74,6 +74,9 @@
 				orderNo: {
 					required: "请输入菜单名称",
 					maxlength: jQuery.format("角色名称不能大于{0}个字符")
+				},
+				remark: {
+					maxlength: jQuery.format("备注不能大于{0}个字符")
 				}
 			}
 		});
