@@ -17,10 +17,6 @@
 		var operate = $("#operate").val();
 		if(operate == "edit"){
 			$("#operContent").text("修改角色");
-			var role_level = $("#role_level_hid").val();
-			if(role_level != null && role_level != "0"){
-				 $("select[name='role_level'] option[value='"+ role_level +"']").attr("selected", true);
-			}
 		}
 		
 		$("#jsForm").validate({
@@ -35,7 +31,6 @@
 				},
 				roleLevel: "required",
 				remark: {
-					required: true,
 					maxlength: 100
 				}
 			},
@@ -50,7 +45,6 @@
 				},
 				roleLevel: "请选择角色等级",
 				remark: {
-					required: "请输入备注",
 					maxlength: jQuery.format("备注不能大于{0}个字符")
 				}
 			}
@@ -78,7 +72,7 @@
 		var html = "<option value=''>请选择</option>";
 		if(typeof(data) != "undefined"){//判断undifined
 			for(var i = 0;i < data.length;i++){
-				if(data[i].key == $("#roleLevel").val()){
+				if(data[i].key == $("#role_level_hid").val()){
 					html += "<option selected='selected' value='"+data[i].key+"'>"+data[i].value+"</option>";
 				}else{
 					html += "<option value='"+data[i].key+"'>"+data[i].value+"</option>";
@@ -119,9 +113,10 @@
 			    <li><label><span class="inline_red">*</span>角色名称:</label><input type="text" id="roleName" name="roleName" value ="${role.roleName}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red">*</span>角色等级:</label>
 				    <select id="roleLevel" name="roleLevel" class="dfinput">
+				    	<option selected="selected" value="${role.roleLevel}"></option>
 					</select>
 				</li>
-			    <li><label><span class="inline_red ">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${role.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

@@ -25,7 +25,7 @@
 		}
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+			if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {};
@@ -36,6 +36,35 @@
 			data['id'] = $("#id").val();
 			var url = $("#base_path").val() + "/dict/edit";
 			doPostAjax(url, data, doSuccessBack);
+		});
+		
+		$("#jsForm").validate({
+			rules: {
+				value: {
+					required: true,
+					maxlength: 64
+				},
+				pId: {
+					required: true,
+					maxlength: 11
+				},
+				remark: {
+					maxlength: 100
+				}
+			},
+			messages: {
+				value: {
+					required: "请输入字典值",
+					maxlength: jQuery.format("字典值不能大于{0}个字符")
+				},
+				pId: {
+					required: "请选择父级字典",
+					maxlength: jQuery.format("父级字典不能大于{0}个字符")
+				},
+				remark: {
+					maxlength: jQuery.format("备注不能大于{0}个字符")
+				}
+			}
 		});
 	});
 	
@@ -50,34 +79,12 @@
 		$("#pId").html(html);
 	}
 	
-	function checkForm(){
-		var value = $("#value");
-		if(value.val() == ""){
-			value.next().removeClass("hid");
-			return false;
-		}
-		var pId = $("#pId");
-		if(pId.val() == ""){
-			pId.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
-	
 	function doSuccessBack(res) {
 		if (res.success == true) {
 			alert("操作成功");
 			window.location.href = $("#base_path").val() + "/views/base/dictionary.htm";
 		}else{
 			alert(res.msg);
-		}
-	}
-	
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
-		}else{
-			$(e).next().removeClass("hid");
 		}
 	}
 	
@@ -98,17 +105,17 @@
 	    	<li id="operContent">修改字典</li>
    		</ul>
     </div>
-    <form>
+    <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>字典信息</span></div>
 		    <ul class="forminfo">
 			    <li><label><span class="inline_red">*</span>字典键:</label><label>${dict.key}</label></li>
-			    <li><label><span class="inline_red">*</span>字典值:</label><input type="text" id="value" name="value" value="${dict.value}" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">字典值不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>字典父级键:</label><select id="pId" name="pId" class="dfinput" onblur="toggleMess(this)">
+			    <li><label><span class="inline_red">*</span>字典值:</label><input type="text" id="value" name="value" value="${dict.value}" class="dfinput" /></li>
+			    <li><label><span class="inline_red">*</span>字典父级键:</label><select id="pId" name="pId" class="dfinput" >
 			    	<option value="">请选择</option>
 			    	<option value="0">父级节点</option>
 			    	<option value="10">父亲序号</option>
-			    </select><span class="inline_red hid">字典父级键不能为空</span></li>
+			    </select></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" id="remark" name="remark" value="${dict.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>

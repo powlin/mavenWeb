@@ -17,7 +17,7 @@
 		
 		//提交
 		$('#subBtn').click(function() {
-			if(!checkForm()){
+			if(!$("#jsForm").valid()){
 				return false;
 			}
 			var data = {};
@@ -27,6 +27,51 @@
 			});
 			var url = $("#base_path").val() + "/sysParam/add";
 			doPostAjax(url, data, doSuccessBack);
+		});
+		
+		$("#jsForm").validate({
+			rules: {
+				code: {
+					required: true,
+					maxlength: 32
+				},
+				name: {
+					required: true,
+					maxlength: 32
+				},
+				type: {
+					required: true,
+					maxlength: 1
+				},
+				value: {
+					required: true,
+					maxlength: 64
+				},
+				remark: {
+					maxlength: 100
+				}
+			},
+			messages: {
+				code: {
+					required: "请输入参数编号",
+					maxlength: jQuery.format("参数编号不能大于{0}个字符")
+				},
+				name: {
+					required: "请输入参数名称",
+					maxlength: jQuery.format("参数名称不能大于{0}个字符")
+				},
+				type: {
+					required: "请选择参数类型",
+					maxlength: jQuery.format("参数类型不能大于{0}个字符")
+				},
+				value: {
+					required: "请输入参数值",
+					maxlength: jQuery.format("参数值不能大于{0}个字符")
+				},
+				remark: {
+					maxlength: jQuery.format("备注不能大于{0}个字符")
+				}
+			}
 		});
 	});
 
@@ -45,44 +90,12 @@
 		$("#type").html(html);
 	}
 	
-	function checkForm(){
-		var code = $("#code");
-		if(code.val() == ""){
-			code.next().removeClass("hid");
-			return false;
-		}
-		var name = $("#name");
-		if(name.val() == ""){
-			name.next().removeClass("hid");
-			return false;
-		}
-		var value = $("#value");
-		if(value.val() == ""){
-			value.next().removeClass("hid");
-			return false;
-		}
-		var remark = $("#remark");
-		if(remark.val() == ""){
-			remark.next().removeClass("hid");
-			return false;
-		}
-		return true;
-	}
-	
 	function doSuccessBack(res) {
 		if (res.success == true) {
 			alert("操作成功");
 			window.location.href = $("#base_path").val() + "/views/base/sys_param_edit.htm";
 		}else{
 			alert(res.msg);
-		}
-	}
-	
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
-		}else{
-			$(e).next().removeClass("hid");
 		}
 	}
 </script>
@@ -97,16 +110,15 @@
 	    	<li>参数新增</li>
    		</ul>
     </div>
-    <form>
+   <form id="jsForm">
 	    <div class="formbody">
 	    <div class="formtitle"><span>参数信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>参数编号:</label><input type="text" id="code" name="code" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">参数编号不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>参数名称:</label><input type="text" id="name" name="name" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">参数名称不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>参数类型:</label><select id="type" name="type" class="dfinput" onblur="toggleMess(this)">
-			    </select><span class="inline_red hid">参数类型不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>参数值:</label><input type="text" id="value" name="value" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">参数值不能为空</span></li>
-			    <li><label><span class="inline_red">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">备注不能为空</span></li>
+			    <li><label><span class="inline_red">*</span>参数编号:</label><input type="text" id="code" name="code" class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>参数名称:</label><input type="text" id="name" name="name" class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>参数类型:</label><select id="type" name="type" class="dfinput"></select></li>
+			    <li><label><span class="inline_red">*</span>参数值:</label><input type="text" id="value" name="value" class="dfinput"/></li>
+			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" id="remark" name="remark" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
 	    </div>

@@ -53,6 +53,9 @@
 				orderNo: {
 					required: true,
 					maxlength: 8
+				},
+				remark: {
+					maxlength: 64
 				}
 			},
 			messages: {
@@ -100,13 +103,6 @@
 		$("#parentCodeSel").html(html);
 	}
 	
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
-		}else{
-			$(e).next().removeClass("hid");
-		}
-	}
 </script>
 </head>
 <body>
@@ -125,11 +121,11 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>菜单信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>菜单编号:</label><input type="text" id="menuCode" name="menuCode" value ="${menu.menuCode}"  class="dfinput" onblur="toggleMess(this)"/></li>
-			    <li><label><span class="inline_red">*</span>菜单名称:</label><input type="text" id="menuName" name="menuName" value ="${menu.menuName}"  class="dfinput" onblur="toggleMess(this)"/></li>
-			    <li><label><span class="inline_red">*</span>菜单地址:</label><input type="text" id="menuUrl" name="menuUrl" value ="${menu.menuUrl}"  class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>菜单编号:</label><input type="text" id="menuCode" name="menuCode" value ="${menu.menuCode}"  class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>菜单名称:</label><input type="text" id="menuName" name="menuName" value ="${menu.menuName}"  class="dfinput"/></li>
+			    <li><label><span class="inline_red">*</span>菜单地址:</label><input type="text" id="menuUrl" name="menuUrl" value ="${menu.menuUrl}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>父菜单编号:</label><select id="parentCodeSel" name="parentCode" value ="${menu.parentCode}" class="dfinput"></select></li>
-			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>菜单顺序号:</label><input type="text" id="orderNo" name="orderNo" value ="${menu.orderNo}"  class="dfinput"/></li>
 			    <li><label><span class="inline_red visibility_hid">*</span>备注:</label><input type="text" name="remark" value="${menu.remark}" class="dfinput"/></li>
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>
