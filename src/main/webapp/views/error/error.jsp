@@ -11,7 +11,7 @@
     	$('.error').css({'position':'absolute','left':($(window).width()-490)/2});
 	$(window).resize(function(){  
     	$('.error').css({'position':'absolute','left':($(window).width()-490)/2});
-    })  
+    })
 });  
 </script> 
 
@@ -24,12 +24,12 @@
     <li><a href="#">错误提示</a></li>
     </ul>
     </div>
-    
     <div class="error">
-
-    <h1>系统错误</h1>
-    <h2>不好意思，系统出错，请联系管理员处理！</h2>
-    <div class="reindex"><a href="<%=request.getContextPath()%>/views/login.jsp" target="_parent">返回首页</a></div>
+    <br/>
+    <h1>系统错误</h1><br/>
+    <h2>不好意思，系统出错，请联系管理员处理！</h2><br/>
+    <h2>错误信息：${exception.message}</h2><br/>
+    <div class="reindex"><a href="<%=request.getContextPath()%>/views/login.jsp" target="_parent">返回登录页</a></div>
     </div>
 </body>
 </html>

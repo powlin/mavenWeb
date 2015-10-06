@@ -20,7 +20,7 @@
 		    if(!$("#jsForm").valid()){
 				return false;
 			}
-			var data = {"accountNumber":$("#accountNumber").val(),"direction":$("#direction").val(),"amount":moneyFormatByEnLarge($("#amount").val()),"applyNote":$("#applyNote").val()};
+			var data = {"accountNumber":$("#accountNumber").val(),"direction":$("#direction").val(),"amount":$("#amount").val(),"applyNote":$("#applyNote").val()};
 			var url = $("#base_path").val() + "/account/redBlueApply";
 			doPostAjax(url, data, doSuccessBack);
 		});
@@ -38,7 +38,7 @@
 				amount: {
 					required: true,
 					number:true,
-					maxlength: 20
+					maxlength: 13
 				},
 				applyNote: {
 					required: true,

@@ -20,6 +20,7 @@ import com.xnjr.cpzc.dto.req.ZC703505Req;
 import com.xnjr.cpzc.dto.res.Page;
 import com.xnjr.cpzc.dto.res.SuccessRes;
 import com.xnjr.cpzc.http.BizConnecter;
+import com.xnjr.cpzc.util.CalculationUtil;
 import com.xnjr.cpzc.util.JsonUtils;
 
 /** 
@@ -82,7 +83,8 @@ public class ProjectAOImpl implements IProjectAO {
         req.setPicture(picture);
         req.setSummary(summary);
         req.setDetail(detail);
-        req.setTargetAmount(String.valueOf(targetAmount));
+        req.setTargetAmount(String.valueOf(CalculationUtil.mult(Double
+            .valueOf(targetAmount))));
         req.setRaiseDays(String.valueOf(raiseDays));
         return BizConnecter.getBizData("703303",
             com.xnjr.cpzc.util.JsonUtils.object2Json(req), SuccessRes.class)
@@ -126,8 +128,10 @@ public class ProjectAOImpl implements IProjectAO {
         ZC703504Req zc703504Req = new ZC703504Req();
         zc703504Req.setProId(proId);
         zc703504Req.setCheckUser(checkUser);
-        zc703504Req.setFirstPayAmount(firstPayAmount);
-        zc703504Req.setFirstPayFee(firstPayFee);
+        zc703504Req.setFirstPayAmount(String.valueOf(CalculationUtil
+            .mult(Double.valueOf(firstPayAmount))));
+        zc703504Req.setFirstPayFee(String.valueOf(CalculationUtil.mult(Double
+            .valueOf(firstPayFee))));
         zc703504Req.setRemark(remark);
         return BizConnecter.getBizData("703504",
             JsonUtils.object2Json(zc703504Req), SuccessRes.class).isSuccess();

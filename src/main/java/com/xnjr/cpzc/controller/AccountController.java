@@ -84,8 +84,8 @@ public class AccountController extends BaseController {
         ModelAndView view = new ModelAndView("/account/fund_jour_detail");
         if (StringUtils.isNotBlank(ajNo)) {
             Page page = accountAO.queryAccountMoneyList(ajNo, bizType,
-                createDatetimeStart, createDatetimeEnd, realName, accountNumber,
-                "0", "10", orderColumn, orderDir);
+                createDatetimeStart, createDatetimeEnd, realName,
+                accountNumber, "0", "10", orderColumn, orderDir);
             if (page != null && page.getList() != null) {
                 view.addObject("account", page.getList().get(0));
             }
@@ -99,7 +99,7 @@ public class AccountController extends BaseController {
     public boolean redBlueApply(
             @RequestParam("accountNumber") String accountNumber,
             @RequestParam("direction") String direction,
-            @RequestParam("amount") Long amount,
+            @RequestParam("amount") String amount,
             @RequestParam("applyNote") String applyNote) {
         SessionUser sessionUser = (SessionUser) sessionProvider.getUserDetail();
         return accountAO.redBlueApply(accountNumber, direction, amount,
@@ -173,10 +173,10 @@ public class AccountController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
-        return accountAO.querySysCheckPage(ubNo, refNo, bizType, checkDateStart,
-            checkDateEnd, checkResult, adjustUser, adjustDatetimeStart,
-            adjustDatetimeEnd, adjustResult, accountNumber, start, limit,
-            orderColumn, orderDir);
+        return accountAO.querySysCheckPage(ubNo, refNo, bizType,
+            checkDateStart, checkDateEnd, checkResult, adjustUser,
+            adjustDatetimeStart, adjustDatetimeEnd, adjustResult,
+            accountNumber, start, limit, orderColumn, orderDir);
     }
 
     @SuppressWarnings("rawtypes")
@@ -186,9 +186,9 @@ public class AccountController extends BaseController {
             @RequestParam(value = "ubNo", required = false) String ubNo) {
         ModelAndView view = new ModelAndView("/account/sys_check_edit");
         if (StringUtils.isNotBlank(ubNo)) {
-            Page page = accountAO.querySysCheckPage(ubNo, null, null, null,
-                null, null, null, null, null, null, null, "1", "10", null,
-                null);
+            Page page = accountAO
+                .querySysCheckPage(ubNo, null, null, null, null, null, null,
+                    null, null, null, null, "1", "10", null, null);
             if (page != null && page.getList() != null) {
                 view.addObject("sysCheck", page.getList().get(0));
             }

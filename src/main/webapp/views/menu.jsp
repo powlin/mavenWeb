@@ -23,7 +23,7 @@
 	            	// 二级菜单
 	    			$.each(res.data, function(j, j_item) {
 	    				if(item.menuCode == j_item.parentCode){
-	    	            	$("#"+item.menuCode).append("<li><cite></cite><a href=\"<%=request.getContextPath()%>"+j_item.menuUrl+"\" target=\"rightFrame\">"+j_item.menuName+"</a><i></i></li>");
+	    	            	$("#"+item.menuCode).append("<li><cite></cite><a id=\"child_menu_"+i+"\" href=\"<%=request.getContextPath()%>"+j_item.menuUrl+"\" target=\"rightFrame\">"+j_item.menuName+"</a><i></i></li>");
 	    	            }
 	    	        });
 				}
@@ -43,6 +43,9 @@
 					$(this).next('ul').slideDown();
 				}
 			});
+			
+			//获取第一个菜单链接，显示左边属性
+			$("#child_menu_0")[0].click();
 		}else{
 			alert("系统异常，请重新登录");
 		}

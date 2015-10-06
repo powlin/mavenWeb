@@ -46,9 +46,8 @@
       <div id="cloud2" class="cloud"></div>
     </div>
 	<div class="logintop">    
-	    <span>欢迎登录后台管理界面平台</span>    
+	    <span>欢迎登录产品众筹管理平台</span>    
 	    <ul>
-		    <li><a href="#">回首页</a></li>
 		    <li><a href="#">帮助</a></li>
 		    <li><a href="#">关于</a></li>
 	    </ul>    
@@ -65,8 +64,8 @@
 			        	<input name="login_pwd" type="password" class="loginpwd"/>
 			        </li>
 			    	<li>
-			    		<input id="loginBtn" type="button" class="loginbtn" value="登录"/>
-			    		<input type="checkbox" value="" checked="checked"/>记住密码
+			    		<input id="loginBtn" type="button" class="loginbtn mr40" value="登录"/>
+			    		<input type="reset" class="loginbtn" value="重置"/>
 			    	</li>
 		    	</ul>
 	    	</div>

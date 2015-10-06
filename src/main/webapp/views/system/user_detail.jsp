@@ -11,12 +11,6 @@
 <jsp:include page="../../components/jsp/include_f.jsp" />
 <script type="text/javascript">
 	$(function() {
-		
-		var operate = $("#operate").val();
-		if(operate == "edit"){
-			$("#operContent").text("新增用户");
-		}
-		
 		//提交
 		$('#subBtn').click(function() {
 		    if(!$("#jsForm").valid()){
@@ -27,7 +21,6 @@
 			$.each(t, function() {
 				data[this.name] = this.value;
 			});
-			/* var operator = $("#operate").val() != "edit"?"add":"edit"; */
 			var url = $("#base_path").val() + "/sysUser/user/add";
 			doPostAjax(url, data, doSuccessBack);
 		});
@@ -74,20 +67,10 @@
 			alert(res.msg);
 		}
 	}
-	
-	function toggleMess(e){
-		if($(e).val() != ""){
-			$(e).next().addClass("hid");
-		}else{
-			$(e).next().removeClass("hid");
-		}
-	}
-	
 </script>
 </head>
 <body>
 	<input type="hidden" id="base_path" value="<%=request.getContextPath()%>" />
-	<input type="hidden" id="operate" value = "${operate}"/>
 	<div class="place">
     	<span>位置：</span>
 	    <ul class="placeul">
@@ -100,9 +83,9 @@
 	    <div class="formbody">
 	    <div class="formtitle"><span>用户信息</span></div>
 		    <ul class="forminfo">
-			    <li><label><span class="inline_red">*</span>用户名:</label><input type="text" id="userCode" name="userCode" class="dfinput" onblur="toggleMess(this)"/></li>
-			    <li><label><span class="inline_red">*</span>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput" onblur="toggleMess(this)"/></li>
-			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="password" name="password" class="dfinput" onblur="toggleMess(this)"/></li>
+			    <li><label><span class="inline_red">*</span>用户名:</label><input type="text" id="userCode" name="userCode" class="dfinput" value=""/></li>
+			    <li><label><span class="inline_red">*</span>用户姓名:</label><input type="text" id="userName" name="userName" class="dfinput" value=""/></li>
+			    <li><label><span class="inline_red">*</span>新密码:</label><input type="password" id="password" name="password" class="dfinput" value=""/></li>
 			    <!-- <li><label>用户角色:</label><label class="roleList">正在加载...</label></li> -->
 			    <li><input id="subBtn" type="button" class="btn mr40" value="确认保存"/></li>
 			</ul>

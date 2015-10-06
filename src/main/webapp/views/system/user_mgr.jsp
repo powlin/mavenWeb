@@ -144,12 +144,15 @@ function dateFormatter(value, row){
 //								data-target="#myModal">新增</button>
 function operateFormatter(value, row) {
 	var zx = '';
-	if(row.status == '1'){
-		zx = '锁定';
-	}else if(row.status == '2'){
-		zx = '恢复';
+	if(row.userCode != "admin"){
+		if(row.status == '1'){
+			zx = '锁定';
+		}else if(row.status == '2'){
+			zx = '恢复';
+		}
 	}
-    return ['<button class="btn btn-link btn-xs editPas">修改密码</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editSta">'+zx+'</button>&nbsp;&nbsp;<button class="btn btn-link btn-xs editRole">设置角色</button>'].join('');
+	var editStr = zx ==''?'':'<button class=\"btn btn-link btn-xs editSta\">'+zx+'</button>';
+    return ['<button class="btn btn-link btn-xs editPas">修改密码</button>&nbsp;'+editStr+'&nbsp;<button class="btn btn-link btn-xs editRole">设置角色</button>'].join('');
     //<button class="btn btn-primary btn-xs edit">修改</button>&nbsp;&nbsp;<button class="btn btn-danger btn-xs del">删除</button>&nbsp;<button class="btn btn-danger btn-xs choice">分配菜单</button>'].join('');
 }
 

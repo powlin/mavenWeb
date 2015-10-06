@@ -5,7 +5,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>信息管理系统界面</title>
+<title>产品众筹后台管理系统</title>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="<%=request.getContextPath()%>/sysUser/top_menu" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />

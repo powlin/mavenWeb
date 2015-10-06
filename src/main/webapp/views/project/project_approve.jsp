@@ -39,7 +39,7 @@ var ue = UE.getEditor('editor');
 			var colNames=['项目编号','项目名称','项目类型','省份','城市','图片','视频','概述','具体描述','目标金额','筹集天数'];
 			var isNulls=[1,1,1,1,1,1,0,1,1,1,1];
 			var colValues=[$("#proId").val(),$("#name").val(),$("#type").val(),$("#province").val(),$("#city").val(),$("#picture").val(),$("#video").val(),$("#summary").val(),ue.getContent(),$("#targetAmount").val(),$("#raiseDays").val()];
-			var colLengths=[32,64,4,4,4,64,128,128,1024,10,10];
+			var colLengths=[32,64,4,4,4,64,128,128,1024,13,10];
 			if(!checkData(colNames,isNulls,colValues,colLengths)){
 				return;
 			}
@@ -53,7 +53,6 @@ var ue = UE.getEditor('editor');
 				alert("筹集天数请输入数字");
 				return;
 			}
-			$("#targetAmount").val(moneyFormatByEnLarge($("#targetAmount").val(), 0));
 			var path = $("#base_path").val() + "/project/edit";
 			$('#proForm').attr("method","post");
 		    $('#proForm').attr("action", path).submit();
@@ -66,6 +65,10 @@ var ue = UE.getEditor('editor');
 				alert("备注不能为空");
 				return;
 			}
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
+				return;
+			}
 			var data = {"proId":$("#proId").val(),"checkResult":"0","remark":remark};
 			var url = $("#base_path").val() + "/project/approve";
 			doPostAjax(url,data,doSuccessBackApp);
@@ -76,6 +79,10 @@ var ue = UE.getEditor('editor');
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
+				return;
+			}
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
 				return;
 			}
 			var data = {"proId":$("#proId").val(),"checkResult":"1","remark":remark};

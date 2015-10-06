@@ -72,6 +72,10 @@
 				alert("备注不能为空");
 				return;
 			}
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
+				return;
+			}
 			var data = {"proId":$("#proId").val(),"remark":remark};
 			var url = $("#base_path").val() + "/project/flow";
 			doPostAjax(url,data,doSuccessBackFlow);
@@ -97,12 +101,29 @@
 				alert("手续费请输入数字");
 				return;
 			}
+			var actualAmount = $("#actualAmount").text();
+			if(Number(actualAmount) < Number(firstPayAmount)){
+				alert("首付金额不能大于实际筹集金额");
+				return;
+			}
+			if(Number(actualAmount) < Number(firstPayFee)){
+				alert("手续费不能大于实际筹集金额");
+				return;
+			}
+			if(Number(actualAmount) < Number(firstPayAmount)+Number(firstPayFee)){
+				alert("首付金额和手续费总和不能大于实际筹集金额");
+				return;
+			}
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
 				return;
 			}
-			var data = {"proId":$("#proId").val(),"firstPayAmount":moneyFormatByEnLarge(firstPayAmount),"firstPayFee":moneyFormatByEnLarge(firstPayFee),"remark":remark};
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
+				return;
+			}
+			var data = {"proId":$("#proId").val(),"firstPayAmount":firstPayAmount,"firstPayFee":firstPayFee,"remark":remark};
 			var url = $("#base_path").val() + "/project/payAmount";
 			doPostAjax(url,data,doSuccessBackPay);
 		});
@@ -112,6 +133,10 @@
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
+				return;
+			}
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
 				return;
 			}
 			var data = {"proId":$("#proId").val(),"checkResult":"0","remark":remark};
@@ -124,6 +149,10 @@
 			var remark = $("#remark").val();
 			if(remark == undefined || remark == null || remark == ''){
 				alert("备注不能为空");
+				return;
+			}
+			if(remark.length > 100){
+				alert("备注长度不能超过100个字符");
 				return;
 			}
 			var data = {"proId":$("#proId").val(),"checkResult":"1","remark":remark};

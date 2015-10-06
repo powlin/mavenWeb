@@ -24,6 +24,7 @@ import com.xnjr.cpzc.dto.res.SuccessRes;
 import com.xnjr.cpzc.exception.BizException;
 import com.xnjr.cpzc.http.BizConnecter;
 import com.xnjr.cpzc.util.JsonUtils;
+import com.xnjr.cpzc.util.MD5Util;
 
 /**
  * 系统用户模块
@@ -44,7 +45,7 @@ public class SysUserAOImpl implements ISysUserAO {
         }
         ZC703176Req zc703176Req = new ZC703176Req();
         zc703176Req.setUserCode(loginName);
-        zc703176Req.setPassword(loginPwd);
+        zc703176Req.setPassword(MD5Util.md5(loginPwd));
         zc703176Req.setLoginIp(loginIp);
         return BizConnecter.getBizData("703176",
             JsonUtils.object2Json(zc703176Req), SuccessRes.class).isSuccess();
@@ -85,7 +86,7 @@ public class SysUserAOImpl implements ISysUserAO {
         ZC703171Req zc703171Req = new ZC703171Req();
         zc703171Req.setUserCode(userCode);
         zc703171Req.setUserName(userName);
-        zc703171Req.setPassword(password);
+        zc703171Req.setPassword(MD5Util.md5(password));
         zc703171Req.setCreator(creator);
         return BizConnecter.getBizData("703171",
             JsonUtils.object2Json(zc703171Req), SuccessRes.class).isSuccess();
@@ -109,8 +110,8 @@ public class SysUserAOImpl implements ISysUserAO {
 
         ZC703176Req zc703176Req = new ZC703176Req();
         zc703176Req.setUserCode(userCode);
-        zc703176Req.setOldPwd(oldPwd);
-        zc703176Req.setNewPwd(newPwd);
+        zc703176Req.setOldPwd(MD5Util.md5(oldPwd));
+        zc703176Req.setNewPwd(MD5Util.md5(newPwd));
         zc703176Req.setUpdater(updater);
 
         return BizConnecter.getBizData("703172",
