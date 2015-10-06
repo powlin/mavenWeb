@@ -257,7 +257,7 @@ var ue = UE.getEditor('editor');
 						</c:forEach>
 					</table>
 				</li>
-				<li><label><span class="inline_red">*</span>审核信息</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">审核备注不能为空</span>
+				<li><label><span class="inline_red">*</span>审核信息:</label><input type="text" id="remark" name="remark" class="dfinput" onblur="toggleMess(this)"/><span class="inline_red hid">审核备注不能为空</span>
 				</li>
 			    <li><input id="saveBtn" type="button" class="btn mr40" value="确认保存" />&nbsp;<input id="appPassBtn" type="button" class="btn mr40" value="审核通过"/>&nbsp;&nbsp;<input id="unAppPassBtn" type="button" class="btn" value="审核不通过"/></li>
 			</ul>

@@ -22,10 +22,11 @@ $(function() {
 		queryParams : function(params) {
 			return {
 				ajNo : $("#aj_no_search").val(),
+				realName : $("#real_name_search").val(),
+				accountNumber : $("#account_number_search").val(),
 				bizType : $("#biz_type_search").val(),
 				createDatetimeStart : $("#create_datetime_start_search").val(),
 				createDatetimeEnd : $("#create_datetime_end_search").val(),
-				accountNumber : $("#account_number_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit
 			};
@@ -50,6 +51,12 @@ $(function() {
 			valign : 'middle',
 			sortable : false,
 			width: 100
+		}, {
+			field : 'realName',
+			title : '用户姓名',
+			align : 'left',
+			valign : 'middle',
+			sortable : false
 		}, {
 			field : 'accountNumber',
 			title : '账户编号',
@@ -84,12 +91,6 @@ $(function() {
 			valign : 'middle',
 			sortable : false,
 			formatter : moneyFormatter
-		}, {
-			field : 'remark',
-			title : '备注',
-			align : 'left',
-			valign : 'middle',
-			sortable : false
 		}, {
 			field : 'createDatetime',
 			title : '发生时间',
@@ -168,29 +169,33 @@ window.operateEvents = {
 	    <div class="panel-body">
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
-					<div class="form-inline" role="form" onsubmit="return searchSys();">
+					<div class="form-inline" role="form">
 						<div class="form-group mr40">
 							<label for="ajNo" class="control-label-first">流水号:</label> <input class="input-sm" type="text"
 								class="form-control" id="aj_no_search" placeholder="请输入流水号">
 						</div>
 						<div class="form-group mr40">
+							<label for="accountNumber" class="control-label-first">用户姓名:</label> <input class="input-sm" type="text"
+								class="form-control" id="real_name_search" placeholder="请输入用户姓名">
+						</div>
+						<div class="form-group mr40">
 							<label for="accountNumber" class="control-label-first">账户编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="account_number_search" placeholder="请输入账户编号">
 						</div>
-						<div class="form-group mr40">
-							<label for="createDatetimeStart" class="control-label-first">发生时间起:</label> <input type="text" class="input-sm dfdate" id="create_datetime_start_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间起"/>
-						</div>
-						<div class="form-group mr40">
-							<label for="createDatetimeEnd" class="control-label-first">发生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
-								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间止"/>
-						</div>
-						<div class="form-group mr40 mt10">
+						<div class="form-group ">
 							<label for="bizType" class="control-label">业务类型:</label> <select class="input-sm"
 								class="form-control" id="biz_type_search">
 								</select>
 						</div>
-						&nbsp;
+						<div class="form-group mr40 mt10">
+							<label for="createDatetimeStart" class="control-label-first">发生时间起:</label> <input type="text" class="input-sm dfdate" id="create_datetime_start_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间起"/>
+						</div>
+						<div class="form-group mr40 mt10">
+							<label for="createDatetimeEnd" class="control-label-first">发生时间止:</label> <input type="text" class="input-sm dfdate" id="create_datetime_end_search" 
+								onClick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" placeholder="请输入发生时间止"/>
+						</div>
+						
 						<div class="form-group mt10">
 							<button id="searchBtn" class="btn btn-default btn-sm">搜索</button>
 						</div>

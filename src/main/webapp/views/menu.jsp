@@ -5,6 +5,15 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">   
+<%
+	response.setHeader("Expires","0");
+	response.setHeader("Cache-Control","no-store");
+	response.setHeader("Pragrma","no-cache");
+	response.setDateHeader("Expires",0);
+%>
 <title>无标题文档</title>
 <jsp:include page="../components/jsp/include_f.jsp" />
 <script type="text/javascript">

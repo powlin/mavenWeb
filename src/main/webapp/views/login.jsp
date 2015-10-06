@@ -4,7 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>欢迎产品众筹后台管理系统</title>
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">   
+<%
+	response.setHeader("Expires","0");
+	response.setHeader("Cache-Control","no-store");
+	response.setHeader("Pragrma","no-cache");
+	response.setDateHeader("Expires",0);
+%>
+<title>欢迎登录产品众筹后台管理系统</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/components/css/style.css"/>
 <script src="<%=request.getContextPath()%>/components/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/components/js/cloud.js"></script>

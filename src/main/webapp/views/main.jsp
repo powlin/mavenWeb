@@ -5,6 +5,15 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="pragma" content="no-cache"> 
+<meta http-equiv="cache-control" content="no-cache"> 
+<meta http-equiv="expires" content="0">   
+<%
+	response.setHeader("Expires","0");
+	response.setHeader("Cache-Control","no-store");
+	response.setHeader("Pragrma","no-cache");
+	response.setDateHeader("Expires",0);
+%>
 <title>产品众筹后台管理系统</title>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">

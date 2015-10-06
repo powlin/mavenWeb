@@ -209,7 +209,7 @@
 .filetable{}
 .filetable tr{line-height:30px; padding:3px 0;}
 .filetable tbody tr td{line-height:30px;}
-.filetable th{font-size:14px;}
+.filetable th{font-size:14px;align:right}
 .filetable td{font-size:13px; color:#555}
 .imgtable{width:95%; margin:7px 0;}
 .filetable .dfinput{height:24px;}
@@ -251,7 +251,7 @@
 	        		<td id="raiseDays">${project.raiseDays}</td>
 	        	</tr>
 	        	<tr>
-	        		<th>项目概述</th>
+	        		<th>项目概述:</th>
 	        		<td colspan="3">${project.summary}</td>
 	        	</tr>
 	        	<tr>
@@ -316,19 +316,19 @@
 	        		<td id="exceedTargetAmount">${project.actualAmount - project.targetAmount}</td>
 	        	</tr>
 	        	<tr id="amountTr">
-	        		<th>首付金额:</th>
+	        		<th><span class="inline_red">*</span>首付金额:</th>
 	        		<td colspan="3" id="">
 	        			<input type="text" id="firstPayAmount" name="firstPayAmount" class="dfinput"/>
 	        		</td>
 	        	</tr>
 	        	<tr id="feeTr">
-	        		<th>手续费:</th>
+	        		<th><span class="inline_red">*</span>手续费:</th>
 	        		<td colspan="3">
 	        			<input type="text" id="firstPayFee" name="firstPayFee" class="dfinput"/>
 	        		</td>
 	        	</tr>
 	        	<tr id="remarkTr">
-	        		<th>备注:</th>
+	        		<th><span class="inline_red">*</span>备注:</th>
 	        		<td colspan="3">
 	        			<input type="text" id="remark" name="remark" class="dfinput"/>
 	        		</td>
