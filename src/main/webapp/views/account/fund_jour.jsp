@@ -22,7 +22,7 @@ $(function() {
 		queryParams : function(params) {
 			return {
 				ajNo : $("#aj_no_search").val(),
-				realName : $("#real_name_search").val(),
+				realName : encodeURI($("#real_name_search").val()),
 				accountNumber : $("#account_number_search").val(),
 				bizType : $("#biz_type_search").val(),
 				createDatetimeStart : $("#create_datetime_start_search").val(),

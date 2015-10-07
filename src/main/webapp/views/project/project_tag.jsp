@@ -29,7 +29,7 @@ var statusData=null;
 			queryParams : function(params) {
 				return {
 					proId : $("#proIdSearch").val(),
-					name : $("#nameSearch").val(),
+					name : encodeURI($("#nameSearch").val()),
 					type : $("#typeSearch").val(),
 					status : $("#statusSearch").val(),
 					isHot : $('#isHotSearch').val(),

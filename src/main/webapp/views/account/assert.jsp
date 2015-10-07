@@ -21,7 +21,7 @@ $(function() {
 		singleSelect : true,
 		queryParams : function(params) {
 			return {
-				realName : $("#real_name_search").val(),
+				realName : encodeURI($("#real_name_search").val()),
 				accountNumber : $("#account_number_search").val(),
 				status : $("#status_search").val(),
 				start : params.offset / params.limit + 1,

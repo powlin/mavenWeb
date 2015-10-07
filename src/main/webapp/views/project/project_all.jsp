@@ -30,7 +30,7 @@ var statusData=null;
 				return {
 					proId : $("#proIdSearch").val(),
 					userId : $("#userIdSearch").val(),
-					name : $("#nameSearch").val(),
+					name : encodeURI($("#nameSearch").val()),
 					type : $("#typeSearch").val(),
 					status : $("#statusSearch").val(),
 					createDatetimeStart : $("#createDatetimeStart").val(),

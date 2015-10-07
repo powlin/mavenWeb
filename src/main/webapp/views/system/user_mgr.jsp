@@ -30,8 +30,8 @@ $(function() {
 		singleSelect : true,
 		queryParams : function(params) {
 			return {
-				userCode : $("#user_code_search").val(),
-				userName : $("#user_name_search").val(),
+				userCode : encodeURI($("#user_code_search").val()),
+				userName : encodeURI($("#user_name_search").val()),
 				status : $("#status_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit

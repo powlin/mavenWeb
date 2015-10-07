@@ -23,7 +23,7 @@ $(function() {
 		queryParams : function(params) {
 			return {
 				code : $("#code_search").val(),
-				name : $("#name_search").val(),
+				name : encodeURI($("#name_search").val()),
 				type : $("#type_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit

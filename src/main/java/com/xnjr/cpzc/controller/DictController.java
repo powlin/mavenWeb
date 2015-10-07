@@ -47,6 +47,11 @@ public class DictController extends BaseController {
             @RequestParam("limit") String limit,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
             @RequestParam(value = "orderDir", required = false) String orderDir) {
+        // try {
+        // pValue = URLDecoder.decode(pValue, "UTF-8");
+        // } catch (UnsupportedEncodingException e) {
+        // e.printStackTrace();
+        // }
         return dictAO.queryDictPage(key, value, pKey, pValue, start, limit,
             orderColumn, orderDir);
     }
