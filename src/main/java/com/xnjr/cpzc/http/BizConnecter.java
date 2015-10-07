@@ -8,7 +8,6 @@
  */
 package com.xnjr.cpzc.http;
 
-import java.net.URLDecoder;
 import java.util.Properties;
 
 import com.xnjr.cpzc.exception.BizException;
@@ -28,15 +27,12 @@ public class BizConnecter {
 
     public static final String POST_URL = "http://115.29.140.31:8087/cpzc/api";
 
-    private static final String encoding = "UTF-8";
-
     public static <T> T getBizData(String code, String json, Class<T> clazz) {
         String data = null;
         String resJson = null;
         try {
             Properties formProperties = new Properties();
             formProperties.put("code", code);
-            json = URLDecoder.decode(json, encoding);// 处理参数中文编码问题
             formProperties.put("json", json);
             System.out.println(json);
             resJson = PostSimulater.requestPostForm(POST_URL, formProperties);
@@ -48,8 +44,8 @@ public class BizConnecter {
         if (YES.equalsIgnoreCase(errorCode)) {
             data = RegexUtils.find(resJson, "data\":(.*)\\}", 1);
         } else {
-            String errorInfo = RegexUtils.find(resJson, "errorInfo\":\"(.+?)\"",
-                1);
+            String errorInfo = RegexUtils.find(resJson,
+                "errorInfo\":\"(.+?)\"", 1);
             System.out
                 .println("errorCode:" + errorCode + "<" + errorInfo + ">");
             throw new BizException("Biz000", errorInfo);
@@ -63,21 +59,20 @@ public class BizConnecter {
         try {
             Properties formProperties = new Properties();
             formProperties.put("code", code);
-            json = URLDecoder.decode(json, encoding);// 处理参数中文编码问题
             formProperties.put("json", json);
             System.out.println(json);
             String resJson = PostSimulater.requestPostForm(POST_URL,
                 formProperties);
             // 开始解析json
-            String errorCode = RegexUtils.find(resJson, "errorCode\":\"(.+?)\"",
-                1);
+            String errorCode = RegexUtils.find(resJson,
+                "errorCode\":\"(.+?)\"", 1);
             if (YES.equalsIgnoreCase(errorCode)) {
                 data = RegexUtils.find(resJson, "data\":(.*)\\}", 1);
             } else {
                 String errorInfo = RegexUtils.find(resJson,
                     "errorInfo\":\"(.+?)\"", 1);
-                System.out
-                    .println("errorCode:" + errorCode + "<" + errorInfo + ">");
+                System.out.println("errorCode:" + errorCode + "<" + errorInfo
+                        + ">");
                 throw new BizException("JD000001", errorInfo);
             }
         } catch (Exception e) {

@@ -32,7 +32,7 @@ var op_status=null;
 				return {
 					proId : $("#proIdSearch").val(),
 					userId : $("#userIdSearch").val(),
-					name : encodeURI($("#nameSearch").val()),
+					name : $("#nameSearch").val(),
 					type : $("#typeSearch").val(),
 					status : $("#op_status").val(),
 					start : params.offset / params.limit + 1,

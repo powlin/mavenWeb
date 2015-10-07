@@ -28,6 +28,7 @@
 	
 	<bean id="applicationProperties" class="com.xnjr.cpzc.base.ApplicationProperties" />
 	
+	
 	<!-- 验证码配置 start 
 	<bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
 	<bean id="captchaEngineEx" class="com.xnjr.cpzc.base.captcha.MyCaptchaEngine"/>

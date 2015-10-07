@@ -18,9 +18,9 @@ $(function() {
 		queryParams : function(params) {
 			return {
 				key : $("#key_search").val(),
-				value : encodeURI($("#value_search").val()),
+				value : $("#value_search").val(),
 				pKey : $("#pKey_search").val(),
-				pValue : encodeURI($("#pValue_search").val()),
+				pValue : $("#pValue_search").val(),
 				start : params.offset / params.limit + 1,
 				limit : params.limit
 			};
