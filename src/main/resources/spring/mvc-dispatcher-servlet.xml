@@ -16,7 +16,7 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd"
 	default-autowire="default">
 	<!-- 扫描package进行注解 -->
-	<context:component-scan base-package="com.xnjr">
+	<context:component-scan base-package="com.yaoyan">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller"></context:include-filter>
 		<context:include-filter type="annotation"
@@ -24,7 +24,7 @@
 	</context:component-scan>
 	
 	<!-- 对静态资源文件的访问  start-->
-	<mvc:resources mapping="/cpzc-oss/components/**" location="/components/" />
+	<mvc:resources mapping="/mavenWeb/components/**" location="/components/" />
 	
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven validator="validator">
@@ -39,7 +39,7 @@
 	</bean>
 	<!-- 转json所支持的头信息类型  -->
    	<bean id="messageConverter"
-		class="com.xnjr.cpzc.base.converters.CustomMappingJackson2HttpMessageConverter">
+		class="com.yaoyan.base.converters.CustomMappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>application/json;charset=UTF-8</value>
@@ -97,7 +97,7 @@
 	</bean>
 	
 	<!-- 视图找不到不会有异常信息 -->
-	<bean id="handlerExceptionResolver" class="com.xnjr.cpzc.base.ExceptionResolver">
+	<bean id="handlerExceptionResolver" class="com.yaoyan.base.ExceptionResolver">
 		<property name="warnLogCategory" value="INFO" />
 		<property name="defaultStatusCode" value="500" />
 		<property name="defaultErrorView" value="error/error" />
@@ -143,14 +143,14 @@
 	</bean>
 
 	<!-- 会话管理器 -->
-	<bean id="sessionInterceptor" class="com.xnjr.cpzc.base.interceptor.SessionContextInterceptor">
+	<bean id="sessionInterceptor" class="com.yaoyan.base.interceptor.SessionContextInterceptor">
 		<property name="sessionProvider" ref="sessionProvider" />
 	</bean>
-	<bean id="sessionProvider" class="com.xnjr.cpzc.base.session.HttpSessionProvider" />
+	<bean id="sessionProvider" class="com.yaoyan.base.session.HttpSessionProvider" />
 	
 	<mvc:interceptors>
 		 <!-- 拦截HttpServletRequest、 HttpServletResponse -->
-		<bean  class="com.xnjr.cpzc.base.interceptor.ContextInterceptor"/>
+		<bean  class="com.yaoyan.base.interceptor.ContextInterceptor"/>
 		
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<!-- //改变语言时所用的参数名称 -->

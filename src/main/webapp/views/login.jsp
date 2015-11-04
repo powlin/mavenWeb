@@ -13,7 +13,7 @@
 	response.setHeader("Pragrma","no-cache");
 	response.setDateHeader("Expires",0);
 %>
-<title>欢迎登录产品众筹后台管理系统</title>
+<title>欢迎登录周报管理系统</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/components/css/style.css"/>
 <script src="<%=request.getContextPath()%>/components/js/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/components/js/cloud.js"></script>
@@ -55,7 +55,7 @@
       <div id="cloud2" class="cloud"></div>
     </div>
 	<div class="logintop">    
-	    <span>欢迎登录产品众筹管理平台</span>    
+	    <span>欢迎登录周报管理系统</span>    
 	    <ul>
 		    <li><a href="#">帮助</a></li>
 		    <li><a href="#">关于</a></li>
@@ -80,6 +80,6 @@
 	    	</div>
 	   </form>
     </div>
-    <div class="loginbm">版权所有  2015  <a href="＃">ommo.cn</a>杭州雄牛金融科技有限公司</div>
+    <div class="loginbm">版权所有  2015  <a href="＃">yuexia.cn</a>月下科技有限公司</div>
 </body>
 </html>
