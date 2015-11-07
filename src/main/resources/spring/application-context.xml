@@ -58,6 +58,13 @@
 		<!-- 超时等待时间以毫秒为单位  -->  
 		<property name="maxWait" value="100"/> 
      </bean>
+     
+     <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:sql-map-config.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 	
 	<!-- 验证码配置 start 
 	<bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
