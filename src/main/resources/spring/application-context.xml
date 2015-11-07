@@ -28,6 +28,36 @@
 	
 	<bean id="applicationProperties" class="com.yaoyan.base.ApplicationProperties" />
 	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/mavenWeb</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+		<!-- 池启动时创建的连接数量 -->
+		<property name="initialSize" value="5"></property>
+		<!-- 同一时间可以从池分配的最多连接数量。设置为0时表示无限制 -->
+		<property name="maxActive" value="50"></property>
+		<!-- 池里不会被释放的最多空闲连接数量。设置为0时表示无限制 -->
+		<property name="maxIdle" value="10"></property>
+		<!-- 在不新建连接的条件下，池中保持空闲的最少连接数 -->
+		<property name="minIdle" value="1"></property>
+		<!-- 设置在自动回收超时连接的时候打印连接的超时错误  -->  
+		<property name="logAbandoned" value="true"/>  
+		<!-- 设置自动回收超时连接 -->  
+		<property name="removeAbandoned"  value="true"/> 
+		<!-- 自动回收超时时间(以秒数为单位) -->  
+		<property name="removeAbandonedTimeout" value="10"/> 
+		<!-- 超时等待时间以毫秒为单位  -->  
+		<property name="maxWait" value="100"/> 
+     </bean>
 	
 	<!-- 验证码配置 start 
 	<bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
