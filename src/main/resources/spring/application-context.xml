@@ -66,35 +66,4 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<!-- 验证码配置 start 
-	<bean id="fastHashMapCaptchaStore" class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>
-	<bean id="captchaEngineEx" class="com.xnjr.cpzc.base.captcha.MyCaptchaEngine"/>
-    <bean id="imageCaptchaService" class="com.xnjr.cpzc.base.captcha.CustomGenericManageableCaptchaService">
-        <constructor-arg type="com.octo.captcha.service.captchastore.CaptchaStore" index="0">
-            <ref bean="fastHashMapCaptchaStore"/>
-        </constructor-arg>
-        <constructor-arg type="com.octo.captcha.engine.CaptchaEngine" index="1">
-            <ref bean="captchaEngineEx"/>
-        </constructor-arg>
-        <constructor-arg index="2">
-            <value>180</value>
-        </constructor-arg>
-        <constructor-arg index="3">
-            <value>100000</value>
-        </constructor-arg>
-        <constructor-arg index="4">
-            <value>75000</value>
-        </constructor-arg>
-    </bean>-->
-    <!-- 验证码配置 end -->
-    <!-- <bean id="dictManager" class="com.hsnet.frontcore.dictionary.DictManager" >
-    	<property name="dictionaryServiceImpl" ref="dictionaryServiceImpl" ></property>
-    </bean>
-    <bean id="dictionaryServiceImpl" class="com.hsnet.frontcore.dictionary.service.DictionaryServiceImpl" >
-    	<property name="loaders" >
-    		<list>
-    			<bean class="com.hsnet.frontcore.dictionary.service.XmlDictLoader" ></bean>
-    		</list>
-    	</property>
-    </bean> -->
 </beans>
