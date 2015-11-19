@@ -59,9 +59,17 @@
 </head>
 <body style="background:#f0f9fd;">
 <input type="hidden" id="basePath" value="<%=request.getContextPath()%>" />
-<input type="hidden" id="pMenuCode" value="${pMenuCode}" />
+<input type="hidden" id="pMenuCode" value="1" />
 	<div class="lefttop"><span></span>功能导航</div>
     <dl class="leftmenu">
+    	<dd>
+    		<div class="title">
+    			<span><img src="../components/images/leftico01.png" /></span>menuName1
+    		</div>
+    		<ul class="menuson">
+    			<li><cite></cite><a id="menu0" href="<%=request.getContextPath()%>/menuName1?menuCode=${menu.menuCode}" target="rightFrame">menuName1</a><i></i></li>
+    		</ul>
+    	</dd>
         <!--<c:forEach var="menu" items="${menuList}" varStatus="status"> 
 			<c:if test="${menu.parentCode} == ">
 				<dd>

@@ -4,4 +4,26 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="mavenWeb">
 	
+	<typeAlias alias="menu" type="com.yaoyan.domain.Menu"/>
+	
+	<resultMap class="menu" id="menu">
+		<result property="id" column="id" nullValue="0"/>
+		<result property="menuCode" column="menuCode"/>
+		<result property="menuName" column="menuName"/>
+		<result property="menuUrl" column="menuUrl"/>
+		<result property="parentCode" column="parentCode"/>
+		<result property="orderNo" column="orderNo"/>
+		<result property="remark" column="remark"/>
+		<result property="status" column="status" nullValue="0"/>
+	</resultMap>
+	
+	<select id="query-bannerlist-validate" resultMap="menu">
+		select id, menuCode, menuName, menuUrl, parentCode, orderNo, remark, status 
+		from menu where status = 1
+	</select>
+	
+	<select id="query-bannerlist-fortest" resultClass="int">
+		select id from menu
+	</select>
+	
 </sqlMap>

@@ -25,7 +25,10 @@ function locationReload(){
 </head>
 <body style="background:url(../components/images/topbg.gif) repeat-x;">
     <div class="topleft">
-    <a href="javascript:void(0)" onclick="locationReload()" target="_parent"><img src="../components/images/logo.png" title="系统首页" /></a>
+    <a href="javascript:void(0)" onclick="locationReload()" target="_parent">
+    系统首页
+    	<!-- <img src="../components/images/logo.png" title="系统首页" /> -->
+    </a>
     </div>
     <ul class="nav">
     	<c:forEach var="menu" items="${bannerList}" varStatus="status">     
