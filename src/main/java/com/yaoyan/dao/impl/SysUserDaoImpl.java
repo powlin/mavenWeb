@@ -1,6 +1,8 @@
 package com.yaoyan.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +20,13 @@ public class SysUserDaoImpl extends BaseDao implements SysUserDao {
             .queryForList("query-bannerlist-validate");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void queryBannerListForTest() {
-        getSqlMapClientTemplate().queryForList("query-bannerlist-fortest");
+    public List<Menu> queryRoleMenu(String pMenuCode, boolean isGetChild) {
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("pMenuCode", pMenuCode);
+        param.put("isGetChild", isGetChild);
+        return getSqlMapClientTemplate().queryForList("query-rolemenu", param);
     }
 
 }

@@ -19,11 +19,39 @@
 	
 	<select id="query-bannerlist-validate" resultMap="menu">
 		select id, menuCode, menuName, menuUrl, parentCode, orderNo, remark, status 
-		from menu where status = 1
+		from menu where status = 1 and parentCode is null
 	</select>
 	
-	<select id="query-bannerlist-fortest" resultClass="int">
-		select id from menu
+	<select id="query-rolemenu" parameterClass="java.util.Map" resultMap="menu">
+		select id, menuCode, menuName, menuUrl, parentCode, orderNo, remark, status 
+		from menu where status = 1
+		<isNotEmpty property="pMenuCode" prepend="and">
+			parentCode = #pMenuCode#
+		</isNotEmpty>
+		<isNotEmpty property="pMenuCode">
+			<isEqual property="isGetChild" compareValue="true" prepend="union all">
+				select id, menuCode, menuName, menuUrl, parentCode, orderNo, remark, status 
+				from menu m where status = 1 and exists 
+				(select 1 from menu where parentCode = #pMenuCode# and menuCode = m.parentCode)
+			</isEqual>
+		</isNotEmpty>
+	</select>
+	
+	<select id="query-menupage" parameterClass="java.util.Map" resultMap="menu">
+		select id, menuCode, menuName, menuUrl, parentCode, orderNo, remark, status 
+		from menu where status = 1
+		<isNotEmpty property="menuCode" prepend="and">
+			menuCode = #menuCode#
+		</isNotEmpty>
+		<isNotEmpty property="parentCode" prepend="and">
+			parentCode = #parentCode#
+		</isNotEmpty>
+		<isNotEmpty property="orderColumn">
+			<isNotEmpty property="orderDir" prepend="and">
+				order by $orderColumn$ $orderDir$
+			</isNotEmpty>
+		</isNotEmpty>
+		limit $start$, $limit$
 	</select>
 	
 </sqlMap>

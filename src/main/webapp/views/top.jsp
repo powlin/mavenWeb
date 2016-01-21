@@ -16,6 +16,9 @@ $(function(){
 		$(this).addClass("selected");
 	});
 	//获取第一个菜单链接，显示左边属性
+	if($("a.topmenu").length > 0){
+		$("#menu0").click();
+	}
 	parent.frames["leftFrame"].location.href = $("#menu0").attr("href");
 });
 function locationReload(){
@@ -32,7 +35,7 @@ function locationReload(){
     </div>
     <ul class="nav">
     	<c:forEach var="menu" items="${bannerList}" varStatus="status">     
-      		<li><a id="menu${status.index}" href="<%=request.getContextPath()%>${menu.menuUrl}?pmenu_code=${menu.menuCode}" target="leftFrame"><img src="../components/images/icon01.png" title="${menu.menuName}" /><h2>${menu.menuName}</h2></a></li>
+      		<li><a id="menu${status.index}" class="topmenu" href="${menu.menuUrl}" target="leftFrame"><img src="../components/images/icon01.png" title="${menu.menuName}" /><h2>${menu.menuName}</h2></a></li>
 		</c:forEach> 
     </ul>
     <div class="topright">    

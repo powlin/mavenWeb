@@ -27,8 +27,8 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
     }
 
     @Override
-    public void queryBannerListForTest() {
-        sysUserDao.queryBannerListForTest();
+    public List<Menu> queryRoleMenu(String pMenuCode, boolean isGetChild) {
+        return sysUserDao.queryRoleMenu(pMenuCode, isGetChild);
     }
 
 }

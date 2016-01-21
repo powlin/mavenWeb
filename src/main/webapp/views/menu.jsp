@@ -59,34 +59,8 @@
 </head>
 <body style="background:#f0f9fd;">
 <input type="hidden" id="basePath" value="<%=request.getContextPath()%>" />
-<input type="hidden" id="pMenuCode" value="1" />
+<input type="hidden" id="pMenuCode" value="${pMenuCode}" />
 	<div class="lefttop"><span></span>功能导航</div>
-    <dl class="leftmenu">
-    	<dd>
-    		<div class="title">
-    			<span><img src="../components/images/leftico01.png" /></span>menuName1
-    		</div>
-    		<ul class="menuson">
-    			<li><cite></cite><a id="menu0" href="<%=request.getContextPath()%>/menuName1?menuCode=${menu.menuCode}" target="rightFrame">menuName1</a><i></i></li>
-    		</ul>
-    	</dd>
-        <!--<c:forEach var="menu" items="${menuList}" varStatus="status"> 
-			<c:if test="${menu.parentCode} == ">
-				<dd>
-				    <div class="title">
-				    <span><img src="../components/images/leftico01.png" /></span>${menu.menuName}
-				    </div>
-				    <ul class="menuson">	
-				    	<c:forEach var="childMenu" items="${menuList}" varStatus="childStatus"> 
-				    		<c:if test="${childMenu.parentCode} == ${menu.menuCode}">
-				    			<li><cite></cite><a href="<%=request.getContextPath()%>${childMenu.menuUrl}" target="rightFrame">${childMenu.menuName}</a><i></i></li>
-				    		</c:if>
-				    	</c:forEach>
-				    </ul>
-	    		</dd>
-			</c:if>
-		</c:forEach> 
-		-->
-    </dl>
+    <dl class="leftmenu"></dl>
 </body>
 </html>

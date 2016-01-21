@@ -16,6 +16,14 @@ public interface SysUserService {
      */
     List<Menu> queryBannerListValidate();
 
-    void queryBannerListForTest();
+    /**
+     * 查询角色清单
+     * @param pMenuCode
+     * @param isGetChild
+     * @return 
+     * @create: 2015年12月8日 下午9:35:08 yuexia
+     * @history:
+     */
+    List<Menu> queryRoleMenu(String pMenuCode, boolean isGetChild);
 
 }

@@ -86,6 +86,9 @@ public class Menu {
         this.status = status;
     }
 
+    public Menu() {
+    }
+
     public Menu(String menuCode, String menuName, String menuUrl,
             String parentCode, String orderNo, String remark, int status) {
         this.menuCode = menuCode;

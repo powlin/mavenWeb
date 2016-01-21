@@ -12,12 +12,12 @@
 <script type="text/javascript">
 	$(function() {
 		//下拉菜单
-		doGetAjax("/user/menu/list", null, doPMenuBack);
+		//doGetAjax("/user/menu/list", null, doPMenuBack);
 		
 		// 绑定列表
 		$('#tableList').bootstrapTable({
 			method : "get",
-			url : "/user/menu/page",
+			url : "/mavenWeb/menumgr/menu/querymenupage",
 			height : $(window).height() - 120,
 			striped : true,
 			singleSelect : true,
@@ -32,8 +32,8 @@
 			queryParamsType : 'limit',
 			responseHandler : function(res) {
 				return {
-					rows : res.data.list,
-					total : res.data.totalCount
+					rows : res.data,
+					total : res.data.length
 				};
 			},
 			pagination : true,
@@ -88,9 +88,6 @@
 				events : operateEvents
 			}],
 			onLoadSuccess : function() {
-			},
-			onLoadError : function() {
-				mif.showErrorMessageBox("数据加载失败！");
 			}
 		});
 
@@ -168,14 +165,14 @@
 		value="<%=request.getContextPath()%>" />
 	<input type="hidden" id="operate_id"/>
 	<div class="panel panel-default">
-		<div class="panel-heading">菜单管理
-			<span class="text-right"><button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal"
-				data-target="#myModal">新增</button></span>
-	    </div>
+		<div class="panel-heading">菜单管理</div>
 		<div class="panel-body">
 			<div>
 				<div id="custom-toolbar" style="margin-bottom: 8px">
 					<div class="form-inline" role="form" onsubmit="return searchSys();">
+						<div class="form-group">
+							<button id="addBtn" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">新增</button>
+						</div>
 						<div class="form-group">
 							<label for="menu_code" class="control-label-first">菜单编号:</label> <input class="input-sm" type="text"
 								class="form-control" id="menu_code_search" placeholder="请输入菜单编号">
@@ -226,7 +223,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="parent_code" class="col-sm-2 control-label">父级菜单编号</label>
+							<label for="parent_code" class="col-sm-2 control-label">父菜单编号</label>
 							<div class="col-sm-10">
 								<select id="parent_code" class="form-control" name="parent_code">
 									<option value="">--请选择--</option>

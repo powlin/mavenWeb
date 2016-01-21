@@ -1,6 +1,5 @@
 package com.yaoyan.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,14 +50,19 @@ public class SysUserController extends BaseController {
     // ******** 顶级菜单 *****
     @RequestMapping(value = "/top_menu", method = RequestMethod.GET)
     public ModelAndView doTopMenu() {
-        sysUserService.queryBannerListForTest();
-        String pMenuCode = "1";
         List<Menu> bannerList = sysUserService.queryBannerListValidate();
-        bannerList.add(new Menu(pMenuCode, pMenuCode, "/menuName1", pMenuCode,
-            pMenuCode, pMenuCode, 1));
         ModelAndView view = new ModelAndView("/top");
         view.addObject("bannerList", bannerList);// 更改为从数据库获取
         view.addObject("userCode", getSessionUser().getUserCode());
+        return view;
+    }
+
+    // ******** 顶级菜单 *****
+    @RequestMapping(value = "/left_menu", method = RequestMethod.GET)
+    public ModelAndView doLeftMenu(
+            @RequestParam(value = "pmenu_code", required = false) String pMenuCode) {
+        ModelAndView view = new ModelAndView("/menu");
+        view.addObject("pMenuCode", pMenuCode);
         return view;
     }
 
@@ -67,11 +71,14 @@ public class SysUserController extends BaseController {
     public List<Menu> queryRoleMenu(
             @RequestParam(value = "pmenuCode", required = false) String pMenuCode,
             @RequestParam(value = "isGetChild", required = false) boolean isGetChild) {
-        List<Menu> menuList = new ArrayList<Menu>();
-        // pMenuCode = "1";
-        // menuList.add(new Menu(pMenuCode, pMenuCode, pMenuCode, pMenuCode,
-        // pMenuCode, pMenuCode));
-        return menuList;
+        return sysUserService.queryRoleMenu(pMenuCode, isGetChild);
+    }
+
+    @RequestMapping(value = "/menu_manage", method = RequestMethod.GET)
+    public ModelAndView menuManage() {
+        ModelAndView view = new ModelAndView("/system/menu");
+        view.addObject("userCode", getSessionUser().getUserCode());
+        return view;
     }
 
 }

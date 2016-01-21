@@ -14,7 +14,7 @@
 	response.setHeader("Pragrma","no-cache");
 	response.setDateHeader("Expires",0);
 %>
-<title>产品众筹后台管理系统</title>
+<title>周报管理系统</title>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="<%=request.getContextPath()%>/sysUser/top_menu" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" title="topFrame" />
